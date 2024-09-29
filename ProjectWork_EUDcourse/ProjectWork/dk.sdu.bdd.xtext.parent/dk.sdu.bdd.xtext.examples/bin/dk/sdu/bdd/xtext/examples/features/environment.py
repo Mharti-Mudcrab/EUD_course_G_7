@@ -21,6 +21,7 @@ with open(json_file_path) as f:
     data = json.load(f)
 
 def before_all(context):
+    """
     print("Setting up Environment...")
 
     ip = get_robot_ip()
@@ -29,6 +30,8 @@ def before_all(context):
     context.controller = rtde_control.RTDEControlInterface(ip)
     context.receiver = rtde_receive.RTDEReceiveInterface(ip)
     context.io = rtde_io.RTDEIOInterface(ip)
+    
+    """
 
     # Initialize gripper
     """
@@ -39,7 +42,8 @@ def before_all(context):
     """
 
 def before_feature(context, feature): 
-    context.controller.moveJ(get_position("default"), get_speed(), get_acceleration())
+    #context.controller.moveJ(get_position("default"), get_speed(), get_acceleration())
+    pass
 
 def after_feature(context, feature):
     pass

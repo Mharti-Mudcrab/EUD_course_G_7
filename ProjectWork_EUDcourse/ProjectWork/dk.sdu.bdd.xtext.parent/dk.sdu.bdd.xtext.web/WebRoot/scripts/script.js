@@ -412,7 +412,7 @@ function saveEntities() {
   });
 }
 
-
+/*
 function runScenario() {
   fetch('/run-scenario', {
     method: 'POST',
@@ -423,6 +423,24 @@ function runScenario() {
       alert('Error running scenario.');
     }
   });
+}*/
+
+function runScenario() {
+	// Establish a connection to the backend SSE servlet
+    const eventSource = new EventSource('/run-scenario');
+	
+	// Listen for incoming messages
+	eventSource.onmessage = function(event) {
+	    // Append received message to the messages div
+	    /*const messagesDiv = document.getElementById('messages');
+	    const newMessage = document.createElement('p');
+	    newMessage.textContent = event.data;
+	    messagesDiv.appendChild(newMessage);*/
+		console.log(event.data);
+	};
+	
+	// Handle any errors in the connection
+	eventSource.onerror = function(event) {
+		eventSource.close();
+	};
 }
-
-

@@ -1,3 +1,7 @@
 /ProjectWork_EUDcourse/ProjectWork/dk.sdu.bdd.xtext.parent/dk.sdu.bdd.xtext.examples/bin/
 *.class
 *.pyc
+*.xtendbin
+*.pyc.BASE
+*.pyc.LOCAL
+*.pyc.REMOTE

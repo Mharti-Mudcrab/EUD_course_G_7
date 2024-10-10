@@ -5,5 +5,5 @@ imperative entity robot {
 }
 
 imperative entity gripper { 
-    states: closed , opened 
-}      
+    states: closed , opened     
+}

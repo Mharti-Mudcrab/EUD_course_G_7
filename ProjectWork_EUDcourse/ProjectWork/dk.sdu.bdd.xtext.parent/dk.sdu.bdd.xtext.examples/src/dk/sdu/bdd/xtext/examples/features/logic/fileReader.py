@@ -17,8 +17,6 @@ def readFile():
     if not os.path.exists(bdd_file_path):
         print(f"File not found: {bdd_file_path}")
         return
-    
-    print("here")
 
     with open(bdd_file_path) as f:
         with open(feature_file_path, "w") as fileWriter:

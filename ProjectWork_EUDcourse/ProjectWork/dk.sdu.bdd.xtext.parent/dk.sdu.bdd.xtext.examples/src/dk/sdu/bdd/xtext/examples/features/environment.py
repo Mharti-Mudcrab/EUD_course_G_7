@@ -55,10 +55,10 @@ def after_scenario(context, scenario):
     pass
 
 def before_step(context, step):
-    print("\t\t#before_step#")
+    pass
     
 def after_step(context, step):
-    print("\t\t#after_step#")
+    pass
 
 # Get coordinate-location based on configured name
 def get_position(name):

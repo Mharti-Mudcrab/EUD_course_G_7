@@ -12,10 +12,16 @@ def readFile():
     
     # Construct the path to the tests.feature file
     feature_file_path = os.path.abspath(os.path.join(current_dir , os.pardir))
+    if not feature_file_path.endswith("\\"):
+        feature_file_path += "\\"
     feature_file_path = feature_file_path + "tests.feature"
     # Check if the file exists
     if not os.path.exists(bdd_file_path):
         print(f"File not found: {bdd_file_path}")
+        return
+    
+    if not os.path.exists(feature_file_path):
+        print(f"File not found: {feature_file_path}")
         return
 
     with open(bdd_file_path) as f:

@@ -5,9 +5,13 @@ import environment as env
 import os
 
 
-@then('the position {prep} the robot "{identifier}" is "{position}"')
-@given('the position {prep} the robot "{identifier}" is "{position}"')
-def step_given(context, identifier : str, position, prep):
+@then('the position {prep} the robot "{identifier}" is "{position}" {pause}')
+@given('the position {prep} the robot "{identifier}" is "{position}" {pause}')
+def step_given(context, identifier : str, position, prep, pause):
+    if (pause == "pause"):
+        print("\t\t\t=== Pause in step_given ===")
+    else:
+        print("\t\t\t=== No pause in step_given ===")
     """
     joint_positions = env.get_position(position)
     if(context.receiver.getActualQ() != joint_positions):
@@ -16,8 +20,12 @@ def step_given(context, identifier : str, position, prep):
     """
 
 
-@when('the robot "{identifier}" moves to position "{position}"')
-def step_when(context, identifier : str, position):
+@when('the robot "{identifier}" moves to position "{position}" {pause}')
+def step_when(context, identifier : str, position, pause):
+    if (pause == "pause"):
+        print("\t\t\t=== Pause in step_when ===")
+    else:
+        print("\t\t\t=== No pause in step_when ===")
     """
     joint_position = env.get_position(position)
     controller = context.controller

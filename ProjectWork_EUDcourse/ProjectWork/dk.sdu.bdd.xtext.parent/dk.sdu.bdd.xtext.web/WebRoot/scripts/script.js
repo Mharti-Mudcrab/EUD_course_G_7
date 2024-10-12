@@ -444,3 +444,27 @@ function runScenario() {
 		eventSource.close();
 	};
 }
+
+function runScenarioInteractive() {
+    const websocket = new WebSocket('ws://' + window.location.host + '/run-scenario-interactive'); // Use ws:// for non-secure, wss:// for secure connections
+
+    websocket.onopen = function(event) {
+        console.log("WebSocket connection opened.");
+    };
+
+    websocket.onmessage = function(event) {
+        console.log(event.data);
+		if (event.data.includes(" pause")) {
+			// Call update debugging visuals
+			websocket.send(prompt("Pause (breakpoint) has been hit"));
+		}
+    };
+
+    websocket.onclose = function(event) {
+        console.log("WebSocket connection closed.");
+    };
+
+    websocket.onerror = function(error) {
+        console.error("WebSocket error:", error);
+    };
+}

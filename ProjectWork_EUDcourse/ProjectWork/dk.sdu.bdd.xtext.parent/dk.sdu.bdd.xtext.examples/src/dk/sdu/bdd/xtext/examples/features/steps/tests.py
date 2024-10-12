@@ -3,6 +3,7 @@ from behave import when, given, then
 import time
 import environment as env
 import os
+from prompt_toolkit import input
 
 
 @then('the position {prep} the robot "{identifier}" is "{position}" {pause}')
@@ -10,6 +11,8 @@ import os
 def step_given(context, identifier : str, position, prep, pause):
     if (pause == "pause"):
         print("\t\t\t=== Pause in step_given ===")
+        s = input() # could contain prompt message with context? eks: input("step_when debug pause")
+        # Use s to determine wether to run from now on or step?
     else:
         print("\t\t\t=== No pause in step_given ===")
     """
@@ -24,6 +27,8 @@ def step_given(context, identifier : str, position, prep, pause):
 def step_when(context, identifier : str, position, pause):
     if (pause == "pause"):
         print("\t\t\t=== Pause in step_when ===")
+        s = input() # could contain prompt message with context? eks: input("step_when debug pause")
+        # Use s to determine wether to run from now on or step?
     else:
         print("\t\t\t=== No pause in step_when ===")
     """

@@ -23,9 +23,9 @@ public class ScenarioRunInteractiveWebSocket {
         try {
             // Get the root path and construct the path to the Python script
             String rootPath = new File("").getAbsolutePath();
-            String relativePath = "../../dk.sdu.bdd.xtext.examples/src/dk/sdu/bdd/xtext/examples/features/main.py";
+            String relativePath = "../dk.sdu.bdd.xtext.examples/src/dk/sdu/bdd/xtext/examples/features/main.py";
             String absoluteFilePath = new File(rootPath, relativePath).getCanonicalPath();
-
+            
             // Start the Python process
             ProcessBuilder pb = new ProcessBuilder("python", absoluteFilePath); // Path to your script
             pb.redirectErrorStream(true); // Combine stderr and stdout
@@ -85,7 +85,7 @@ public class ScenarioRunInteractiveWebSocket {
         // Optionally, you can notify the client about the error
         if ( session.isOpen() ) {
 	        try {
-	            session.getRemote().sendString("Error: " + error.getMessage());
+	            session.getRemote().sendString("Error from server: " + error.getMessage());
 	        } catch (IOException e) {
 	            e.printStackTrace(); // Log the error if unable to send message to client
 	        }

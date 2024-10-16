@@ -446,7 +446,7 @@ function runScenario() {
 }
 
 function runScenarioInteractive() {
-    const websocket = new WebSocket('ws://' + window.location.host + '/run-scenario-interactive'); // Use ws:// for non-secure, wss:// for secure connections
+    const websocket = new WebSocket('ws://localhost:8081/run-scenario-interactive'); // Use ws:// for non-secure, wss:// for secure connections
 
     websocket.onopen = function(event) {
         console.log("WebSocket connection opened.");
@@ -457,6 +457,9 @@ function runScenarioInteractive() {
 		if (event.data.includes(" pause")) {
 			// Call update debugging visuals
 			websocket.send(prompt("Pause (breakpoint) has been hit"));
+		}
+		else if (event.data.includes("Took ")) {
+			websocket.close();
 		}
     };
 

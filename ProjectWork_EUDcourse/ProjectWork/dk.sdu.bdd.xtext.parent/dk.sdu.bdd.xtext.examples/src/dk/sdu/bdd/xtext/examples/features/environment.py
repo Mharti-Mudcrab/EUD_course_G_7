@@ -21,6 +21,8 @@ with open(json_file_path) as f:
     data = json.load(f)
 
 def before_all(context):
+    if not hasattr(context, "step_mode"):
+        context.step_mode = False
     """
     print("Setting up Environment...")
 

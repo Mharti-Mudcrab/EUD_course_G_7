@@ -456,7 +456,7 @@ function runScenarioInteractive() {
         console.log(event.data);
 		if (event.data.includes(" pause")) {
 			// Call update debugging visuals
-			websocket.send(prompt("Pause (breakpoint) has been hit"));
+			websocket.send(prompt("Pause (breakpoint) has been hit\n\t1 - For continue\n\tanything else - For goto next step and pause"));
 		}
 		else if (event.data.includes("Took ")) {
 			websocket.close();

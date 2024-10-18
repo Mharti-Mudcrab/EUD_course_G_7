@@ -40,15 +40,17 @@ public class ScenarioRunInteractiveWebSocket {
                 try {
                     String line;
                     while ((line = pythonOutputReader.readLine()) != null) {
-                        session.getRemote().sendString(line); // Send output to the frontend
+                        session.getRemote().sendString(line);
                     }
                 } catch (IOException e) {
-                    e.printStackTrace(); // Log or handle the error
+                    e.printStackTrace();
+                    onClose(-1, "Error from python listenig thread");
                 }
             }).start();
 
         } catch (IOException e) {
-            e.printStackTrace(); // Handle the error and possibly close the session
+            e.printStackTrace();
+            onClose(-1, "Error from onConnect");
         }
     }
 
@@ -57,10 +59,10 @@ public class ScenarioRunInteractiveWebSocket {
         try {
             // Send the received WebSocket message to the Python process
             pythonInputWriter.write(message);
-            pythonInputWriter.newLine(); // Ensure the message is complete
-            pythonInputWriter.flush();   // Flush to send immediately
+            pythonInputWriter.newLine(); // Complete message to python with extra newline
+            pythonInputWriter.flush();
         } catch (IOException e) {
-            e.printStackTrace(); // Handle the error (e.g., log the error)
+            e.printStackTrace();
         }
     }
 
@@ -72,22 +74,20 @@ public class ScenarioRunInteractiveWebSocket {
             if (pythonOutputReader != null) pythonOutputReader.close();
             if (pythonProcess != null) pythonProcess.destroy(); // Terminate the Python process
         } catch (IOException e) {
-            e.printStackTrace(); // Log or handle the error
+            e.printStackTrace();
         }
     }
 
-    // Add error handling for WebSocket errors
     @OnWebSocketError
     public void onError(Session session, Throwable error) {
         System.err.println("WebSocket error occurred: " + error.getMessage());
-        error.printStackTrace(); // Print the stack trace for debugging
+        error.printStackTrace();
 
-        // Optionally, you can notify the client about the error
         if ( session.isOpen() ) {
 	        try {
 	            session.getRemote().sendString("Error from server: " + error.getMessage());
 	        } catch (IOException e) {
-	            e.printStackTrace(); // Log the error if unable to send message to client
+	            e.printStackTrace();
 	        }
         }
     }

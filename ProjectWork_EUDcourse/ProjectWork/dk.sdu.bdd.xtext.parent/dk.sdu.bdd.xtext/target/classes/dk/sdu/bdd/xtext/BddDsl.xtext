@@ -59,21 +59,21 @@ ImperativePropertyDef: name = ID (ID?);
 Scenario:
        'Scenario:' scenarioName = STRING
        'Given' preStateE = DeclarativeScenarioState
-       imperative1 = ImperativeScenario?
+       imperative1 = ImperativeScenario? ('pause')?
        
        'When' actionE = DeclarativeScenarioAction 
-	   imperative2 = ImperativeScenario?
+	   imperative2 = ImperativeScenario? ('pause')?
        
        'Then' preStateE1 = DeclarativeScenarioState
-	   imperative3 = ImperativeScenario?
+	   imperative3 = ImperativeScenario? ('pause')?
 ;
 
 ImperativeScenario:
    'which' 'means'
        
-   'Given' preState = ImperativeScenarioState
-   'When' action = ImperativeScenarioAction
-   'Then' postState = ImperativeScenarioState
+   'Given' preState = ImperativeScenarioState ('pause')?
+   'When' action = ImperativeScenarioAction ('pause')?
+   'Then' postState = ImperativeScenarioState ('pause')?
 ;
 
 PrePostWords:
@@ -194,7 +194,7 @@ ImperativeVerbAction:
 ;
 
 ImperativeEntityAction: 
-	entity = ImperativeEntityRef actionRef = ImperativeActionRef preposition = PREP entity2 = ImperativeEntityRef
+	entity = ImperativeEntityRef actionRef = ImperativeActionRef preposition = PREP entity2 = ImperativeEntityRef 
 ;
 
 ImperativeEntityPropertyAction:

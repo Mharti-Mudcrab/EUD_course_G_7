@@ -454,7 +454,7 @@ function runScenarioInteractive() {
 
     websocket.onmessage = function(event) {
         console.log(event.data);
-		if (event.data.includes(" pause")) {
+		if (event.data.includes("pausetag")) {
 			// Call update debugging visuals
 			websocket.send(prompt("Pause (breakpoint) has been hit\n\t1 - For continue\n\tanything else - For goto next step and pause"));
 		}

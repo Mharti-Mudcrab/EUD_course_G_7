@@ -13,6 +13,9 @@ from behave.model import Scenario
 current_dir = os.path.dirname(os.path.abspath(__file__))
 json_file_path = os.path.join(current_dir, 'Environment.json')
 
+
+
+
 # Check if the file exists
 if not os.path.exists(json_file_path):
     raise FileNotFoundError(f"File not found: {json_file_path}")
@@ -22,7 +25,7 @@ with open(json_file_path) as f:
 
 def before_all(context):
     if not hasattr(context, "step_mode"):
-        context.step_mode = False
+        context.step_mode = 0
     """
     print("Setting up Environment...")
 
@@ -60,6 +63,19 @@ def before_step(context, step):
     pass
     
 def after_step(context, step):
+    if context.step_mode in [1, 2]:
+        if context.step_mode == 1:
+            print("\t\t\t=== Pause was detected === pausetag")
+        elif context.step_mode == 2:
+            print("\t\t\t=== Step mode is on and triggered a pause === pausetag")
+        
+        if input() == '1':
+            context.step_mode = 2
+        else:
+            context.step_mode = 0
+    #else:
+        #print("\t\t\t=== No-pause in step_when ===")
+            
     pass
 
 # Get coordinate-location based on configured name

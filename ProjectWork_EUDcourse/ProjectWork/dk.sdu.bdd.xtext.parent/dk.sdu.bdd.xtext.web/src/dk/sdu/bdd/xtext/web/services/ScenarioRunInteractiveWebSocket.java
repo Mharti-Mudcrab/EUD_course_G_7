@@ -43,12 +43,14 @@ public class ScenarioRunInteractiveWebSocket {
                         session.getRemote().sendString(line);
                     }
                 } catch (IOException e) {
+                	System.out.print("An error occured in ScenarioRunInteractiveWebsocket:");
                     e.printStackTrace();
                     onClose(-1, "Error from python listenig thread");
                 }
             }).start();
 
         } catch (IOException e) {
+        	System.out.print("An error occured in ScenarioRunInteractiveWebsocket:");
             e.printStackTrace();
             onClose(-1, "Error from onConnect");
         }
@@ -62,6 +64,7 @@ public class ScenarioRunInteractiveWebSocket {
             pythonInputWriter.newLine(); // Complete message to python with extra newline
             pythonInputWriter.flush();
         } catch (IOException e) {
+        	System.out.print("An error occured in ScenarioRunInteractiveWebsocket:");
             e.printStackTrace();
         }
     }
@@ -74,19 +77,21 @@ public class ScenarioRunInteractiveWebSocket {
             if (pythonOutputReader != null) pythonOutputReader.close();
             if (pythonProcess != null) pythonProcess.destroy(); // Terminate the Python process
         } catch (IOException e) {
+        	System.out.print("An error occured in ScenarioRunInteractiveWebsocket:");
             e.printStackTrace();
         }
     }
 
     @OnWebSocketError
     public void onError(Session session, Throwable error) {
-        System.err.println("WebSocket error occurred: " + error.getMessage());
+    	System.out.print("An error occured in ScenarioRunInteractiveWebsocket: " + error.getMessage());
         error.printStackTrace();
 
         if ( session.isOpen() ) {
 	        try {
 	            session.getRemote().sendString("Error from server: " + error.getMessage());
 	        } catch (IOException e) {
+	        	System.out.print("An error occured in ScenarioRunInteractiveWebsocket:");
 	            e.printStackTrace();
 	        }
         }

@@ -8,6 +8,7 @@ import rtde_control
 import rtde_io
 from logic.sdu_robotics.robotiq_gripper_control import RobotiqGripper
 from behave.model import Scenario
+from pyspark.resource import information
 
 # Dynamically find the path to Environment.json
 current_dir = os.path.dirname(os.path.abspath(__file__))
@@ -69,6 +70,10 @@ def after_step(context, step):
         elif context.step_mode == 2:
             print("\t\t\t=== Step mode is on and triggered a pause === pausetag")
         
+        #print all robot information here
+        #print(get_robot_information(context))
+        print("This is where robot information would be printed")
+        
         if input() == '1':
             context.step_mode = 2
         else:
@@ -77,6 +82,15 @@ def after_step(context, step):
         #print("\t\t\t=== No-pause in step_when ===")
             
     pass
+
+def get_robot_information(context):
+    information_string = "The robot information at the current step is:\n"
+    information_string += get_position(context.position) 
+    information_string += get_speed(context.identifier)
+    information_string += get_acceleration(context.identifier)
+    information_string += get_robot_ip()
+    return information_string
+
 
 # Get coordinate-location based on configured name
 def get_position(name):

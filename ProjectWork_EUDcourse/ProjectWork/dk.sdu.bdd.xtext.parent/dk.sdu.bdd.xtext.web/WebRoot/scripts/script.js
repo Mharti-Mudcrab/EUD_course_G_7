@@ -444,3 +444,45 @@ function runScenario() {
 		eventSource.close();
 	};
 }
+
+document.addEventListener('DOMContentLoaded', function() {
+    // Initialize console
+    const consoleOutput = document.getElementById('console-output');
+    const clearConsoleButton = document.getElementById('clear-console');
+
+    // Clear console button functionality
+    clearConsoleButton.addEventListener('click', function() {
+        consoleOutput.textContent = '';
+    });
+
+    // Add initial message
+    appendToConsole('Console ready. Click "Run Scenario" to begin.\n');
+});
+
+function appendToConsole(message) {
+    const consoleOutput = document.getElementById('console-output');
+    consoleOutput.textContent += message;
+    consoleOutput.scrollTop = consoleOutput.scrollHeight;
+}
+
+function runScenario() {
+    const consoleOutput = document.getElementById('console-output');
+    consoleOutput.textContent = ''; // Clear previous output
+    appendToConsole('Starting scenario execution...\n');
+
+    const eventSource = new EventSource('/console-output');
+
+    eventSource.onmessage = function(event) {
+        appendToConsole(event.data + '\n');
+    };
+
+    eventSource.onerror = function() {
+        appendToConsole('Error: Connection to server lost\n');
+        eventSource.close();
+    };
+
+    eventSource.addEventListener('close', function(event) {
+        appendToConsole('Execution completed\n');
+        eventSource.close();
+    });
+}

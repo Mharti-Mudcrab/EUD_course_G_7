@@ -175,6 +175,9 @@
         <button id="save-scenario" onclick="saveScenario()">Save Scenario</button>
         <button id="save-entities" onclick="saveEntities()">Save Entities</button>    
         <button id="run-scenario" onclick="runScenario()">Run Scenario</button>
+		<button id="list-versions" onclick="listVersions()">List Versions</button>
+		<button id="revert-version" onclick="revertVersion()">Revert to Selected Version</button>
+		<select id="version-list" style="display:none;"></select>
       </div>
       <div id="console-section">
         <div class="console-header">
@@ -186,5 +189,120 @@
         </div>
       </div>
     </div>
+	<!-- JavaScript functions directly included at the end of the body -->
+	<script>
+		async function saveVersion() {
+		    const editor = getCurrentAceEditor();
+		    const content = editor.getValue();
+		    const metadata = {
+		        fileName: document.getElementById("fileName").value,
+		        timestamp: new Date().toISOString()
+		    };
+
+		    try {
+		        const response = await fetch('/save-scenario', {
+		            method: 'POST',
+		            headers: {
+		                'Content-Type': 'application/json'
+		            },
+		            body: JSON.stringify({ content, metadata })
+		        });
+
+		        if (response.ok) {
+		            const result = await response.json();
+		            appendToConsole(`Version saved successfully: ${result.version}\n`);
+		            await listVersions(); // Refresh the version list
+		        } else {
+		            const error = await response.text();
+		            appendToConsole(`Failed to save version: ${error}\n`);
+		        }
+		    } catch (error) {
+		        appendToConsole(`Error: ${error.message}\n`);
+		    }
+		}
+
+		async function listVersions() {
+		    try {
+		        const response = await fetch('/list-versions');
+		        const versions = await response.json();
+
+		        const versionList = document.getElementById("version-list");
+		        versionList.innerHTML = ""; // Clear previous entries
+		        versionList.style.display = 'block';
+
+		        versions.forEach(version => {
+		            const option = document.createElement("option");
+		            option.value = version.filename;
+		            const timestamp = version.metadata?.timestamp || version.lastModified;
+		            const fileName = version.metadata?.fileName || 'Unnamed';
+		            option.textContent = `${fileName} - ${timestamp} (${version.filename})`;
+		            versionList.appendChild(option);
+		        });
+
+		        appendToConsole("Versions listed successfully.\n");
+		    } catch (error) {
+		        appendToConsole(`Error listing versions: ${error.message}\n`);
+		    }
+		}
+
+		async function revertVersion() {
+		    const versionList = document.getElementById("version-list");
+		    const selectedVersion = versionList.value;
+
+		    if (!selectedVersion) {
+		        appendToConsole("No version selected for revert.\n");
+		        return;
+		    }
+
+			appendToConsole(`Error reverting version: ${selectedVersion}\n`);
+		    try {
+		        const response = await fetch('/revert-version', {
+		            method: 'POST',
+		            headers: {
+		                'Content-Type': 'application/json'
+		            },
+		            body: JSON.stringify({ versionFileName: selectedVersion })
+		        });
+
+		        const result = await response.json();
+
+		        if (response.ok) {
+		            appendToConsole(`Reverted to version: ${selectedVersion}\n`);
+		            
+		            // Update the editor content if available
+		            if (result.content) {
+		                const editor = getCurrentAceEditor();
+		                editor.setValue(result.content);
+		                editor.clearSelection();
+		            }
+		            
+		            // Refresh the version list to show the new backup version
+		            await listVersions();
+		        } else {
+		            appendToConsole(`Failed to revert to version: ${result.message}\n`);
+		        }
+		    } catch (error) {
+		        appendToConsole(`Error reverting version: ${error.message}\n`);
+		    }
+		}
+
+		// Helper function to append messages to the console
+		function appendToConsole(message) {
+		    const consoleOutput = document.getElementById("console-output");
+		    const timestamp = new Date().toLocaleTimeString();
+		    consoleOutput.innerHTML += `[${timestamp}] ${message}`;
+		    consoleOutput.scrollTop = consoleOutput.scrollHeight;
+		}
+
+		// Event listeners
+		document.getElementById("clear-console")?.addEventListener("click", function() {
+		    document.getElementById("console-output").innerHTML = "";
+		});
+
+		// Initialize version list when page loads
+		document.addEventListener("DOMContentLoaded", function() {
+		    listVersions();
+		});
+	</script>
   </body>
 </html>

@@ -425,26 +425,6 @@ function runScenario() {
   });
 }*/
 
-function runScenario() {
-	// Establish a connection to the backend SSE servlet
-    const eventSource = new EventSource('/run-scenario');
-	
-	// Listen for incoming messages
-	eventSource.onmessage = function(event) {
-	    // Append received message to the messages div
-	    /*const messagesDiv = document.getElementById('messages');
-	    const newMessage = document.createElement('p');
-	    newMessage.textContent = event.data;
-	    messagesDiv.appendChild(newMessage);*/
-		console.log(event.data);
-	};
-	
-	// Handle any errors in the connection
-	eventSource.onerror = function(event) {
-		eventSource.close();
-	};
-}
-
 document.addEventListener('DOMContentLoaded', function() {
     // Initialize console
     const consoleOutput = document.getElementById('console-output');
@@ -485,4 +465,37 @@ function runScenario() {
         appendToConsole('Execution completed\n');
         eventSource.close();
     });
+}
+
+function runScenarioInteractive() {
+    const websocket = new WebSocket('ws://localhost:8081/run-scenario-interactive'); // Use ws:// for non-secure, wss:// for secure connections
+    appendToConsole('Starting scenario execution...\n');
+  
+    websocket.onopen = function(event) {
+        appendToConsole('WebSocket connection opened.\n');
+        console.log("WebSocket connection opened.");
+    };
+
+    websocket.onmessage = function(event) {
+        appendToConsole(event.data + '\n');
+        //console.log(event.data);
+        if (event.data.includes("pausetag")) {
+            // Call update debugging visuals
+            websocket.send(prompt("Pause (breakpoint) has been hit\n\t1 - For continue\n\tanything else - For goto next step and pause"));
+        }
+        else if (event.data.includes("Took ")) {
+            websocket.close();
+        }
+    };
+
+    websocket.onclose = function(event) {
+        appendToConsole('Execution completed\n');  
+        //console.log("WebSocket connection closed.");
+    };
+
+    websocket.onerror = function(error) {
+        appendToConsole('Error: Connection to server lost\n');
+        websocket.close();
+        //console.error("WebSocket error:", error);
+    };
 }

@@ -8,10 +8,14 @@ import rtde_control
 import rtde_io
 from logic.sdu_robotics.robotiq_gripper_control import RobotiqGripper
 from behave.model import Scenario
+from pyspark.resource import information
 
 # Dynamically find the path to Environment.json
 current_dir = os.path.dirname(os.path.abspath(__file__))
 json_file_path = os.path.join(current_dir, 'Environment.json')
+
+
+
 
 # Check if the file exists
 if not os.path.exists(json_file_path):
@@ -21,6 +25,8 @@ with open(json_file_path) as f:
     data = json.load(f)
 
 def before_all(context):
+    if not hasattr(context, "step_mode"):
+        context.step_mode = 0
     """
     print("Setting up Environment...")
 
@@ -58,7 +64,33 @@ def before_step(context, step):
     pass
     
 def after_step(context, step):
+    if context.step_mode in [1, 2]:
+        if context.step_mode == 1:
+            print("\t\t\t=== Pause was detected === pausetag")
+        elif context.step_mode == 2:
+            print("\t\t\t=== Step mode is on and triggered a pause === pausetag")
+        
+        #print all robot information here
+        #print(get_robot_information(context))
+        print("This is where robot information would be printed")
+        
+        if input() == '1':
+            context.step_mode = 2
+        else:
+            context.step_mode = 0
+    #else:
+        #print("\t\t\t=== No-pause in step_when ===")
+            
     pass
+
+def get_robot_information(context):
+    information_string = "The robot information at the current step is:\n"
+    information_string += get_position(context.position) 
+    information_string += get_speed(context.identifier)
+    information_string += get_acceleration(context.identifier)
+    information_string += get_robot_ip()
+    return information_string
+
 
 # Get coordinate-location based on configured name
 def get_position(name):

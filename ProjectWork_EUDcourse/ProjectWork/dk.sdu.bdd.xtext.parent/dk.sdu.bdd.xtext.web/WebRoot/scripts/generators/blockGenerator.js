@@ -280,9 +280,9 @@ function addBlockToWorkspace(parsedObj, workspace, parentBlock) {
     if (parsedObj.preposition3)
         setDropdownValue(parsedObj.preposition3, blockToAdd, workspace, false); 
 	
-	if (parsedObj.debugStmt1 && parsedObj.type === 'DeclarativeEntityPropertyStatePhrase')
-		console.log("Adding pause block", parsedObj.type)
-		addDebugBlock(blockToAdd, workspace) 
+	//if (parsedObj.debugStmt1 && parsedObj.type === 'DeclarativeEntityPropertyStatePhrase')
+		//console.log("Adding pause block", parsedObj.type)
+	//	addDebugBlock(blockToAdd, workspace) 
 
     if (parentBlock)
         addParentBlock(parentBlock, blockToAdd, workspace);
@@ -299,9 +299,9 @@ function addParentBlock(parentBlock, blockToAdd, workspace)
         return b.type === parentBlock.type;
     });
     
-	console.log("This is the parentBlockDefinitions:", parentBlockDefinition)
+	//console.log("This is the parentBlockDefinitions:", parentBlockDefinition)
     var blockToAddType = blockToAdd.type;
-	console.log("This type pf block to add:", blockToAddType)
+	//console.log("This type pf block to add:", blockToAddType)
     if (blockToAddType === 'subBlock_Scenario_And0') // SPECIAL CASE! this input argument does not exist - it's custom.
     {
         blockToAddType = 'subBlock_Scenario_And';
@@ -334,8 +334,8 @@ function addParentBlock(parentBlock, blockToAdd, workspace)
     }
 
     var targetBlock = workspace.getBlockById(parentBlock.id);
-	console.log("TargetBlock:", targetBlock)
-	console.log("inputArgument:", inputArgument )
+	//console.log("TargetBlock:", targetBlock)
+	//console.log("inputArgument:", inputArgument )
     if (inputArgument && targetBlock.inputList) // connect as an input
     {
         var input = targetBlock.inputList.find(function(i) {
@@ -408,10 +408,10 @@ function addStringBlock(stringValue, blockToAdd, workspace)
 
 	console.log("InputArgument", inputArgument)
 	
-	var test = blockToAdd.getInput(inputArgument.name)
-	 console.log("test", test)
+	var name = blockToAdd.getInput(inputArgument.name)
+	console.log("name", name)
 	 
-    var inputConnection = test.connection;
+    var inputConnection = name.connection;
 	console.log("inputConnection", inputConnection)
 	
     stringBlock.outputConnection.connect(inputConnection);
@@ -436,10 +436,9 @@ function addDebugBlock(parentBlock, workspace){
 		
 	console.log("blockDefinitions", blockDefinition)
 	
-	let inputArgument = {
-	    name: 'alternatives_statement',
-	    type: 'input_value'
-	};
+	//var inputArgument = blockDefinition.args0.find(function(a) {
+	//        return a.check && a.check.includes('STRING') && a.type === 'input_value';
+	 //   });
 
 	//var test =  blockToAdd.getInput(inputArgument.name)
 	
@@ -496,7 +495,7 @@ function parseValueString(str) {
 
     if (matches) {
 		var type = matches[1];
-		var debugStmt1 = matches[2] || "pause";
+		var debugStmt1 = matches[2] || null;
 		var debugStmt2 = matches[3] || null;
 		var debugStmt3 = matches[4] || null;
 		var preposition = matches[5] || null;

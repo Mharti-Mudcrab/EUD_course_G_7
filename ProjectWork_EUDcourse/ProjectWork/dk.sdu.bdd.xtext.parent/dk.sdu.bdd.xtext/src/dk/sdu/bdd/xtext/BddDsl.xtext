@@ -179,7 +179,6 @@ DeclarativeEntityPropertyStatePhrase:
 	property = PropertyRef? preposition = PREP  entity = DeclarativeEntityRef
 	toBeWord = ToBeWords value = ENTITY_IDENTITY 
 	debug = DebugStatement?
-	
 ;
 
 ImperativeEntityPropertyStatePhrase:

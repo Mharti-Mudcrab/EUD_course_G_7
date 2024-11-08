@@ -30,6 +30,7 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
  *   <li>{@link dk.sdu.bdd.xtext.bddDsl.impl.DeclarativeEntityPropertyStatePhraseImpl#getEntity <em>Entity</em>}</li>
  *   <li>{@link dk.sdu.bdd.xtext.bddDsl.impl.DeclarativeEntityPropertyStatePhraseImpl#getToBeWord <em>To Be Word</em>}</li>
  *   <li>{@link dk.sdu.bdd.xtext.bddDsl.impl.DeclarativeEntityPropertyStatePhraseImpl#getValue <em>Value</em>}</li>
+ *   <li>{@link dk.sdu.bdd.xtext.bddDsl.impl.DeclarativeEntityPropertyStatePhraseImpl#getDebug <em>Debug</em>}</li>
  * </ul>
  *
  * @generated
@@ -115,6 +116,26 @@ public class DeclarativeEntityPropertyStatePhraseImpl extends MinimalEObjectImpl
    * @ordered
    */
   protected String value = VALUE_EDEFAULT;
+
+  /**
+   * The default value of the '{@link #getDebug() <em>Debug</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getDebug()
+   * @generated
+   * @ordered
+   */
+  protected static final String DEBUG_EDEFAULT = null;
+
+  /**
+   * The cached value of the '{@link #getDebug() <em>Debug</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getDebug()
+   * @generated
+   * @ordered
+   */
+  protected String debug = DEBUG_EDEFAULT;
 
   /**
    * <!-- begin-user-doc -->
@@ -318,6 +339,31 @@ public class DeclarativeEntityPropertyStatePhraseImpl extends MinimalEObjectImpl
    * @generated
    */
   @Override
+  public String getDebug()
+  {
+    return debug;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public void setDebug(String newDebug)
+  {
+    String oldDebug = debug;
+    debug = newDebug;
+    if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, BddDslPackage.DECLARATIVE_ENTITY_PROPERTY_STATE_PHRASE__DEBUG, oldDebug, debug));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
   public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
   {
     switch (featureID)
@@ -350,6 +396,8 @@ public class DeclarativeEntityPropertyStatePhraseImpl extends MinimalEObjectImpl
         return getToBeWord();
       case BddDslPackage.DECLARATIVE_ENTITY_PROPERTY_STATE_PHRASE__VALUE:
         return getValue();
+      case BddDslPackage.DECLARATIVE_ENTITY_PROPERTY_STATE_PHRASE__DEBUG:
+        return getDebug();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -378,6 +426,9 @@ public class DeclarativeEntityPropertyStatePhraseImpl extends MinimalEObjectImpl
         return;
       case BddDslPackage.DECLARATIVE_ENTITY_PROPERTY_STATE_PHRASE__VALUE:
         setValue((String)newValue);
+        return;
+      case BddDslPackage.DECLARATIVE_ENTITY_PROPERTY_STATE_PHRASE__DEBUG:
+        setDebug((String)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -408,6 +459,9 @@ public class DeclarativeEntityPropertyStatePhraseImpl extends MinimalEObjectImpl
       case BddDslPackage.DECLARATIVE_ENTITY_PROPERTY_STATE_PHRASE__VALUE:
         setValue(VALUE_EDEFAULT);
         return;
+      case BddDslPackage.DECLARATIVE_ENTITY_PROPERTY_STATE_PHRASE__DEBUG:
+        setDebug(DEBUG_EDEFAULT);
+        return;
     }
     super.eUnset(featureID);
   }
@@ -432,6 +486,8 @@ public class DeclarativeEntityPropertyStatePhraseImpl extends MinimalEObjectImpl
         return TO_BE_WORD_EDEFAULT == null ? toBeWord != null : !TO_BE_WORD_EDEFAULT.equals(toBeWord);
       case BddDslPackage.DECLARATIVE_ENTITY_PROPERTY_STATE_PHRASE__VALUE:
         return VALUE_EDEFAULT == null ? value != null : !VALUE_EDEFAULT.equals(value);
+      case BddDslPackage.DECLARATIVE_ENTITY_PROPERTY_STATE_PHRASE__DEBUG:
+        return DEBUG_EDEFAULT == null ? debug != null : !DEBUG_EDEFAULT.equals(debug);
     }
     return super.eIsSet(featureID);
   }
@@ -453,6 +509,8 @@ public class DeclarativeEntityPropertyStatePhraseImpl extends MinimalEObjectImpl
     result.append(toBeWord);
     result.append(", value: ");
     result.append(value);
+    result.append(", debug: ");
+    result.append(debug);
     result.append(')');
     return result.toString();
   }

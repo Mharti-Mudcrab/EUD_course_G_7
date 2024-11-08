@@ -934,38 +934,40 @@ public class BddDslGrammarAccess extends AbstractElementFinder.AbstractGrammarEl
 		private final RuleCall cPreStateEDeclarativeScenarioStateParserRuleCall_3_0 = (RuleCall)cPreStateEAssignment_3.eContents().get(0);
 		private final Assignment cImperative1Assignment_4 = (Assignment)cGroup.eContents().get(4);
 		private final RuleCall cImperative1ImperativeScenarioParserRuleCall_4_0 = (RuleCall)cImperative1Assignment_4.eContents().get(0);
-		private final Keyword cPauseKeyword_5 = (Keyword)cGroup.eContents().get(5);
-		private final Keyword cWhenKeyword_6 = (Keyword)cGroup.eContents().get(6);
-		private final Assignment cActionEAssignment_7 = (Assignment)cGroup.eContents().get(7);
-		private final RuleCall cActionEDeclarativeScenarioActionParserRuleCall_7_0 = (RuleCall)cActionEAssignment_7.eContents().get(0);
-		private final Assignment cImperative2Assignment_8 = (Assignment)cGroup.eContents().get(8);
-		private final RuleCall cImperative2ImperativeScenarioParserRuleCall_8_0 = (RuleCall)cImperative2Assignment_8.eContents().get(0);
-		private final Keyword cPauseKeyword_9 = (Keyword)cGroup.eContents().get(9);
-		private final Keyword cThenKeyword_10 = (Keyword)cGroup.eContents().get(10);
-		private final Assignment cPreStateE1Assignment_11 = (Assignment)cGroup.eContents().get(11);
-		private final RuleCall cPreStateE1DeclarativeScenarioStateParserRuleCall_11_0 = (RuleCall)cPreStateE1Assignment_11.eContents().get(0);
-		private final Assignment cImperative3Assignment_12 = (Assignment)cGroup.eContents().get(12);
-		private final RuleCall cImperative3ImperativeScenarioParserRuleCall_12_0 = (RuleCall)cImperative3Assignment_12.eContents().get(0);
-		private final Keyword cPauseKeyword_13 = (Keyword)cGroup.eContents().get(13);
+		private final Keyword cWhenKeyword_5 = (Keyword)cGroup.eContents().get(5);
+		private final Assignment cActionEAssignment_6 = (Assignment)cGroup.eContents().get(6);
+		private final RuleCall cActionEDeclarativeScenarioActionParserRuleCall_6_0 = (RuleCall)cActionEAssignment_6.eContents().get(0);
+		private final Assignment cImperative2Assignment_7 = (Assignment)cGroup.eContents().get(7);
+		private final RuleCall cImperative2ImperativeScenarioParserRuleCall_7_0 = (RuleCall)cImperative2Assignment_7.eContents().get(0);
+		private final Keyword cThenKeyword_8 = (Keyword)cGroup.eContents().get(8);
+		private final Assignment cPreStateE1Assignment_9 = (Assignment)cGroup.eContents().get(9);
+		private final RuleCall cPreStateE1DeclarativeScenarioStateParserRuleCall_9_0 = (RuleCall)cPreStateE1Assignment_9.eContents().get(0);
+		private final Assignment cImperative3Assignment_10 = (Assignment)cGroup.eContents().get(10);
+		private final RuleCall cImperative3ImperativeScenarioParserRuleCall_10_0 = (RuleCall)cImperative3Assignment_10.eContents().get(0);
 		
 		//Scenario:
 		//       'Scenario:' scenarioName = STRING
 		//       'Given' preStateE = DeclarativeScenarioState
-		//       imperative1 = ImperativeScenario? ('pause')?
+		//       imperative1 = ImperativeScenario?
+		//       //debugStmt1 = DebugStatement?
 		//       'When' actionE = DeclarativeScenarioAction
-		//       imperative2 = ImperativeScenario? ('pause')?
+		//       imperative2 = ImperativeScenario?
+		//       //debugStmt2 = DebugStatement?
 		//       'Then' preStateE1 = DeclarativeScenarioState
-		//       imperative3 = ImperativeScenario? ('pause')?
+		//       imperative3 = ImperativeScenario?
+		//       //debugStmt3 = DebugStatement?
 		//;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//'Scenario:' scenarioName = STRING
 		//'Given' preStateE = DeclarativeScenarioState
-		//imperative1 = ImperativeScenario? ('pause')?
+		//imperative1 = ImperativeScenario?
+		////debugStmt1 = DebugStatement?
 		//'When' actionE = DeclarativeScenarioAction
-		//imperative2 = ImperativeScenario? ('pause')?
+		//imperative2 = ImperativeScenario?
+		////debugStmt2 = DebugStatement?
 		//'Then' preStateE1 = DeclarativeScenarioState
-		//imperative3 = ImperativeScenario? ('pause')?
+		//imperative3 = ImperativeScenario?
 		public Group getGroup() { return cGroup; }
 		
 		//'Scenario:'
@@ -992,44 +994,37 @@ public class BddDslGrammarAccess extends AbstractElementFinder.AbstractGrammarEl
 		//ImperativeScenario
 		public RuleCall getImperative1ImperativeScenarioParserRuleCall_4_0() { return cImperative1ImperativeScenarioParserRuleCall_4_0; }
 		
-		//('pause')?
-		public Keyword getPauseKeyword_5() { return cPauseKeyword_5; }
-		
+		////debugStmt1 = DebugStatement?
 		//'When'
-		public Keyword getWhenKeyword_6() { return cWhenKeyword_6; }
+		public Keyword getWhenKeyword_5() { return cWhenKeyword_5; }
 		
 		//actionE = DeclarativeScenarioAction
-		public Assignment getActionEAssignment_7() { return cActionEAssignment_7; }
+		public Assignment getActionEAssignment_6() { return cActionEAssignment_6; }
 		
 		//DeclarativeScenarioAction
-		public RuleCall getActionEDeclarativeScenarioActionParserRuleCall_7_0() { return cActionEDeclarativeScenarioActionParserRuleCall_7_0; }
+		public RuleCall getActionEDeclarativeScenarioActionParserRuleCall_6_0() { return cActionEDeclarativeScenarioActionParserRuleCall_6_0; }
 		
 		//imperative2 = ImperativeScenario?
-		public Assignment getImperative2Assignment_8() { return cImperative2Assignment_8; }
+		public Assignment getImperative2Assignment_7() { return cImperative2Assignment_7; }
 		
 		//ImperativeScenario
-		public RuleCall getImperative2ImperativeScenarioParserRuleCall_8_0() { return cImperative2ImperativeScenarioParserRuleCall_8_0; }
+		public RuleCall getImperative2ImperativeScenarioParserRuleCall_7_0() { return cImperative2ImperativeScenarioParserRuleCall_7_0; }
 		
-		//('pause')?
-		public Keyword getPauseKeyword_9() { return cPauseKeyword_9; }
-		
+		////debugStmt2 = DebugStatement?
 		//'Then'
-		public Keyword getThenKeyword_10() { return cThenKeyword_10; }
+		public Keyword getThenKeyword_8() { return cThenKeyword_8; }
 		
 		//preStateE1 = DeclarativeScenarioState
-		public Assignment getPreStateE1Assignment_11() { return cPreStateE1Assignment_11; }
+		public Assignment getPreStateE1Assignment_9() { return cPreStateE1Assignment_9; }
 		
 		//DeclarativeScenarioState
-		public RuleCall getPreStateE1DeclarativeScenarioStateParserRuleCall_11_0() { return cPreStateE1DeclarativeScenarioStateParserRuleCall_11_0; }
+		public RuleCall getPreStateE1DeclarativeScenarioStateParserRuleCall_9_0() { return cPreStateE1DeclarativeScenarioStateParserRuleCall_9_0; }
 		
 		//imperative3 = ImperativeScenario?
-		public Assignment getImperative3Assignment_12() { return cImperative3Assignment_12; }
+		public Assignment getImperative3Assignment_10() { return cImperative3Assignment_10; }
 		
 		//ImperativeScenario
-		public RuleCall getImperative3ImperativeScenarioParserRuleCall_12_0() { return cImperative3ImperativeScenarioParserRuleCall_12_0; }
-		
-		//('pause')?
-		public Keyword getPauseKeyword_13() { return cPauseKeyword_13; }
+		public RuleCall getImperative3ImperativeScenarioParserRuleCall_10_0() { return cImperative3ImperativeScenarioParserRuleCall_10_0; }
 	}
 	public class ImperativeScenarioElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "dk.sdu.bdd.xtext.BddDsl.ImperativeScenario");
@@ -1039,28 +1034,25 @@ public class BddDslGrammarAccess extends AbstractElementFinder.AbstractGrammarEl
 		private final Keyword cGivenKeyword_2 = (Keyword)cGroup.eContents().get(2);
 		private final Assignment cPreStateAssignment_3 = (Assignment)cGroup.eContents().get(3);
 		private final RuleCall cPreStateImperativeScenarioStateParserRuleCall_3_0 = (RuleCall)cPreStateAssignment_3.eContents().get(0);
-		private final Keyword cPauseKeyword_4 = (Keyword)cGroup.eContents().get(4);
-		private final Keyword cWhenKeyword_5 = (Keyword)cGroup.eContents().get(5);
-		private final Assignment cActionAssignment_6 = (Assignment)cGroup.eContents().get(6);
-		private final RuleCall cActionImperativeScenarioActionParserRuleCall_6_0 = (RuleCall)cActionAssignment_6.eContents().get(0);
-		private final Keyword cPauseKeyword_7 = (Keyword)cGroup.eContents().get(7);
-		private final Keyword cThenKeyword_8 = (Keyword)cGroup.eContents().get(8);
-		private final Assignment cPostStateAssignment_9 = (Assignment)cGroup.eContents().get(9);
-		private final RuleCall cPostStateImperativeScenarioStateParserRuleCall_9_0 = (RuleCall)cPostStateAssignment_9.eContents().get(0);
-		private final Keyword cPauseKeyword_10 = (Keyword)cGroup.eContents().get(10);
+		private final Keyword cWhenKeyword_4 = (Keyword)cGroup.eContents().get(4);
+		private final Assignment cActionAssignment_5 = (Assignment)cGroup.eContents().get(5);
+		private final RuleCall cActionImperativeScenarioActionParserRuleCall_5_0 = (RuleCall)cActionAssignment_5.eContents().get(0);
+		private final Keyword cThenKeyword_6 = (Keyword)cGroup.eContents().get(6);
+		private final Assignment cPostStateAssignment_7 = (Assignment)cGroup.eContents().get(7);
+		private final RuleCall cPostStateImperativeScenarioStateParserRuleCall_7_0 = (RuleCall)cPostStateAssignment_7.eContents().get(0);
 		
 		//ImperativeScenario:
 		//   'which' 'means'
-		//   'Given' preState = ImperativeScenarioState ('pause')?
-		//   'When' action = ImperativeScenarioAction ('pause')?
-		//   'Then' postState = ImperativeScenarioState ('pause')?
+		//   'Given' preState = ImperativeScenarioState
+		//   'When' action = ImperativeScenarioAction
+		//   'Then' postState = ImperativeScenarioState
 		//;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//'which' 'means'
-		//'Given' preState = ImperativeScenarioState ('pause')?
-		//'When' action = ImperativeScenarioAction ('pause')?
-		//'Then' postState = ImperativeScenarioState ('pause')?
+		//'Given' preState = ImperativeScenarioState
+		//'When' action = ImperativeScenarioAction
+		//'Then' postState = ImperativeScenarioState
 		public Group getGroup() { return cGroup; }
 		
 		//'which'
@@ -1078,32 +1070,23 @@ public class BddDslGrammarAccess extends AbstractElementFinder.AbstractGrammarEl
 		//ImperativeScenarioState
 		public RuleCall getPreStateImperativeScenarioStateParserRuleCall_3_0() { return cPreStateImperativeScenarioStateParserRuleCall_3_0; }
 		
-		//('pause')?
-		public Keyword getPauseKeyword_4() { return cPauseKeyword_4; }
-		
 		//'When'
-		public Keyword getWhenKeyword_5() { return cWhenKeyword_5; }
+		public Keyword getWhenKeyword_4() { return cWhenKeyword_4; }
 		
 		//action = ImperativeScenarioAction
-		public Assignment getActionAssignment_6() { return cActionAssignment_6; }
+		public Assignment getActionAssignment_5() { return cActionAssignment_5; }
 		
 		//ImperativeScenarioAction
-		public RuleCall getActionImperativeScenarioActionParserRuleCall_6_0() { return cActionImperativeScenarioActionParserRuleCall_6_0; }
-		
-		//('pause')?
-		public Keyword getPauseKeyword_7() { return cPauseKeyword_7; }
+		public RuleCall getActionImperativeScenarioActionParserRuleCall_5_0() { return cActionImperativeScenarioActionParserRuleCall_5_0; }
 		
 		//'Then'
-		public Keyword getThenKeyword_8() { return cThenKeyword_8; }
+		public Keyword getThenKeyword_6() { return cThenKeyword_6; }
 		
 		//postState = ImperativeScenarioState
-		public Assignment getPostStateAssignment_9() { return cPostStateAssignment_9; }
+		public Assignment getPostStateAssignment_7() { return cPostStateAssignment_7; }
 		
 		//ImperativeScenarioState
-		public RuleCall getPostStateImperativeScenarioStateParserRuleCall_9_0() { return cPostStateImperativeScenarioStateParserRuleCall_9_0; }
-		
-		//('pause')?
-		public Keyword getPauseKeyword_10() { return cPauseKeyword_10; }
+		public RuleCall getPostStateImperativeScenarioStateParserRuleCall_7_0() { return cPostStateImperativeScenarioStateParserRuleCall_7_0; }
 	}
 	public class PrePostWordsElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "dk.sdu.bdd.xtext.BddDsl.PrePostWords");
@@ -1160,6 +1143,18 @@ public class BddDslGrammarAccess extends AbstractElementFinder.AbstractGrammarEl
 		
 		//'not'
 		public Keyword getNotKeyword_3_1() { return cNotKeyword_3_1; }
+	}
+	public class DebugStatementElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "dk.sdu.bdd.xtext.BddDsl.DebugStatement");
+		private final Keyword cPauseKeyword = (Keyword)rule.eContents().get(1);
+		
+		//DebugStatement:
+		//    ('pause')
+		//;
+		@Override public ParserRule getRule() { return rule; }
+		
+		//('pause')
+		public Keyword getPauseKeyword() { return cPauseKeyword; }
 	}
 	public class DeclarativeScenarioStateElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "dk.sdu.bdd.xtext.BddDsl.DeclarativeScenarioState");
@@ -1356,8 +1351,7 @@ public class BddDslGrammarAccess extends AbstractElementFinder.AbstractGrammarEl
 		
 		//DeclarativeScenarioAction:
 		//    actions += (DeclarativeEntityAction | VerbAction | DeclarativeEntityPropertyAction)
-		//    ('And' andActions += DeclarativeScenarioActionAnd)*
-		//;
+		//    ('And' andActions += DeclarativeScenarioActionAnd)* ;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//actions += (DeclarativeEntityAction | VerbAction | DeclarativeEntityPropertyAction)
@@ -1938,15 +1932,19 @@ public class BddDslGrammarAccess extends AbstractElementFinder.AbstractGrammarEl
 		private final RuleCall cToBeWordToBeWordsParserRuleCall_3_0 = (RuleCall)cToBeWordAssignment_3.eContents().get(0);
 		private final Assignment cValueAssignment_4 = (Assignment)cGroup.eContents().get(4);
 		private final RuleCall cValueENTITY_IDENTITYParserRuleCall_4_0 = (RuleCall)cValueAssignment_4.eContents().get(0);
+		private final Assignment cDebugAssignment_5 = (Assignment)cGroup.eContents().get(5);
+		private final RuleCall cDebugDebugStatementParserRuleCall_5_0 = (RuleCall)cDebugAssignment_5.eContents().get(0);
 		
 		//DeclarativeEntityPropertyStatePhrase:
 		//    property = PropertyRef? preposition = PREP  entity = DeclarativeEntityRef
 		//    toBeWord = ToBeWords value = ENTITY_IDENTITY
+		//    debug = DebugStatement?
 		//;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//property = PropertyRef? preposition = PREP  entity = DeclarativeEntityRef
 		//toBeWord = ToBeWords value = ENTITY_IDENTITY
+		//debug = DebugStatement?
 		public Group getGroup() { return cGroup; }
 		
 		//property = PropertyRef?
@@ -1978,6 +1976,12 @@ public class BddDslGrammarAccess extends AbstractElementFinder.AbstractGrammarEl
 		
 		//ENTITY_IDENTITY
 		public RuleCall getValueENTITY_IDENTITYParserRuleCall_4_0() { return cValueENTITY_IDENTITYParserRuleCall_4_0; }
+		
+		//debug = DebugStatement?
+		public Assignment getDebugAssignment_5() { return cDebugAssignment_5; }
+		
+		//DebugStatement
+		public RuleCall getDebugDebugStatementParserRuleCall_5_0() { return cDebugDebugStatementParserRuleCall_5_0; }
 	}
 	public class ImperativeEntityPropertyStatePhraseElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "dk.sdu.bdd.xtext.BddDsl.ImperativeEntityPropertyStatePhrase");
@@ -2434,6 +2438,7 @@ public class BddDslGrammarAccess extends AbstractElementFinder.AbstractGrammarEl
 	private final ImperativeScenarioElements pImperativeScenario;
 	private final PrePostWordsElements pPrePostWords;
 	private final ToBeWordsElements pToBeWords;
+	private final DebugStatementElements pDebugStatement;
 	private final DeclarativeScenarioStateElements pDeclarativeScenarioState;
 	private final DeclarativeScenarioStateAndElements pDeclarativeScenarioStateAnd;
 	private final ImperativeScenarioStateElements pImperativeScenarioState;
@@ -2491,6 +2496,7 @@ public class BddDslGrammarAccess extends AbstractElementFinder.AbstractGrammarEl
 		this.pImperativeScenario = new ImperativeScenarioElements();
 		this.pPrePostWords = new PrePostWordsElements();
 		this.pToBeWords = new ToBeWordsElements();
+		this.pDebugStatement = new DebugStatementElements();
 		this.pDeclarativeScenarioState = new DeclarativeScenarioStateElements();
 		this.pDeclarativeScenarioStateAnd = new DeclarativeScenarioStateAndElements();
 		this.pImperativeScenarioState = new ImperativeScenarioStateElements();
@@ -2697,11 +2703,14 @@ public class BddDslGrammarAccess extends AbstractElementFinder.AbstractGrammarEl
 	//Scenario:
 	//       'Scenario:' scenarioName = STRING
 	//       'Given' preStateE = DeclarativeScenarioState
-	//       imperative1 = ImperativeScenario? ('pause')?
+	//       imperative1 = ImperativeScenario?
+	//       //debugStmt1 = DebugStatement?
 	//       'When' actionE = DeclarativeScenarioAction
-	//       imperative2 = ImperativeScenario? ('pause')?
+	//       imperative2 = ImperativeScenario?
+	//       //debugStmt2 = DebugStatement?
 	//       'Then' preStateE1 = DeclarativeScenarioState
-	//       imperative3 = ImperativeScenario? ('pause')?
+	//       imperative3 = ImperativeScenario?
+	//       //debugStmt3 = DebugStatement?
 	//;
 	public ScenarioElements getScenarioAccess() {
 		return pScenario;
@@ -2713,9 +2722,9 @@ public class BddDslGrammarAccess extends AbstractElementFinder.AbstractGrammarEl
 	
 	//ImperativeScenario:
 	//   'which' 'means'
-	//   'Given' preState = ImperativeScenarioState ('pause')?
-	//   'When' action = ImperativeScenarioAction ('pause')?
-	//   'Then' postState = ImperativeScenarioState ('pause')?
+	//   'Given' preState = ImperativeScenarioState
+	//   'When' action = ImperativeScenarioAction
+	//   'Then' postState = ImperativeScenarioState
 	//;
 	public ImperativeScenarioElements getImperativeScenarioAccess() {
 		return pImperativeScenario;
@@ -2745,6 +2754,17 @@ public class BddDslGrammarAccess extends AbstractElementFinder.AbstractGrammarEl
 	
 	public ParserRule getToBeWordsRule() {
 		return getToBeWordsAccess().getRule();
+	}
+	
+	//DebugStatement:
+	//    ('pause')
+	//;
+	public DebugStatementElements getDebugStatementAccess() {
+		return pDebugStatement;
+	}
+	
+	public ParserRule getDebugStatementRule() {
+		return getDebugStatementAccess().getRule();
 	}
 	
 	//DeclarativeScenarioState:
@@ -2795,8 +2815,7 @@ public class BddDslGrammarAccess extends AbstractElementFinder.AbstractGrammarEl
 	
 	//DeclarativeScenarioAction:
 	//    actions += (DeclarativeEntityAction | VerbAction | DeclarativeEntityPropertyAction)
-	//    ('And' andActions += DeclarativeScenarioActionAnd)*
-	//;
+	//    ('And' andActions += DeclarativeScenarioActionAnd)* ;
 	public DeclarativeScenarioActionElements getDeclarativeScenarioActionAccess() {
 		return pDeclarativeScenarioAction;
 	}
@@ -2981,6 +3000,7 @@ public class BddDslGrammarAccess extends AbstractElementFinder.AbstractGrammarEl
 	//DeclarativeEntityPropertyStatePhrase:
 	//    property = PropertyRef? preposition = PREP  entity = DeclarativeEntityRef
 	//    toBeWord = ToBeWords value = ENTITY_IDENTITY
+	//    debug = DebugStatement?
 	//;
 	public DeclarativeEntityPropertyStatePhraseElements getDeclarativeEntityPropertyStatePhraseAccess() {
 		return pDeclarativeEntityPropertyStatePhrase;

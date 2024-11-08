@@ -9,7 +9,7 @@ Model:
 		(modelRefs += ModelRef) |
 		(declarativeEntityDef += DeclarativeEntityDef) |
 		(imperativeEntityDef += ImperativeEntityDef) |
-		(scenarios += Scenario)
+		(scenarios += Scenario) 
 	)*
 ;
 
@@ -58,22 +58,25 @@ ImperativePropertyDef: name = ID (ID?);
 
 Scenario:
        'Scenario:' scenarioName = STRING
-       'Given' preStateE = DeclarativeScenarioState
-       imperative1 = ImperativeScenario? ('pause')?
+       'Given' preStateE = DeclarativeScenarioState 
+       imperative1 = ImperativeScenario? 
+       //debugStmt1 = DebugStatement?
        
-       'When' actionE = DeclarativeScenarioAction 
-	   imperative2 = ImperativeScenario? ('pause')?
+       'When' actionE = DeclarativeScenarioAction
+	   imperative2 = ImperativeScenario?
+	   //debugStmt2 = DebugStatement?
        
-       'Then' preStateE1 = DeclarativeScenarioState
-	   imperative3 = ImperativeScenario? ('pause')?
+       'Then' preStateE1 = DeclarativeScenarioState 
+	   imperative3 = ImperativeScenario? 
+	   //debugStmt3 = DebugStatement?
 ;
 
 ImperativeScenario:
    'which' 'means'
        
-   'Given' preState = ImperativeScenarioState ('pause')?
-   'When' action = ImperativeScenarioAction ('pause')?
-   'Then' postState = ImperativeScenarioState ('pause')?
+   'Given' preState = ImperativeScenarioState
+   'When' action = ImperativeScenarioAction 
+   'Then' postState = ImperativeScenarioState 
 ;
 
 PrePostWords:
@@ -83,6 +86,11 @@ PrePostWords:
 ToBeWords:
 	('is'|'are'|'is' 'not'|'are' 'not')?
 ;
+
+DebugStatement:
+	('pause')
+;
+
 
 DeclarativeScenarioState: 
 	PrePostWords states += (DeclarativeEntityPropertyStatePhrase | DeclarativeEntityStatePhrase | DeclarativeEntityStatePhraseWithProperty)
@@ -95,7 +103,7 @@ DeclarativeScenarioStateAnd:
 
 ImperativeScenarioState:
 	PrePostWords states += (ImperativeEntityPropertyStatePhrase | ImperativeEntityStatePhrase | ImperativeEntityStatePhraseWithProperty)
-	('And' andStates += ImperativeScenarioStateAnd)*
+	('And' andStates += ImperativeScenarioStateAnd)* 
 ;
 
 ImperativeScenarioStateAnd:
@@ -104,8 +112,7 @@ ImperativeScenarioStateAnd:
 
 DeclarativeScenarioAction:
 	actions += (DeclarativeEntityAction | VerbAction | DeclarativeEntityPropertyAction)
-	('And' andActions += DeclarativeScenarioActionAnd)*
-;
+	('And' andActions += DeclarativeScenarioActionAnd)* ;
 
 DeclarativeScenarioActionAnd:
 	actions += (DeclarativeEntityAction | VerbAction | DeclarativeEntityPropertyAction)
@@ -113,11 +120,12 @@ DeclarativeScenarioActionAnd:
 
 ImperativeScenarioAction:
 	actions += (ImperativeEntityAction | ImperativeVerbAction | ImperativeEntityPropertyAction)
-	('And' andActions += ImperativeScenarioActionAnd)*
+	('And' andActions += ImperativeScenarioActionAnd)* 
 ;
 
 ImperativeScenarioActionAnd:
 	actions += (ImperativeEntityAction | ImperativeVerbAction | ImperativeEntityPropertyAction)
+	
 ;
 
 ENTITY_IDENTITY: (('#' INT) | STRING);
@@ -169,7 +177,9 @@ ImperativeEntityStatePhraseWithProperty:
 
 DeclarativeEntityPropertyStatePhrase:
 	property = PropertyRef? preposition = PREP  entity = DeclarativeEntityRef
-	toBeWord = ToBeWords value = ENTITY_IDENTITY
+	toBeWord = ToBeWords value = ENTITY_IDENTITY 
+	debug = DebugStatement?
+	
 ;
 
 ImperativeEntityPropertyStatePhrase:

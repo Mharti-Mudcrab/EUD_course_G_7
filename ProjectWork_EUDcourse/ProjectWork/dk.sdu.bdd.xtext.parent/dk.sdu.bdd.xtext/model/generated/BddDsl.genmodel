@@ -152,6 +152,7 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BddDsl.ecore#//DeclarativeEntityPropertyStatePhrase/entity"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BddDsl.ecore#//DeclarativeEntityPropertyStatePhrase/toBeWord"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BddDsl.ecore#//DeclarativeEntityPropertyStatePhrase/value"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BddDsl.ecore#//DeclarativeEntityPropertyStatePhrase/debug"/>
     </genClasses>
     <genClasses ecoreClass="BddDsl.ecore#//ImperativeEntityPropertyStatePhrase">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BddDsl.ecore#//ImperativeEntityPropertyStatePhrase/property"/>

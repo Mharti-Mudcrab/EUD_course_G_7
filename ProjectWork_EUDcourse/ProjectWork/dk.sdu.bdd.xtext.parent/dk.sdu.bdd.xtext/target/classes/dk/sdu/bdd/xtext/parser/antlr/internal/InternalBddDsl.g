@@ -1433,22 +1433,16 @@ ruleScenario returns [EObject current=null]
 				}
 			)
 		)?
-		(
-			otherlv_5='pause'
-			{
-				newLeafNode(otherlv_5, grammarAccess.getScenarioAccess().getPauseKeyword_5());
-			}
-		)?
-		otherlv_6='When'
+		otherlv_5='When'
 		{
-			newLeafNode(otherlv_6, grammarAccess.getScenarioAccess().getWhenKeyword_6());
+			newLeafNode(otherlv_5, grammarAccess.getScenarioAccess().getWhenKeyword_5());
 		}
 		(
 			(
 				{
-					newCompositeNode(grammarAccess.getScenarioAccess().getActionEDeclarativeScenarioActionParserRuleCall_7_0());
+					newCompositeNode(grammarAccess.getScenarioAccess().getActionEDeclarativeScenarioActionParserRuleCall_6_0());
 				}
-				lv_actionE_7_0=ruleDeclarativeScenarioAction
+				lv_actionE_6_0=ruleDeclarativeScenarioAction
 				{
 					if ($current==null) {
 						$current = createModelElementForParent(grammarAccess.getScenarioRule());
@@ -1456,7 +1450,7 @@ ruleScenario returns [EObject current=null]
 					set(
 						$current,
 						"actionE",
-						lv_actionE_7_0,
+						lv_actionE_6_0,
 						"dk.sdu.bdd.xtext.BddDsl.DeclarativeScenarioAction");
 					afterParserOrEnumRuleCall();
 				}
@@ -1465,9 +1459,9 @@ ruleScenario returns [EObject current=null]
 		(
 			(
 				{
-					newCompositeNode(grammarAccess.getScenarioAccess().getImperative2ImperativeScenarioParserRuleCall_8_0());
+					newCompositeNode(grammarAccess.getScenarioAccess().getImperative2ImperativeScenarioParserRuleCall_7_0());
 				}
-				lv_imperative2_8_0=ruleImperativeScenario
+				lv_imperative2_7_0=ruleImperativeScenario
 				{
 					if ($current==null) {
 						$current = createModelElementForParent(grammarAccess.getScenarioRule());
@@ -1475,28 +1469,22 @@ ruleScenario returns [EObject current=null]
 					set(
 						$current,
 						"imperative2",
-						lv_imperative2_8_0,
+						lv_imperative2_7_0,
 						"dk.sdu.bdd.xtext.BddDsl.ImperativeScenario");
 					afterParserOrEnumRuleCall();
 				}
 			)
 		)?
-		(
-			otherlv_9='pause'
-			{
-				newLeafNode(otherlv_9, grammarAccess.getScenarioAccess().getPauseKeyword_9());
-			}
-		)?
-		otherlv_10='Then'
+		otherlv_8='Then'
 		{
-			newLeafNode(otherlv_10, grammarAccess.getScenarioAccess().getThenKeyword_10());
+			newLeafNode(otherlv_8, grammarAccess.getScenarioAccess().getThenKeyword_8());
 		}
 		(
 			(
 				{
-					newCompositeNode(grammarAccess.getScenarioAccess().getPreStateE1DeclarativeScenarioStateParserRuleCall_11_0());
+					newCompositeNode(grammarAccess.getScenarioAccess().getPreStateE1DeclarativeScenarioStateParserRuleCall_9_0());
 				}
-				lv_preStateE1_11_0=ruleDeclarativeScenarioState
+				lv_preStateE1_9_0=ruleDeclarativeScenarioState
 				{
 					if ($current==null) {
 						$current = createModelElementForParent(grammarAccess.getScenarioRule());
@@ -1504,7 +1492,7 @@ ruleScenario returns [EObject current=null]
 					set(
 						$current,
 						"preStateE1",
-						lv_preStateE1_11_0,
+						lv_preStateE1_9_0,
 						"dk.sdu.bdd.xtext.BddDsl.DeclarativeScenarioState");
 					afterParserOrEnumRuleCall();
 				}
@@ -1513,9 +1501,9 @@ ruleScenario returns [EObject current=null]
 		(
 			(
 				{
-					newCompositeNode(grammarAccess.getScenarioAccess().getImperative3ImperativeScenarioParserRuleCall_12_0());
+					newCompositeNode(grammarAccess.getScenarioAccess().getImperative3ImperativeScenarioParserRuleCall_10_0());
 				}
-				lv_imperative3_12_0=ruleImperativeScenario
+				lv_imperative3_10_0=ruleImperativeScenario
 				{
 					if ($current==null) {
 						$current = createModelElementForParent(grammarAccess.getScenarioRule());
@@ -1523,17 +1511,11 @@ ruleScenario returns [EObject current=null]
 					set(
 						$current,
 						"imperative3",
-						lv_imperative3_12_0,
+						lv_imperative3_10_0,
 						"dk.sdu.bdd.xtext.BddDsl.ImperativeScenario");
 					afterParserOrEnumRuleCall();
 				}
 			)
-		)?
-		(
-			otherlv_13='pause'
-			{
-				newLeafNode(otherlv_13, grammarAccess.getScenarioAccess().getPauseKeyword_13());
-			}
 		)?
 	)
 ;
@@ -1585,22 +1567,16 @@ ruleImperativeScenario returns [EObject current=null]
 				}
 			)
 		)
-		(
-			otherlv_4='pause'
-			{
-				newLeafNode(otherlv_4, grammarAccess.getImperativeScenarioAccess().getPauseKeyword_4());
-			}
-		)?
-		otherlv_5='When'
+		otherlv_4='When'
 		{
-			newLeafNode(otherlv_5, grammarAccess.getImperativeScenarioAccess().getWhenKeyword_5());
+			newLeafNode(otherlv_4, grammarAccess.getImperativeScenarioAccess().getWhenKeyword_4());
 		}
 		(
 			(
 				{
-					newCompositeNode(grammarAccess.getImperativeScenarioAccess().getActionImperativeScenarioActionParserRuleCall_6_0());
+					newCompositeNode(grammarAccess.getImperativeScenarioAccess().getActionImperativeScenarioActionParserRuleCall_5_0());
 				}
-				lv_action_6_0=ruleImperativeScenarioAction
+				lv_action_5_0=ruleImperativeScenarioAction
 				{
 					if ($current==null) {
 						$current = createModelElementForParent(grammarAccess.getImperativeScenarioRule());
@@ -1608,28 +1584,22 @@ ruleImperativeScenario returns [EObject current=null]
 					set(
 						$current,
 						"action",
-						lv_action_6_0,
+						lv_action_5_0,
 						"dk.sdu.bdd.xtext.BddDsl.ImperativeScenarioAction");
 					afterParserOrEnumRuleCall();
 				}
 			)
 		)
-		(
-			otherlv_7='pause'
-			{
-				newLeafNode(otherlv_7, grammarAccess.getImperativeScenarioAccess().getPauseKeyword_7());
-			}
-		)?
-		otherlv_8='Then'
+		otherlv_6='Then'
 		{
-			newLeafNode(otherlv_8, grammarAccess.getImperativeScenarioAccess().getThenKeyword_8());
+			newLeafNode(otherlv_6, grammarAccess.getImperativeScenarioAccess().getThenKeyword_6());
 		}
 		(
 			(
 				{
-					newCompositeNode(grammarAccess.getImperativeScenarioAccess().getPostStateImperativeScenarioStateParserRuleCall_9_0());
+					newCompositeNode(grammarAccess.getImperativeScenarioAccess().getPostStateImperativeScenarioStateParserRuleCall_7_0());
 				}
-				lv_postState_9_0=ruleImperativeScenarioState
+				lv_postState_7_0=ruleImperativeScenarioState
 				{
 					if ($current==null) {
 						$current = createModelElementForParent(grammarAccess.getImperativeScenarioRule());
@@ -1637,18 +1607,12 @@ ruleImperativeScenario returns [EObject current=null]
 					set(
 						$current,
 						"postState",
-						lv_postState_9_0,
+						lv_postState_7_0,
 						"dk.sdu.bdd.xtext.BddDsl.ImperativeScenarioState");
 					afterParserOrEnumRuleCall();
 				}
 			)
 		)
-		(
-			otherlv_10='pause'
-			{
-				newLeafNode(otherlv_10, grammarAccess.getImperativeScenarioAccess().getPauseKeyword_10());
-			}
-		)?
 	)
 ;
 
@@ -1730,6 +1694,28 @@ ruleToBeWords returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken
 			}
 		)
 	)?
+;
+
+// Entry rule entryRuleDebugStatement
+entryRuleDebugStatement returns [String current=null]:
+	{ newCompositeNode(grammarAccess.getDebugStatementRule()); }
+	iv_ruleDebugStatement=ruleDebugStatement
+	{ $current=$iv_ruleDebugStatement.current.getText(); }
+	EOF;
+
+// Rule DebugStatement
+ruleDebugStatement returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()]
+@init {
+	enterRule();
+}
+@after {
+	leaveRule();
+}:
+	kw='pause'
+	{
+		$current.merge(kw);
+		newLeafNode(kw, grammarAccess.getDebugStatementAccess().getPauseKeyword());
+	}
 ;
 
 // Entry rule entryRuleDeclarativeScenarioState
@@ -3204,6 +3190,25 @@ ruleDeclarativeEntityPropertyStatePhrase returns [EObject current=null]
 				}
 			)
 		)
+		(
+			(
+				{
+					newCompositeNode(grammarAccess.getDeclarativeEntityPropertyStatePhraseAccess().getDebugDebugStatementParserRuleCall_5_0());
+				}
+				lv_debug_5_0=ruleDebugStatement
+				{
+					if ($current==null) {
+						$current = createModelElementForParent(grammarAccess.getDeclarativeEntityPropertyStatePhraseRule());
+					}
+					set(
+						$current,
+						"debug",
+						lv_debug_5_0,
+						"dk.sdu.bdd.xtext.BddDsl.DebugStatement");
+					afterParserOrEnumRuleCall();
+				}
+			)
+		)?
 	)
 ;
 

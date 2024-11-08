@@ -1424,13 +1424,22 @@ public interface BddDslPackage extends EPackage
   int DECLARATIVE_ENTITY_PROPERTY_STATE_PHRASE__VALUE = 4;
 
   /**
+   * The feature id for the '<em><b>Debug</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int DECLARATIVE_ENTITY_PROPERTY_STATE_PHRASE__DEBUG = 5;
+
+  /**
    * The number of structural features of the '<em>Declarative Entity Property State Phrase</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int DECLARATIVE_ENTITY_PROPERTY_STATE_PHRASE_FEATURE_COUNT = 5;
+  int DECLARATIVE_ENTITY_PROPERTY_STATE_PHRASE_FEATURE_COUNT = 6;
 
   /**
    * The meta object id for the '{@link dk.sdu.bdd.xtext.bddDsl.impl.ImperativeEntityPropertyStatePhraseImpl <em>Imperative Entity Property State Phrase</em>}' class.
@@ -3127,6 +3136,17 @@ public interface BddDslPackage extends EPackage
   EAttribute getDeclarativeEntityPropertyStatePhrase_Value();
 
   /**
+   * Returns the meta object for the attribute '{@link dk.sdu.bdd.xtext.bddDsl.DeclarativeEntityPropertyStatePhrase#getDebug <em>Debug</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Debug</em>'.
+   * @see dk.sdu.bdd.xtext.bddDsl.DeclarativeEntityPropertyStatePhrase#getDebug()
+   * @see #getDeclarativeEntityPropertyStatePhrase()
+   * @generated
+   */
+  EAttribute getDeclarativeEntityPropertyStatePhrase_Debug();
+
+  /**
    * Returns the meta object for class '{@link dk.sdu.bdd.xtext.bddDsl.ImperativeEntityPropertyStatePhrase <em>Imperative Entity Property State Phrase</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -4619,6 +4639,14 @@ public interface BddDslPackage extends EPackage
      * @generated
      */
     EAttribute DECLARATIVE_ENTITY_PROPERTY_STATE_PHRASE__VALUE = eINSTANCE.getDeclarativeEntityPropertyStatePhrase_Value();
+
+    /**
+     * The meta object literal for the '<em><b>Debug</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute DECLARATIVE_ENTITY_PROPERTY_STATE_PHRASE__DEBUG = eINSTANCE.getDeclarativeEntityPropertyStatePhrase_Debug();
 
     /**
      * The meta object literal for the '{@link dk.sdu.bdd.xtext.bddDsl.impl.ImperativeEntityPropertyStatePhraseImpl <em>Imperative Entity Property State Phrase</em>}' class.

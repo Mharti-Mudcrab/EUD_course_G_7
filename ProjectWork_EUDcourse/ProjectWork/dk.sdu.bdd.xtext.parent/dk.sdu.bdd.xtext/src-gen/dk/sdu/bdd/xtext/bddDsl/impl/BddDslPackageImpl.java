@@ -1660,6 +1660,17 @@ public class BddDslPackageImpl extends EPackageImpl implements BddDslPackage
    * @generated
    */
   @Override
+  public EAttribute getDeclarativeEntityPropertyStatePhrase_Debug()
+  {
+    return (EAttribute)declarativeEntityPropertyStatePhraseEClass.getEStructuralFeatures().get(5);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
   public EClass getImperativeEntityPropertyStatePhrase()
   {
     return imperativeEntityPropertyStatePhraseEClass;
@@ -2337,6 +2348,7 @@ public class BddDslPackageImpl extends EPackageImpl implements BddDslPackage
     createEReference(declarativeEntityPropertyStatePhraseEClass, DECLARATIVE_ENTITY_PROPERTY_STATE_PHRASE__ENTITY);
     createEAttribute(declarativeEntityPropertyStatePhraseEClass, DECLARATIVE_ENTITY_PROPERTY_STATE_PHRASE__TO_BE_WORD);
     createEAttribute(declarativeEntityPropertyStatePhraseEClass, DECLARATIVE_ENTITY_PROPERTY_STATE_PHRASE__VALUE);
+    createEAttribute(declarativeEntityPropertyStatePhraseEClass, DECLARATIVE_ENTITY_PROPERTY_STATE_PHRASE__DEBUG);
 
     imperativeEntityPropertyStatePhraseEClass = createEClass(IMPERATIVE_ENTITY_PROPERTY_STATE_PHRASE);
     createEReference(imperativeEntityPropertyStatePhraseEClass, IMPERATIVE_ENTITY_PROPERTY_STATE_PHRASE__PROPERTY);
@@ -2570,6 +2582,7 @@ public class BddDslPackageImpl extends EPackageImpl implements BddDslPackage
     initEReference(getDeclarativeEntityPropertyStatePhrase_Entity(), this.getDeclarativeEntityRef(), null, "entity", null, 0, 1, DeclarativeEntityPropertyStatePhrase.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getDeclarativeEntityPropertyStatePhrase_ToBeWord(), ecorePackage.getEString(), "toBeWord", null, 0, 1, DeclarativeEntityPropertyStatePhrase.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getDeclarativeEntityPropertyStatePhrase_Value(), ecorePackage.getEString(), "value", null, 0, 1, DeclarativeEntityPropertyStatePhrase.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getDeclarativeEntityPropertyStatePhrase_Debug(), ecorePackage.getEString(), "debug", null, 0, 1, DeclarativeEntityPropertyStatePhrase.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(imperativeEntityPropertyStatePhraseEClass, ImperativeEntityPropertyStatePhrase.class, "ImperativeEntityPropertyStatePhrase", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getImperativeEntityPropertyStatePhrase_Property(), this.getImperativePropertyRef(), null, "property", null, 0, 1, ImperativeEntityPropertyStatePhrase.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

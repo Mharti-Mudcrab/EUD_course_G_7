@@ -5,3 +5,4 @@
 *.pyc.BASE
 *.pyc.LOCAL
 *.pyc.REMOTE
+/.metadata/

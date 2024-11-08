@@ -17,6 +17,13 @@ bddGenerator.forBlock['ID'] = function(block) {
     return [code, Order.ATOMIC];
 };
 
+bddGenerator.forBlock['DebugStatement'] = function(block) {
+	console.log("For debug block")
+    const debugStmt1 = block.getFieldValue('debugStmt1'); // Get the value from the block
+    const code = `// Debug statement: ${debugStmt1}\n`;
+    rturn [code, Order.ATOMIC];
+};
+
 bddGenerator.scrub_ = function(block, code, thisOnly) {
     const nextBlock = block.nextConnection && block.nextConnection.targetBlock();
     if (nextBlock && !thisOnly) {
@@ -33,12 +40,13 @@ function getBddGenerator(blockArray)
 
 function registerRuleForBlock(blockArrayElement)
 {
-    bddGenerator.forBlock[blockArrayElement.type] = function(block, generator) {        
+    bddGenerator.forBlock[blockArrayElement.type] = function(block, generator) {    
+		//console.log("type", blockArrayElement.type)    
         var code = blockArrayElement.message0;
         for (var i = 0; i < blockArrayElement.args0.length; i++) {
             var argument = blockArrayElement.args0[i];
             var argumentValue = getArgumentValue(argument.type, argument.name, block, generator);
-
+			//console.log("argumentValue:", argumentValue)
             code = code.replace(`%${i+1}`, argumentValue); // starts from %1
         }
         

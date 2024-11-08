@@ -168,13 +168,13 @@ public class BddDslParser extends AbstractContentAssistParser {
 			builder.put(grammarAccess.getScenarioAccess().getScenarioNameAssignment_1(), "rule__Scenario__ScenarioNameAssignment_1");
 			builder.put(grammarAccess.getScenarioAccess().getPreStateEAssignment_3(), "rule__Scenario__PreStateEAssignment_3");
 			builder.put(grammarAccess.getScenarioAccess().getImperative1Assignment_4(), "rule__Scenario__Imperative1Assignment_4");
-			builder.put(grammarAccess.getScenarioAccess().getActionEAssignment_7(), "rule__Scenario__ActionEAssignment_7");
-			builder.put(grammarAccess.getScenarioAccess().getImperative2Assignment_8(), "rule__Scenario__Imperative2Assignment_8");
-			builder.put(grammarAccess.getScenarioAccess().getPreStateE1Assignment_11(), "rule__Scenario__PreStateE1Assignment_11");
-			builder.put(grammarAccess.getScenarioAccess().getImperative3Assignment_12(), "rule__Scenario__Imperative3Assignment_12");
+			builder.put(grammarAccess.getScenarioAccess().getActionEAssignment_6(), "rule__Scenario__ActionEAssignment_6");
+			builder.put(grammarAccess.getScenarioAccess().getImperative2Assignment_7(), "rule__Scenario__Imperative2Assignment_7");
+			builder.put(grammarAccess.getScenarioAccess().getPreStateE1Assignment_9(), "rule__Scenario__PreStateE1Assignment_9");
+			builder.put(grammarAccess.getScenarioAccess().getImperative3Assignment_10(), "rule__Scenario__Imperative3Assignment_10");
 			builder.put(grammarAccess.getImperativeScenarioAccess().getPreStateAssignment_3(), "rule__ImperativeScenario__PreStateAssignment_3");
-			builder.put(grammarAccess.getImperativeScenarioAccess().getActionAssignment_6(), "rule__ImperativeScenario__ActionAssignment_6");
-			builder.put(grammarAccess.getImperativeScenarioAccess().getPostStateAssignment_9(), "rule__ImperativeScenario__PostStateAssignment_9");
+			builder.put(grammarAccess.getImperativeScenarioAccess().getActionAssignment_5(), "rule__ImperativeScenario__ActionAssignment_5");
+			builder.put(grammarAccess.getImperativeScenarioAccess().getPostStateAssignment_7(), "rule__ImperativeScenario__PostStateAssignment_7");
 			builder.put(grammarAccess.getDeclarativeScenarioStateAccess().getStatesAssignment_1(), "rule__DeclarativeScenarioState__StatesAssignment_1");
 			builder.put(grammarAccess.getDeclarativeScenarioStateAccess().getAndStatesAssignment_2_1(), "rule__DeclarativeScenarioState__AndStatesAssignment_2_1");
 			builder.put(grammarAccess.getDeclarativeScenarioStateAndAccess().getStatesAssignment_1(), "rule__DeclarativeScenarioStateAnd__StatesAssignment_1");
@@ -214,6 +214,7 @@ public class BddDslParser extends AbstractContentAssistParser {
 			builder.put(grammarAccess.getDeclarativeEntityPropertyStatePhraseAccess().getEntityAssignment_2(), "rule__DeclarativeEntityPropertyStatePhrase__EntityAssignment_2");
 			builder.put(grammarAccess.getDeclarativeEntityPropertyStatePhraseAccess().getToBeWordAssignment_3(), "rule__DeclarativeEntityPropertyStatePhrase__ToBeWordAssignment_3");
 			builder.put(grammarAccess.getDeclarativeEntityPropertyStatePhraseAccess().getValueAssignment_4(), "rule__DeclarativeEntityPropertyStatePhrase__ValueAssignment_4");
+			builder.put(grammarAccess.getDeclarativeEntityPropertyStatePhraseAccess().getDebugAssignment_5(), "rule__DeclarativeEntityPropertyStatePhrase__DebugAssignment_5");
 			builder.put(grammarAccess.getImperativeEntityPropertyStatePhraseAccess().getPropertyAssignment_0(), "rule__ImperativeEntityPropertyStatePhrase__PropertyAssignment_0");
 			builder.put(grammarAccess.getImperativeEntityPropertyStatePhraseAccess().getPrepositionAssignment_1(), "rule__ImperativeEntityPropertyStatePhrase__PrepositionAssignment_1");
 			builder.put(grammarAccess.getImperativeEntityPropertyStatePhraseAccess().getEntityAssignment_2(), "rule__ImperativeEntityPropertyStatePhrase__EntityAssignment_2");

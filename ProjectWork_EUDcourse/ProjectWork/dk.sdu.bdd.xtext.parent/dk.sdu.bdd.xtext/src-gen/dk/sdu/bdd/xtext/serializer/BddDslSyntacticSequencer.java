@@ -27,14 +27,8 @@ public class BddDslSyntacticSequencer extends AbstractSyntacticSequencer {
 	protected AbstractElementAlias match_ImperativeActionDef___IDTerminalRuleCall_1_1_or_____AndKeyword_1_0_0_0_or_TheKeyword_1_0_0_1___IDTerminalRuleCall_1_0_1____q;
 	protected AbstractElementAlias match_ImperativeEntityDef___HyphenMinusKeyword_3_0_IDTerminalRuleCall_3_1__q;
 	protected AbstractElementAlias match_ImperativePropertyDef_IDTerminalRuleCall_1_q;
-	protected AbstractElementAlias match_ImperativeScenario_PauseKeyword_10_q;
-	protected AbstractElementAlias match_ImperativeScenario_PauseKeyword_4_q;
-	protected AbstractElementAlias match_ImperativeScenario_PauseKeyword_7_q;
 	protected AbstractElementAlias match_ImperativeStateName_____AndKeyword_1_0_0_or_OffKeyword_1_0_1___IDTerminalRuleCall_1_1__q;
 	protected AbstractElementAlias match_PropertyDef_IDTerminalRuleCall_1_q;
-	protected AbstractElementAlias match_Scenario_PauseKeyword_13_q;
-	protected AbstractElementAlias match_Scenario_PauseKeyword_5_q;
-	protected AbstractElementAlias match_Scenario_PauseKeyword_9_q;
 	protected AbstractElementAlias match_StateName_____AndKeyword_1_0_0_or_OffKeyword_1_0_1___IDTerminalRuleCall_1_1__q;
 	
 	@Inject
@@ -45,14 +39,8 @@ public class BddDslSyntacticSequencer extends AbstractSyntacticSequencer {
 		match_ImperativeActionDef___IDTerminalRuleCall_1_1_or_____AndKeyword_1_0_0_0_or_TheKeyword_1_0_0_1___IDTerminalRuleCall_1_0_1____q = new AlternativeAlias(false, true, new GroupAlias(false, false, new AlternativeAlias(false, false, new TokenAlias(false, false, grammarAccess.getImperativeActionDefAccess().getAndKeyword_1_0_0_0()), new TokenAlias(false, false, grammarAccess.getImperativeActionDefAccess().getTheKeyword_1_0_0_1())), new TokenAlias(false, false, grammarAccess.getImperativeActionDefAccess().getIDTerminalRuleCall_1_0_1())), new TokenAlias(false, false, grammarAccess.getImperativeActionDefAccess().getIDTerminalRuleCall_1_1()));
 		match_ImperativeEntityDef___HyphenMinusKeyword_3_0_IDTerminalRuleCall_3_1__q = new GroupAlias(false, true, new TokenAlias(false, false, grammarAccess.getImperativeEntityDefAccess().getHyphenMinusKeyword_3_0()), new TokenAlias(false, false, grammarAccess.getImperativeEntityDefAccess().getIDTerminalRuleCall_3_1()));
 		match_ImperativePropertyDef_IDTerminalRuleCall_1_q = new TokenAlias(false, true, grammarAccess.getImperativePropertyDefAccess().getIDTerminalRuleCall_1());
-		match_ImperativeScenario_PauseKeyword_10_q = new TokenAlias(false, true, grammarAccess.getImperativeScenarioAccess().getPauseKeyword_10());
-		match_ImperativeScenario_PauseKeyword_4_q = new TokenAlias(false, true, grammarAccess.getImperativeScenarioAccess().getPauseKeyword_4());
-		match_ImperativeScenario_PauseKeyword_7_q = new TokenAlias(false, true, grammarAccess.getImperativeScenarioAccess().getPauseKeyword_7());
 		match_ImperativeStateName_____AndKeyword_1_0_0_or_OffKeyword_1_0_1___IDTerminalRuleCall_1_1__q = new GroupAlias(false, true, new AlternativeAlias(false, false, new TokenAlias(false, false, grammarAccess.getImperativeStateNameAccess().getAndKeyword_1_0_0()), new TokenAlias(false, false, grammarAccess.getImperativeStateNameAccess().getOffKeyword_1_0_1())), new TokenAlias(false, false, grammarAccess.getImperativeStateNameAccess().getIDTerminalRuleCall_1_1()));
 		match_PropertyDef_IDTerminalRuleCall_1_q = new TokenAlias(false, true, grammarAccess.getPropertyDefAccess().getIDTerminalRuleCall_1());
-		match_Scenario_PauseKeyword_13_q = new TokenAlias(false, true, grammarAccess.getScenarioAccess().getPauseKeyword_13());
-		match_Scenario_PauseKeyword_5_q = new TokenAlias(false, true, grammarAccess.getScenarioAccess().getPauseKeyword_5());
-		match_Scenario_PauseKeyword_9_q = new TokenAlias(false, true, grammarAccess.getScenarioAccess().getPauseKeyword_9());
 		match_StateName_____AndKeyword_1_0_0_or_OffKeyword_1_0_1___IDTerminalRuleCall_1_1__q = new GroupAlias(false, true, new AlternativeAlias(false, false, new TokenAlias(false, false, grammarAccess.getStateNameAccess().getAndKeyword_1_0_0()), new TokenAlias(false, false, grammarAccess.getStateNameAccess().getOffKeyword_1_0_1())), new TokenAlias(false, false, grammarAccess.getStateNameAccess().getIDTerminalRuleCall_1_1()));
 	}
 	
@@ -114,22 +102,10 @@ public class BddDslSyntacticSequencer extends AbstractSyntacticSequencer {
 				emit_ImperativeEntityDef___HyphenMinusKeyword_3_0_IDTerminalRuleCall_3_1__q(semanticObject, getLastNavigableState(), syntaxNodes);
 			else if (match_ImperativePropertyDef_IDTerminalRuleCall_1_q.equals(syntax))
 				emit_ImperativePropertyDef_IDTerminalRuleCall_1_q(semanticObject, getLastNavigableState(), syntaxNodes);
-			else if (match_ImperativeScenario_PauseKeyword_10_q.equals(syntax))
-				emit_ImperativeScenario_PauseKeyword_10_q(semanticObject, getLastNavigableState(), syntaxNodes);
-			else if (match_ImperativeScenario_PauseKeyword_4_q.equals(syntax))
-				emit_ImperativeScenario_PauseKeyword_4_q(semanticObject, getLastNavigableState(), syntaxNodes);
-			else if (match_ImperativeScenario_PauseKeyword_7_q.equals(syntax))
-				emit_ImperativeScenario_PauseKeyword_7_q(semanticObject, getLastNavigableState(), syntaxNodes);
 			else if (match_ImperativeStateName_____AndKeyword_1_0_0_or_OffKeyword_1_0_1___IDTerminalRuleCall_1_1__q.equals(syntax))
 				emit_ImperativeStateName_____AndKeyword_1_0_0_or_OffKeyword_1_0_1___IDTerminalRuleCall_1_1__q(semanticObject, getLastNavigableState(), syntaxNodes);
 			else if (match_PropertyDef_IDTerminalRuleCall_1_q.equals(syntax))
 				emit_PropertyDef_IDTerminalRuleCall_1_q(semanticObject, getLastNavigableState(), syntaxNodes);
-			else if (match_Scenario_PauseKeyword_13_q.equals(syntax))
-				emit_Scenario_PauseKeyword_13_q(semanticObject, getLastNavigableState(), syntaxNodes);
-			else if (match_Scenario_PauseKeyword_5_q.equals(syntax))
-				emit_Scenario_PauseKeyword_5_q(semanticObject, getLastNavigableState(), syntaxNodes);
-			else if (match_Scenario_PauseKeyword_9_q.equals(syntax))
-				emit_Scenario_PauseKeyword_9_q(semanticObject, getLastNavigableState(), syntaxNodes);
 			else if (match_StateName_____AndKeyword_1_0_0_or_OffKeyword_1_0_1___IDTerminalRuleCall_1_1__q.equals(syntax))
 				emit_StateName_____AndKeyword_1_0_0_or_OffKeyword_1_0_1___IDTerminalRuleCall_1_1__q(semanticObject, getLastNavigableState(), syntaxNodes);
 			else acceptNodes(getLastNavigableState(), syntaxNodes);
@@ -221,48 +197,6 @@ public class BddDslSyntacticSequencer extends AbstractSyntacticSequencer {
 	/**
 	 * <pre>
 	 * Ambiguous syntax:
-	 *     'pause'?
-	 *
-	 * This ambiguous syntax occurs at:
-	 *     postState=ImperativeScenarioState (ambiguity) (rule end)
-	 
-	 * </pre>
-	 */
-	protected void emit_ImperativeScenario_PauseKeyword_10_q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
-		acceptNodes(transition, nodes);
-	}
-	
-	/**
-	 * <pre>
-	 * Ambiguous syntax:
-	 *     'pause'?
-	 *
-	 * This ambiguous syntax occurs at:
-	 *     preState=ImperativeScenarioState (ambiguity) 'When' action=ImperativeScenarioAction
-	 
-	 * </pre>
-	 */
-	protected void emit_ImperativeScenario_PauseKeyword_4_q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
-		acceptNodes(transition, nodes);
-	}
-	
-	/**
-	 * <pre>
-	 * Ambiguous syntax:
-	 *     'pause'?
-	 *
-	 * This ambiguous syntax occurs at:
-	 *     action=ImperativeScenarioAction (ambiguity) 'Then' postState=ImperativeScenarioState
-	 
-	 * </pre>
-	 */
-	protected void emit_ImperativeScenario_PauseKeyword_7_q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
-		acceptNodes(transition, nodes);
-	}
-	
-	/**
-	 * <pre>
-	 * Ambiguous syntax:
 	 *     (('and' | 'off') ID)?
 	 *
 	 * This ambiguous syntax occurs at:
@@ -285,51 +219,6 @@ public class BddDslSyntacticSequencer extends AbstractSyntacticSequencer {
 	 * </pre>
 	 */
 	protected void emit_PropertyDef_IDTerminalRuleCall_1_q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
-		acceptNodes(transition, nodes);
-	}
-	
-	/**
-	 * <pre>
-	 * Ambiguous syntax:
-	 *     'pause'?
-	 *
-	 * This ambiguous syntax occurs at:
-	 *     imperative3=ImperativeScenario (ambiguity) (rule end)
-	 *     preStateE1=DeclarativeScenarioState (ambiguity) (rule end)
-	 
-	 * </pre>
-	 */
-	protected void emit_Scenario_PauseKeyword_13_q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
-		acceptNodes(transition, nodes);
-	}
-	
-	/**
-	 * <pre>
-	 * Ambiguous syntax:
-	 *     'pause'?
-	 *
-	 * This ambiguous syntax occurs at:
-	 *     imperative1=ImperativeScenario (ambiguity) 'When' actionE=DeclarativeScenarioAction
-	 *     preStateE=DeclarativeScenarioState (ambiguity) 'When' actionE=DeclarativeScenarioAction
-	 
-	 * </pre>
-	 */
-	protected void emit_Scenario_PauseKeyword_5_q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
-		acceptNodes(transition, nodes);
-	}
-	
-	/**
-	 * <pre>
-	 * Ambiguous syntax:
-	 *     'pause'?
-	 *
-	 * This ambiguous syntax occurs at:
-	 *     actionE=DeclarativeScenarioAction (ambiguity) 'Then' preStateE1=DeclarativeScenarioState
-	 *     imperative2=ImperativeScenario (ambiguity) 'Then' preStateE1=DeclarativeScenarioState
-	 
-	 * </pre>
-	 */
-	protected void emit_Scenario_PauseKeyword_9_q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	

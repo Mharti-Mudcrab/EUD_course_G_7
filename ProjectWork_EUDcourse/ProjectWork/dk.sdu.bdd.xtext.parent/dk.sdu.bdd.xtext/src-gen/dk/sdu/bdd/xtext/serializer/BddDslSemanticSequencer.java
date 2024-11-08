@@ -345,7 +345,14 @@ public class BddDslSemanticSequencer extends AbstractDelegatingSemanticSequencer
 	 *     DeclarativeEntityPropertyStatePhrase returns DeclarativeEntityPropertyStatePhrase
 	 *
 	 * Constraint:
-	 *     (property=PropertyRef? preposition=PREP entity=DeclarativeEntityRef toBeWord=ToBeWords value=ENTITY_IDENTITY)
+	 *     (
+	 *         property=PropertyRef? 
+	 *         preposition=PREP 
+	 *         entity=DeclarativeEntityRef 
+	 *         toBeWord=ToBeWords 
+	 *         value=ENTITY_IDENTITY 
+	 *         debug=DebugStatement?
+	 *     )
 	 * </pre>
 	 */
 	protected void sequence_DeclarativeEntityPropertyStatePhrase(ISerializationContext context, DeclarativeEntityPropertyStatePhrase semanticObject) {
@@ -794,8 +801,8 @@ public class BddDslSemanticSequencer extends AbstractDelegatingSemanticSequencer
 		}
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
 		feeder.accept(grammarAccess.getImperativeScenarioAccess().getPreStateImperativeScenarioStateParserRuleCall_3_0(), semanticObject.getPreState());
-		feeder.accept(grammarAccess.getImperativeScenarioAccess().getActionImperativeScenarioActionParserRuleCall_6_0(), semanticObject.getAction());
-		feeder.accept(grammarAccess.getImperativeScenarioAccess().getPostStateImperativeScenarioStateParserRuleCall_9_0(), semanticObject.getPostState());
+		feeder.accept(grammarAccess.getImperativeScenarioAccess().getActionImperativeScenarioActionParserRuleCall_5_0(), semanticObject.getAction());
+		feeder.accept(grammarAccess.getImperativeScenarioAccess().getPostStateImperativeScenarioStateParserRuleCall_7_0(), semanticObject.getPostState());
 		feeder.finish();
 	}
 	

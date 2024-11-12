@@ -85,10 +85,10 @@ def after_step(context, step):
 
 def get_robot_information(context):
     information_string = "The robot information at the current step is:\n"
-    information_string += get_position(context.position) 
-    information_string += get_speed(context.identifier)
-    information_string += get_acceleration(context.identifier)
-    information_string += get_robot_ip()
+    information_string += f" position: {get_position(context.position)}" 
+    information_string += f" speed: {get_speed(context.identifier)}"
+    information_string += f" acceleration: {get_acceleration(context.identifier)}"
+    information_string += f" IP: {get_robot_ip()}"
     return information_string
 
 

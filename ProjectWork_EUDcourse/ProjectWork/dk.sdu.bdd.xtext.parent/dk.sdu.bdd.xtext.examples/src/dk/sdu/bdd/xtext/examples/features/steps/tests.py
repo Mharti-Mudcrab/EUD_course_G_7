@@ -12,11 +12,16 @@ use_step_matcher("re")
 def test_for_pause(context, pause):
     if pause is not None:
         context.step_mode = 1
+        
+def save_step_details_for_print(context, identifier, position):
+    context.identifier = identifier
+    context.position = position
 
 @then('the position (.+) the robot "([^"]+)" is "([^"]+)"( pause)?')
 @given('the position (.+) the robot "([^"]+)" is "([^"]+)"( pause)?')
 def step_given(context, prep, identifier, position, pause):
     test_for_pause(context, pause)
+    save_step_details_for_print(context, identifier, position)
     
     """
     joint_positions = env.get_position(position)
@@ -28,6 +33,7 @@ def step_given(context, prep, identifier, position, pause):
 @when('the robot "([^"]+)" moves to position "([^"]+)"( pause)?')
 def step_when(context, identifier, position, pause):
     test_for_pause(context, pause)
+    save_step_details_for_print(context, identifier, position)
 
     """
     joint_position = env.get_position(position)

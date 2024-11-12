@@ -52,9 +52,9 @@ public class ScenarioRunServlet extends HttpServlet {
                 String line;
                 while ((line = reader.readLine()) != null) {
                     output.append(line).append("\n");
-                    response.getWriter().write("data: " + line + "\n\n");
+                    response.getWriter().write("data: " + line + "\n\n"+"");
                     response.getWriter().flush();
-                    System.out.println(line); // Log to Eclipse console
+                    System.out.println(line); // Log to Eclipse console´
                 }
             }
 

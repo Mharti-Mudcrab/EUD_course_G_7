@@ -123,27 +123,10 @@ class VersionControl {
     }
 
     public void revertToVersion(String versionFileName, String targetFilePath) throws IOException {
-        // Load the version content
         String versionContent = loadVersion(versionFileName);
-        // Create backup of current state
-        File targetFile = new File(targetFilePath);
-        if (targetFile.exists()) {
-            StringBuilder currentContent = new StringBuilder();
-            try (BufferedReader reader = new BufferedReader(new FileReader(targetFile))) {
-                String line;
-                while ((line = reader.readLine()) != null) {
-                    currentContent.append(line).append("\n");
-                }
-            }
-            
-            JSONObject backupMetadata = new JSONObject();
-            backupMetadata.put("type", "backup_before_revert");
-            backupMetadata.put("revertedTo", versionFileName);
-            saveVersion(currentContent.toString(), targetFilePath, backupMetadata);
-        }
 
-        // Write the version content to the target file
-        try (FileWriter writer = new FileWriter(targetFile)) {
+        // Write the version content to the target file *directly*
+        try (FileWriter writer = new FileWriter(new File(targetFilePath))) {
             writer.write(versionContent);
         }
     }

@@ -364,53 +364,53 @@ function filterCategories(element, contents) {
 }
 
 function saveScenario() {
-  // Get the current scenario content from the appropriate editor
-  const editor = getCurrentAceEditor(); // Assuming this function gets the active Ace editor
-  const scenarioContent = editor.getValue(); // Get the content from the editor
+  const scenarioEditor = ace.edit("xtext-editor-scenarios");
+  const scenarioContent = scenarioEditor.getValue();
 
-  // Send the content to the server-side servlet for saving
+  appendToConsole(`Hi: ${scenarioContent}!\n`);
+
+  // Save the scenario content
   fetch('/save-scenario', {
     method: 'POST',
-    headers: {
-      'Content-Type': 'application/json', // Specify the content type as JSON
-    },
-    body: JSON.stringify({ content: scenarioContent }), // Send the scenario content as JSON
-  }).then(response => {
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ content: scenarioContent })
+  })
+  .then(response => {
     if (response.ok) {
-      alert('Scenario saved successfully!'); // Notify the user of success
+      appendToConsole('Scenario saved successfully!\n');
     } else {
-      alert('Error saving scenario.'); // Notify the user of an error
+      appendToConsole('Error saving scenario.\n');
     }
-  }).catch(error => {
-    console.error('Error:', error); // Log any network errors
-    alert('An error occurred while saving the scenario.'); // Notify the user of an error
+  })
+  .catch(error => {
+    appendToConsole('Error: An error occurred while saving the scenario.\n');
   });
 }
-
 
 function saveEntities() {
-  // Get the current scenario content from the appropriate editor
-  const editor = getCurrentAceEditor(); // Assuming this function gets the active Ace editor
-  const scenarioContent = editor.getValue(); // Get the content from the editor
+  const entitiesEditor = ace.edit("xtext-editor-entities");
+  const entitiesContent = entitiesEditor.getValue();
+  
+  appendToConsole(`Hi: ${entitiesContent}!\n`);
 
-  // Send the content to the server-side servlet for saving
+  // Save the entities content
   fetch('/save-entities', {
     method: 'POST',
-    headers: {
-      'Content-Type': 'application/json', // Specify the content type as JSON
-    },
-    body: JSON.stringify({ content: scenarioContent }), // Send the scenario content as JSON
-  }).then(response => {
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ content: entitiesContent })
+  })
+  .then(response => {
     if (response.ok) {
-      alert('Entities saved successfully!'); // Notify the user of success
+      appendToConsole('Entities saved successfully!\n');
     } else {
-      alert('Error saving entities.'); // Notify the user of an error
+      appendToConsole('Error saving entities.\n');
     }
-  }).catch(error => {
-    console.error('Error:', error); // Log any network errors
-    alert('An error occurred while saving the entities.'); // Notify the user of an error
+  })
+  .catch(error => {
+    appendToConsole('Error: An error occurred while saving the entities.\n');
   });
 }
+
 
 /*
 function runScenario() {

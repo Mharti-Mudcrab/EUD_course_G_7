@@ -32,6 +32,7 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
  *   <li>{@link dk.sdu.bdd.xtext.bddDsl.impl.VerbActionImpl#getEntity2 <em>Entity2</em>}</li>
  *   <li>{@link dk.sdu.bdd.xtext.bddDsl.impl.VerbActionImpl#getPreposition3 <em>Preposition3</em>}</li>
  *   <li>{@link dk.sdu.bdd.xtext.bddDsl.impl.VerbActionImpl#getEntity3 <em>Entity3</em>}</li>
+ *   <li>{@link dk.sdu.bdd.xtext.bddDsl.impl.VerbActionImpl#getDebug <em>Debug</em>}</li>
  * </ul>
  *
  * @generated
@@ -137,6 +138,26 @@ public class VerbActionImpl extends MinimalEObjectImpl.Container implements Verb
    * @ordered
    */
   protected DeclarativeEntityRef entity3;
+
+  /**
+   * The default value of the '{@link #getDebug() <em>Debug</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getDebug()
+   * @generated
+   * @ordered
+   */
+  protected static final String DEBUG_EDEFAULT = null;
+
+  /**
+   * The cached value of the '{@link #getDebug() <em>Debug</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getDebug()
+   * @generated
+   * @ordered
+   */
+  protected String debug = DEBUG_EDEFAULT;
 
   /**
    * <!-- begin-user-doc -->
@@ -440,6 +461,31 @@ public class VerbActionImpl extends MinimalEObjectImpl.Container implements Verb
    * @generated
    */
   @Override
+  public String getDebug()
+  {
+    return debug;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public void setDebug(String newDebug)
+  {
+    String oldDebug = debug;
+    debug = newDebug;
+    if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, BddDslPackage.VERB_ACTION__DEBUG, oldDebug, debug));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
   public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
   {
     switch (featureID)
@@ -480,6 +526,8 @@ public class VerbActionImpl extends MinimalEObjectImpl.Container implements Verb
         return getPreposition3();
       case BddDslPackage.VERB_ACTION__ENTITY3:
         return getEntity3();
+      case BddDslPackage.VERB_ACTION__DEBUG:
+        return getDebug();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -514,6 +562,9 @@ public class VerbActionImpl extends MinimalEObjectImpl.Container implements Verb
         return;
       case BddDslPackage.VERB_ACTION__ENTITY3:
         setEntity3((DeclarativeEntityRef)newValue);
+        return;
+      case BddDslPackage.VERB_ACTION__DEBUG:
+        setDebug((String)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -550,6 +601,9 @@ public class VerbActionImpl extends MinimalEObjectImpl.Container implements Verb
       case BddDslPackage.VERB_ACTION__ENTITY3:
         setEntity3((DeclarativeEntityRef)null);
         return;
+      case BddDslPackage.VERB_ACTION__DEBUG:
+        setDebug(DEBUG_EDEFAULT);
+        return;
     }
     super.eUnset(featureID);
   }
@@ -578,6 +632,8 @@ public class VerbActionImpl extends MinimalEObjectImpl.Container implements Verb
         return PREPOSITION3_EDEFAULT == null ? preposition3 != null : !PREPOSITION3_EDEFAULT.equals(preposition3);
       case BddDslPackage.VERB_ACTION__ENTITY3:
         return entity3 != null;
+      case BddDslPackage.VERB_ACTION__DEBUG:
+        return DEBUG_EDEFAULT == null ? debug != null : !DEBUG_EDEFAULT.equals(debug);
     }
     return super.eIsSet(featureID);
   }
@@ -599,6 +655,8 @@ public class VerbActionImpl extends MinimalEObjectImpl.Container implements Verb
     result.append(preposition2);
     result.append(", preposition3: ");
     result.append(preposition3);
+    result.append(", debug: ");
+    result.append(debug);
     result.append(')');
     return result.toString();
   }

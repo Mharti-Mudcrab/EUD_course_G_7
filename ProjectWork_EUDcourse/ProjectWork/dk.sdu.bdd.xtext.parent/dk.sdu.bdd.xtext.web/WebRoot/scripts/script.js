@@ -235,7 +235,6 @@ function loadBlocks(element, skipAddingBlocks) {
 	fetch('/xtext-service/blocks?resource=multi-resource/scenarios.bdd')
 		.then(response => response.json())
 		.then(response => {
-			//console.log(response)
 			response.blocks = JSON.parse(response.blocks)
 			response.toolBox = JSON.parse(response.toolBox)
 			blockArray = response.blocks
@@ -284,36 +283,6 @@ function loadBlocks(element, skipAddingBlocks) {
 						.appendField("\"");
 				}
 			}
-			
-			//if debugging 
-			//Blockly.Blocks["DebugStatement"] = {
-			//  init: function() {
-			//	this.setColour(230); 
-			//	this.setOutput(true, 'pause')
-			//	this.setTooltip("Pause execution");     // Tooltip for the block
-			//	this.setPreviousStatement(true, null);  // Allows a block before it
-			//	this.setNextStatement(false, null);      // Does not allow a block after the pause block 
-				//this.args0([{type: 'input_value', name: 'name_STRING'}])
-			//    this.appendDummyInput()
-			//		.appendField("\"")
-			//        .appendField('pause')
-			//		.appendField("\"");     
-			//  }
-			//}
-			
-			//Blockly.defineBlocksWithJsonArray([{
-			//  "type": "DebugStatement",
-			//  "message0": 'pause',
-			//  "args0": [
-			//        
-			//  ],
-			  
-			//  "output": false,
-			//  "colour": 160,
-			//  "previousStatement": null,
-			//  "nextStatement": null,
-			//}]);
-
 
 			let termArr = []
 			termArr.push({ "kind": "block", "type": "ID" })
@@ -322,9 +291,9 @@ function loadBlocks(element, skipAddingBlocks) {
 			response.toolBox.contents.push({ "kind": "category", "name": "Terminals", contents: termArr })
 
 			//Debugging toolbox
-			//let debugArr = []
-			//debugArr.push({ "kind": "block", "type": "DebugStatement" });  // Add debug_pause block here
-			//response.toolBox.contents.push({ "kind": "category", "name": "Debugging", contents: debugArr })
+			let debugArr = []
+			debugArr.push({ "kind": "block", "type": "DebugStatement" });  // Add debug_pause block here
+			response.toolBox.contents.push({ "kind": "category", "name": "Debugging", contents: debugArr })
 			
       		originalToolbox = response.toolBox;
 			response.toolBox.contents = filterCategories(element, originalToolbox.contents);

@@ -1231,13 +1231,22 @@ public interface BddDslPackage extends EPackage
   int DECLARATIVE_ENTITY_STATE_PHRASE__STATE = 1;
 
   /**
+   * The feature id for the '<em><b>Debug</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int DECLARATIVE_ENTITY_STATE_PHRASE__DEBUG = 2;
+
+  /**
    * The number of structural features of the '<em>Declarative Entity State Phrase</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int DECLARATIVE_ENTITY_STATE_PHRASE_FEATURE_COUNT = 2;
+  int DECLARATIVE_ENTITY_STATE_PHRASE_FEATURE_COUNT = 3;
 
   /**
    * The meta object id for the '{@link dk.sdu.bdd.xtext.bddDsl.impl.DeclarativeEntityStatePhraseWithPropertyImpl <em>Declarative Entity State Phrase With Property</em>}' class.
@@ -1277,13 +1286,22 @@ public interface BddDslPackage extends EPackage
   int DECLARATIVE_ENTITY_STATE_PHRASE_WITH_PROPERTY__PROPERTY = 2;
 
   /**
+   * The feature id for the '<em><b>Debug</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int DECLARATIVE_ENTITY_STATE_PHRASE_WITH_PROPERTY__DEBUG = 3;
+
+  /**
    * The number of structural features of the '<em>Declarative Entity State Phrase With Property</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int DECLARATIVE_ENTITY_STATE_PHRASE_WITH_PROPERTY_FEATURE_COUNT = 3;
+  int DECLARATIVE_ENTITY_STATE_PHRASE_WITH_PROPERTY_FEATURE_COUNT = 4;
 
   /**
    * The meta object id for the '{@link dk.sdu.bdd.xtext.bddDsl.impl.ImperativeEntityStatePhraseImpl <em>Imperative Entity State Phrase</em>}' class.
@@ -1579,13 +1597,22 @@ public interface BddDslPackage extends EPackage
   int VERB_ACTION__ENTITY3 = 6;
 
   /**
+   * The feature id for the '<em><b>Debug</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int VERB_ACTION__DEBUG = 7;
+
+  /**
    * The number of structural features of the '<em>Verb Action</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int VERB_ACTION_FEATURE_COUNT = 7;
+  int VERB_ACTION_FEATURE_COUNT = 8;
 
   /**
    * The meta object id for the '{@link dk.sdu.bdd.xtext.bddDsl.impl.DeclarativeEntityActionImpl <em>Declarative Entity Action</em>}' class.
@@ -1634,13 +1661,22 @@ public interface BddDslPackage extends EPackage
   int DECLARATIVE_ENTITY_ACTION__ENTITY2 = 3;
 
   /**
+   * The feature id for the '<em><b>Debug</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int DECLARATIVE_ENTITY_ACTION__DEBUG = 4;
+
+  /**
    * The number of structural features of the '<em>Declarative Entity Action</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int DECLARATIVE_ENTITY_ACTION_FEATURE_COUNT = 4;
+  int DECLARATIVE_ENTITY_ACTION_FEATURE_COUNT = 5;
 
   /**
    * The meta object id for the '{@link dk.sdu.bdd.xtext.bddDsl.impl.DeclarativeEntityPropertyActionImpl <em>Declarative Entity Property Action</em>}' class.
@@ -1707,13 +1743,22 @@ public interface BddDslPackage extends EPackage
   int DECLARATIVE_ENTITY_PROPERTY_ACTION__ENTITY2 = 5;
 
   /**
+   * The feature id for the '<em><b>Debug</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int DECLARATIVE_ENTITY_PROPERTY_ACTION__DEBUG = 6;
+
+  /**
    * The number of structural features of the '<em>Declarative Entity Property Action</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int DECLARATIVE_ENTITY_PROPERTY_ACTION_FEATURE_COUNT = 6;
+  int DECLARATIVE_ENTITY_PROPERTY_ACTION_FEATURE_COUNT = 7;
 
   /**
    * The meta object id for the '{@link dk.sdu.bdd.xtext.bddDsl.impl.ImperativeVerbActionImpl <em>Imperative Verb Action</em>}' class.
@@ -2953,6 +2998,17 @@ public interface BddDslPackage extends EPackage
   EReference getDeclarativeEntityStatePhrase_State();
 
   /**
+   * Returns the meta object for the attribute '{@link dk.sdu.bdd.xtext.bddDsl.DeclarativeEntityStatePhrase#getDebug <em>Debug</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Debug</em>'.
+   * @see dk.sdu.bdd.xtext.bddDsl.DeclarativeEntityStatePhrase#getDebug()
+   * @see #getDeclarativeEntityStatePhrase()
+   * @generated
+   */
+  EAttribute getDeclarativeEntityStatePhrase_Debug();
+
+  /**
    * Returns the meta object for class '{@link dk.sdu.bdd.xtext.bddDsl.DeclarativeEntityStatePhraseWithProperty <em>Declarative Entity State Phrase With Property</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -2994,6 +3050,17 @@ public interface BddDslPackage extends EPackage
    * @generated
    */
   EReference getDeclarativeEntityStatePhraseWithProperty_Property();
+
+  /**
+   * Returns the meta object for the attribute '{@link dk.sdu.bdd.xtext.bddDsl.DeclarativeEntityStatePhraseWithProperty#getDebug <em>Debug</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Debug</em>'.
+   * @see dk.sdu.bdd.xtext.bddDsl.DeclarativeEntityStatePhraseWithProperty#getDebug()
+   * @see #getDeclarativeEntityStatePhraseWithProperty()
+   * @generated
+   */
+  EAttribute getDeclarativeEntityStatePhraseWithProperty_Debug();
 
   /**
    * Returns the meta object for class '{@link dk.sdu.bdd.xtext.bddDsl.ImperativeEntityStatePhrase <em>Imperative Entity State Phrase</em>}'.
@@ -3299,6 +3366,17 @@ public interface BddDslPackage extends EPackage
   EReference getVerbAction_Entity3();
 
   /**
+   * Returns the meta object for the attribute '{@link dk.sdu.bdd.xtext.bddDsl.VerbAction#getDebug <em>Debug</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Debug</em>'.
+   * @see dk.sdu.bdd.xtext.bddDsl.VerbAction#getDebug()
+   * @see #getVerbAction()
+   * @generated
+   */
+  EAttribute getVerbAction_Debug();
+
+  /**
    * Returns the meta object for class '{@link dk.sdu.bdd.xtext.bddDsl.DeclarativeEntityAction <em>Declarative Entity Action</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -3351,6 +3429,17 @@ public interface BddDslPackage extends EPackage
    * @generated
    */
   EReference getDeclarativeEntityAction_Entity2();
+
+  /**
+   * Returns the meta object for the attribute '{@link dk.sdu.bdd.xtext.bddDsl.DeclarativeEntityAction#getDebug <em>Debug</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Debug</em>'.
+   * @see dk.sdu.bdd.xtext.bddDsl.DeclarativeEntityAction#getDebug()
+   * @see #getDeclarativeEntityAction()
+   * @generated
+   */
+  EAttribute getDeclarativeEntityAction_Debug();
 
   /**
    * Returns the meta object for class '{@link dk.sdu.bdd.xtext.bddDsl.DeclarativeEntityPropertyAction <em>Declarative Entity Property Action</em>}'.
@@ -3427,6 +3516,17 @@ public interface BddDslPackage extends EPackage
    * @generated
    */
   EReference getDeclarativeEntityPropertyAction_Entity2();
+
+  /**
+   * Returns the meta object for the attribute '{@link dk.sdu.bdd.xtext.bddDsl.DeclarativeEntityPropertyAction#getDebug <em>Debug</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Debug</em>'.
+   * @see dk.sdu.bdd.xtext.bddDsl.DeclarativeEntityPropertyAction#getDebug()
+   * @see #getDeclarativeEntityPropertyAction()
+   * @generated
+   */
+  EAttribute getDeclarativeEntityPropertyAction_Debug();
 
   /**
    * Returns the meta object for class '{@link dk.sdu.bdd.xtext.bddDsl.ImperativeVerbAction <em>Imperative Verb Action</em>}'.
@@ -4497,6 +4597,14 @@ public interface BddDslPackage extends EPackage
     EReference DECLARATIVE_ENTITY_STATE_PHRASE__STATE = eINSTANCE.getDeclarativeEntityStatePhrase_State();
 
     /**
+     * The meta object literal for the '<em><b>Debug</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute DECLARATIVE_ENTITY_STATE_PHRASE__DEBUG = eINSTANCE.getDeclarativeEntityStatePhrase_Debug();
+
+    /**
      * The meta object literal for the '{@link dk.sdu.bdd.xtext.bddDsl.impl.DeclarativeEntityStatePhraseWithPropertyImpl <em>Declarative Entity State Phrase With Property</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -4529,6 +4637,14 @@ public interface BddDslPackage extends EPackage
      * @generated
      */
     EReference DECLARATIVE_ENTITY_STATE_PHRASE_WITH_PROPERTY__PROPERTY = eINSTANCE.getDeclarativeEntityStatePhraseWithProperty_Property();
+
+    /**
+     * The meta object literal for the '<em><b>Debug</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute DECLARATIVE_ENTITY_STATE_PHRASE_WITH_PROPERTY__DEBUG = eINSTANCE.getDeclarativeEntityStatePhraseWithProperty_Debug();
 
     /**
      * The meta object literal for the '{@link dk.sdu.bdd.xtext.bddDsl.impl.ImperativeEntityStatePhraseImpl <em>Imperative Entity State Phrase</em>}' class.
@@ -4765,6 +4881,14 @@ public interface BddDslPackage extends EPackage
     EReference VERB_ACTION__ENTITY3 = eINSTANCE.getVerbAction_Entity3();
 
     /**
+     * The meta object literal for the '<em><b>Debug</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute VERB_ACTION__DEBUG = eINSTANCE.getVerbAction_Debug();
+
+    /**
      * The meta object literal for the '{@link dk.sdu.bdd.xtext.bddDsl.impl.DeclarativeEntityActionImpl <em>Declarative Entity Action</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -4805,6 +4929,14 @@ public interface BddDslPackage extends EPackage
      * @generated
      */
     EReference DECLARATIVE_ENTITY_ACTION__ENTITY2 = eINSTANCE.getDeclarativeEntityAction_Entity2();
+
+    /**
+     * The meta object literal for the '<em><b>Debug</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute DECLARATIVE_ENTITY_ACTION__DEBUG = eINSTANCE.getDeclarativeEntityAction_Debug();
 
     /**
      * The meta object literal for the '{@link dk.sdu.bdd.xtext.bddDsl.impl.DeclarativeEntityPropertyActionImpl <em>Declarative Entity Property Action</em>}' class.
@@ -4863,6 +4995,14 @@ public interface BddDslPackage extends EPackage
      * @generated
      */
     EReference DECLARATIVE_ENTITY_PROPERTY_ACTION__ENTITY2 = eINSTANCE.getDeclarativeEntityPropertyAction_Entity2();
+
+    /**
+     * The meta object literal for the '<em><b>Debug</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute DECLARATIVE_ENTITY_PROPERTY_ACTION__DEBUG = eINSTANCE.getDeclarativeEntityPropertyAction_Debug();
 
     /**
      * The meta object literal for the '{@link dk.sdu.bdd.xtext.bddDsl.impl.ImperativeVerbActionImpl <em>Imperative Verb Action</em>}' class.

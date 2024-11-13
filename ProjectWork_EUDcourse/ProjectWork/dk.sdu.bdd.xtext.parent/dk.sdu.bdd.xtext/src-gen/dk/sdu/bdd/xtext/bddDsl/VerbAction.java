@@ -21,6 +21,7 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link dk.sdu.bdd.xtext.bddDsl.VerbAction#getEntity2 <em>Entity2</em>}</li>
  *   <li>{@link dk.sdu.bdd.xtext.bddDsl.VerbAction#getPreposition3 <em>Preposition3</em>}</li>
  *   <li>{@link dk.sdu.bdd.xtext.bddDsl.VerbAction#getEntity3 <em>Entity3</em>}</li>
+ *   <li>{@link dk.sdu.bdd.xtext.bddDsl.VerbAction#getDebug <em>Debug</em>}</li>
  * </ul>
  *
  * @see dk.sdu.bdd.xtext.bddDsl.BddDslPackage#getVerbAction()
@@ -182,5 +183,27 @@ public interface VerbAction extends EObject
    * @generated
    */
   void setEntity3(DeclarativeEntityRef value);
+
+  /**
+   * Returns the value of the '<em><b>Debug</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Debug</em>' attribute.
+   * @see #setDebug(String)
+   * @see dk.sdu.bdd.xtext.bddDsl.BddDslPackage#getVerbAction_Debug()
+   * @model
+   * @generated
+   */
+  String getDebug();
+
+  /**
+   * Sets the value of the '{@link dk.sdu.bdd.xtext.bddDsl.VerbAction#getDebug <em>Debug</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>Debug</em>' attribute.
+   * @see #getDebug()
+   * @generated
+   */
+  void setDebug(String value);
 
 } // VerbAction

@@ -279,10 +279,10 @@ function addBlockToWorkspace(parsedObj, workspace, parentBlock) {
 
     if (parsedObj.preposition3)
         setDropdownValue(parsedObj.preposition3, blockToAdd, workspace, false); 
-	
-	//if (parsedObj.debugStmt1 && parsedObj.type === 'DeclarativeEntityPropertyStatePhrase')
-		//console.log("Adding pause block", parsedObj.type)
-	//	addDebugBlock(blockToAdd, workspace) 
+	//TODO: it should just be if(parsedObj.debug), but for object types, where debug is a option the null value gets parsed as the 
+	// string 'null'. Not sure why, but it means this extra check is neccesary or else to many pause blocks gets added 
+	if (parsedObj.debug === 'pause')
+		addDebugBlock(blockToAdd, workspace) 
 
     if (parentBlock)
         addParentBlock(parentBlock, blockToAdd, workspace);
@@ -299,9 +299,8 @@ function addParentBlock(parentBlock, blockToAdd, workspace)
         return b.type === parentBlock.type;
     });
     
-	//console.log("This is the parentBlockDefinitions:", parentBlockDefinition)
     var blockToAddType = blockToAdd.type;
-	//console.log("This type pf block to add:", blockToAddType)
+	
     if (blockToAddType === 'subBlock_Scenario_And0') // SPECIAL CASE! this input argument does not exist - it's custom.
     {
         blockToAddType = 'subBlock_Scenario_And';
@@ -334,8 +333,7 @@ function addParentBlock(parentBlock, blockToAdd, workspace)
     }
 
     var targetBlock = workspace.getBlockById(parentBlock.id);
-	//console.log("TargetBlock:", targetBlock)
-	//console.log("inputArgument:", inputArgument )
+
     if (inputArgument && targetBlock.inputList) // connect as an input
     {
         var input = targetBlock.inputList.find(function(i) {
@@ -398,7 +396,7 @@ function addStringBlock(stringValue, blockToAdd, workspace)
     var blockDefinition = blockDefinitions.find(function(b) {
         return b.type === blockToAdd.type;
     });
-	console.log("blockDefinitions", blockDefinition)
+	
     var stringBlock = workspace.newBlock('STRING');
     stringBlock.setFieldValue(stringValue, 'TEXT_INPUT');
     
@@ -406,13 +404,8 @@ function addStringBlock(stringValue, blockToAdd, workspace)
         return a.check && a.check.includes('STRING') && a.type === 'input_value';
     });
 
-	console.log("InputArgument", inputArgument)
 	
-	var name = blockToAdd.getInput(inputArgument.name)
-	console.log("name", name)
-	 
-    var inputConnection = name.connection;
-	console.log("inputConnection", inputConnection)
+    var inputConnection = blockToAdd.getInput(inputArgument.name).connection;
 	
     stringBlock.outputConnection.connect(inputConnection);
 
@@ -427,30 +420,9 @@ function addValueBlock(valueString, parentBlock, workspace) {
 }
 
 function addDebugBlock(parentBlock, workspace){
-	var blockToAdd = workspace.newBlock('DebugStatement');
+	var blockToAdd = workspace.newBlock('DebugStatement');	
 	addParentBlock(parentBlock, blockToAdd, workspace);
-	
-	var blockDefinition = blockDefinitions.find(function(b) {
-	        return b.type === blockToAdd.type;
-	    });
-		
-	console.log("blockDefinitions", blockDefinition)
-	
-	//var inputArgument = blockDefinition.args0.find(function(a) {
-	//        return a.check && a.check.includes('STRING') && a.type === 'input_value';
-	 //   });
-
-	//var test =  blockToAdd.getInput(inputArgument.name)
-	
-	//console.log("test", test)
-	//ar inputConnection = test.connection;
-	
-	//console.log("inputConnection", inputConnection)
-	
-	//blockToAdd.outputConnection.connect(inputConnection);
-
-	 
-	 workspace.getBlockById(blockToAdd.id).initSvg();
+	workspace.getBlockById(blockToAdd.id).initSvg();
 }
 
 
@@ -486,36 +458,28 @@ function setDropdownValue(dropdownValue, blockToAdd, workspace, skip) {
 }
 
 
-//Need to fix regex!
 function parseValueString(str) {
-    var regex = /(\w+)\s*(?:\(debugStmt1:\s*(\w+),\s*debugStmt2:\s+(\w+))?(?:,\s*debugStmt3:\s+(\w+))?(?:,\s*preposition:\s+(\w+))?(?:,\s*preposition2:\s+(\w+))?(?:,\s*toBeWord:\s+(\w+))?(?:,\s*value:\s*(\w+(?:\s+\w+)*))?\)?(?:\(scenarioName:\s*(\w+(?:\s+\w+)*)\))?(?:\(propertyValue:\s*(\w+(?:\s+\w+)*)\))?\s*(?:\(entityValue:\s*(\w+(?:\s+\w+)*)\))?(?:->\s*(\w+))?\s*(?:\(name:\s+(\w+))?(?:,\s*preposition:\s+(\w+))?(?:,\s*argument:\s+(\w+))?\)?/;   
-	var matches = str.match(regex);
-	//console.log("string", str)
-	///console.log("matches", matches)
+    var regex = /(\w+)\s*(?:\(preposition:\s+(\w+))?(?:,\s*preposition2:\s+(\w+))?(?:,\s*toBeWord:\s+(\w+))?(?:,\s*value:\s*(\w+(?:\s+\w+)*))?\)?(?:\(scenarioName:\s*(\w+(?:\s+\w+)*)\))?(?:\(propertyValue:\s*(\w+(?:\s+\w+)*)\))?\s*(?:\(entityValue:\s*(\w+(?:\s+\w+)*)\))?(?:->\s*(\w+))?\s*(?:\(name:\s+(\w+))?(?:,\s*preposition:\s+(\w+))?(?:,\s*debug:\s+(\w+))?(?:,\s*argument:\s+(\w+))?\)?/;
+    var matches = str.match(regex);
 
     if (matches) {
-		var type = matches[1];
-		var debugStmt1 = matches[2] || null;
-		var debugStmt2 = matches[3] || null;
-		var debugStmt3 = matches[4] || null;
-		var preposition = matches[5] || null;
-		var preposition2 = matches[6] || null;
-		var toBeWord = matches[7] || null;
-		var strValue = matches[8] || null;
-		var scenarioName = matches[9] || null;
-		var propertyValue = matches[10] || null;
-		var entityValue = matches[11] || null;
-		var reference = matches[12] || null;
-		var id = matches[13] || null;
-		var preposition3 = matches[14] || null;
-		var argument = matches[15] || null;
-
+        var type = matches[1];
+        var preposition = matches[2] || null;
+        var preposition2 = matches[3] || null;
+        var toBeWord = matches[4] || null;
+        var strValue = matches[5] || null;
+        var scenarioName = matches[6] || null;
+        var propertyValue = matches[7] || null;
+        var entityValue = matches[8] || null;
+        var reference = matches[9] || null;
+        var id = matches[10] || null;
+        var preposition3 = matches[11] || null;
+		var debug = matches [12] || null;
+        var argument = matches[13] || null;
+		
         return {
             type: type,
             scenarioName: scenarioName,
-			debugStmt1: debugStmt1,
-			debugStmt2: debugStmt2,
-			debugStmt3: debugStmt3,
             entityValue: entityValue,
             propertyValue: propertyValue,
             reference: reference, 
@@ -525,7 +489,8 @@ function parseValueString(str) {
             preposition2: preposition2,
             preposition3: preposition3,
             argument: argument,
-            toBeWord: toBeWord
+            toBeWord: toBeWord,
+			debug: debug
         };
     } 
     else {

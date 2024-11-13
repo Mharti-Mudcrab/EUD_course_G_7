@@ -17,11 +17,6 @@ bddGenerator.forBlock['ID'] = function(block) {
     return [code, Order.ATOMIC];
 };
 
-//bddGenerator.forBlock['DebugStatement'] = function(block) {
-//    const debugStmt1 = block.getFieldValue('debugStmt1'); // Get the value from the block
-//	const code = `${debugStmt1}`;
-//	return [code, Order.ATOMIC];
-//};
 
 bddGenerator.scrub_ = function(block, code, thisOnly) {
     const nextBlock = block.nextConnection && block.nextConnection.targetBlock();
@@ -39,21 +34,15 @@ function getBddGenerator(blockArray)
 
 function registerRuleForBlock(blockArrayElement)
 {
-    bddGenerator.forBlock[blockArrayElement.type] = function(block, generator) {    
-		console.log("type", blockArrayElement.type)    
+    bddGenerator.forBlock[blockArrayElement.type] = function(block, generator) {       
         var code = blockArrayElement.message0;
-		console.log("first code", code) 
-		
-		console.log("BlockArrarElement args0", blockArrayElement.args0)    
+		 
         for (var i = 0; i < blockArrayElement.args0.length; i++) {
             var argument = blockArrayElement.args0[i];
             var argumentValue = getArgumentValue(argument.type, argument.name, block, generator);
-			console.log("ArgumentValue:", argumentValue)
             code = code.replace(`%${i+1}`, argumentValue); // starts from %1
-			console.log("code:", code)
         }
         
-		console.log("blockArrayElement output", blockArrayElement) 
         if (!blockArrayElement.output)
             return code;
         else

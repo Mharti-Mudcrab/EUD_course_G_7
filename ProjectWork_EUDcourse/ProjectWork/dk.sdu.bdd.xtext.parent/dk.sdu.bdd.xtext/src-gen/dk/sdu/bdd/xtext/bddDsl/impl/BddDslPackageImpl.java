@@ -1473,6 +1473,17 @@ public class BddDslPackageImpl extends EPackageImpl implements BddDslPackage
    * @generated
    */
   @Override
+  public EAttribute getDeclarativeEntityStatePhrase_Debug()
+  {
+    return (EAttribute)declarativeEntityStatePhraseEClass.getEStructuralFeatures().get(2);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
   public EClass getDeclarativeEntityStatePhraseWithProperty()
   {
     return declarativeEntityStatePhraseWithPropertyEClass;
@@ -1509,6 +1520,17 @@ public class BddDslPackageImpl extends EPackageImpl implements BddDslPackage
   public EReference getDeclarativeEntityStatePhraseWithProperty_Property()
   {
     return (EReference)declarativeEntityStatePhraseWithPropertyEClass.getEStructuralFeatures().get(2);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EAttribute getDeclarativeEntityStatePhraseWithProperty_Debug()
+  {
+    return (EAttribute)declarativeEntityStatePhraseWithPropertyEClass.getEStructuralFeatures().get(3);
   }
 
   /**
@@ -1825,6 +1847,17 @@ public class BddDslPackageImpl extends EPackageImpl implements BddDslPackage
    * @generated
    */
   @Override
+  public EAttribute getVerbAction_Debug()
+  {
+    return (EAttribute)verbActionEClass.getEStructuralFeatures().get(7);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
   public EClass getDeclarativeEntityAction()
   {
     return declarativeEntityActionEClass;
@@ -1872,6 +1905,17 @@ public class BddDslPackageImpl extends EPackageImpl implements BddDslPackage
   public EReference getDeclarativeEntityAction_Entity2()
   {
     return (EReference)declarativeEntityActionEClass.getEStructuralFeatures().get(3);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EAttribute getDeclarativeEntityAction_Debug()
+  {
+    return (EAttribute)declarativeEntityActionEClass.getEStructuralFeatures().get(4);
   }
 
   /**
@@ -1949,6 +1993,17 @@ public class BddDslPackageImpl extends EPackageImpl implements BddDslPackage
   public EReference getDeclarativeEntityPropertyAction_Entity2()
   {
     return (EReference)declarativeEntityPropertyActionEClass.getEStructuralFeatures().get(5);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EAttribute getDeclarativeEntityPropertyAction_Debug()
+  {
+    return (EAttribute)declarativeEntityPropertyActionEClass.getEStructuralFeatures().get(6);
   }
 
   /**
@@ -2327,11 +2382,13 @@ public class BddDslPackageImpl extends EPackageImpl implements BddDslPackage
     declarativeEntityStatePhraseEClass = createEClass(DECLARATIVE_ENTITY_STATE_PHRASE);
     createEReference(declarativeEntityStatePhraseEClass, DECLARATIVE_ENTITY_STATE_PHRASE__ENTITY);
     createEReference(declarativeEntityStatePhraseEClass, DECLARATIVE_ENTITY_STATE_PHRASE__STATE);
+    createEAttribute(declarativeEntityStatePhraseEClass, DECLARATIVE_ENTITY_STATE_PHRASE__DEBUG);
 
     declarativeEntityStatePhraseWithPropertyEClass = createEClass(DECLARATIVE_ENTITY_STATE_PHRASE_WITH_PROPERTY);
     createEReference(declarativeEntityStatePhraseWithPropertyEClass, DECLARATIVE_ENTITY_STATE_PHRASE_WITH_PROPERTY__ENTITY);
     createEReference(declarativeEntityStatePhraseWithPropertyEClass, DECLARATIVE_ENTITY_STATE_PHRASE_WITH_PROPERTY__STATE);
     createEReference(declarativeEntityStatePhraseWithPropertyEClass, DECLARATIVE_ENTITY_STATE_PHRASE_WITH_PROPERTY__PROPERTY);
+    createEAttribute(declarativeEntityStatePhraseWithPropertyEClass, DECLARATIVE_ENTITY_STATE_PHRASE_WITH_PROPERTY__DEBUG);
 
     imperativeEntityStatePhraseEClass = createEClass(IMPERATIVE_ENTITY_STATE_PHRASE);
     createEReference(imperativeEntityStatePhraseEClass, IMPERATIVE_ENTITY_STATE_PHRASE__ENTITY);
@@ -2365,12 +2422,14 @@ public class BddDslPackageImpl extends EPackageImpl implements BddDslPackage
     createEReference(verbActionEClass, VERB_ACTION__ENTITY2);
     createEAttribute(verbActionEClass, VERB_ACTION__PREPOSITION3);
     createEReference(verbActionEClass, VERB_ACTION__ENTITY3);
+    createEAttribute(verbActionEClass, VERB_ACTION__DEBUG);
 
     declarativeEntityActionEClass = createEClass(DECLARATIVE_ENTITY_ACTION);
     createEReference(declarativeEntityActionEClass, DECLARATIVE_ENTITY_ACTION__ENTITY);
     createEReference(declarativeEntityActionEClass, DECLARATIVE_ENTITY_ACTION__ACTION_REF);
     createEAttribute(declarativeEntityActionEClass, DECLARATIVE_ENTITY_ACTION__PREPOSITION);
     createEReference(declarativeEntityActionEClass, DECLARATIVE_ENTITY_ACTION__ENTITY2);
+    createEAttribute(declarativeEntityActionEClass, DECLARATIVE_ENTITY_ACTION__DEBUG);
 
     declarativeEntityPropertyActionEClass = createEClass(DECLARATIVE_ENTITY_PROPERTY_ACTION);
     createEReference(declarativeEntityPropertyActionEClass, DECLARATIVE_ENTITY_PROPERTY_ACTION__ENTITY);
@@ -2379,6 +2438,7 @@ public class BddDslPackageImpl extends EPackageImpl implements BddDslPackage
     createEReference(declarativeEntityPropertyActionEClass, DECLARATIVE_ENTITY_PROPERTY_ACTION__PROPERTY);
     createEAttribute(declarativeEntityPropertyActionEClass, DECLARATIVE_ENTITY_PROPERTY_ACTION__PREPOSITION2);
     createEReference(declarativeEntityPropertyActionEClass, DECLARATIVE_ENTITY_PROPERTY_ACTION__ENTITY2);
+    createEAttribute(declarativeEntityPropertyActionEClass, DECLARATIVE_ENTITY_PROPERTY_ACTION__DEBUG);
 
     imperativeVerbActionEClass = createEClass(IMPERATIVE_VERB_ACTION);
     createEReference(imperativeVerbActionEClass, IMPERATIVE_VERB_ACTION__ACTION);
@@ -2561,11 +2621,13 @@ public class BddDslPackageImpl extends EPackageImpl implements BddDslPackage
     initEClass(declarativeEntityStatePhraseEClass, DeclarativeEntityStatePhrase.class, "DeclarativeEntityStatePhrase", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getDeclarativeEntityStatePhrase_Entity(), this.getDeclarativeEntityRef(), null, "entity", null, 0, 1, DeclarativeEntityStatePhrase.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getDeclarativeEntityStatePhrase_State(), this.getStateName(), null, "state", null, 0, 1, DeclarativeEntityStatePhrase.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getDeclarativeEntityStatePhrase_Debug(), ecorePackage.getEString(), "debug", null, 0, 1, DeclarativeEntityStatePhrase.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(declarativeEntityStatePhraseWithPropertyEClass, DeclarativeEntityStatePhraseWithProperty.class, "DeclarativeEntityStatePhraseWithProperty", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getDeclarativeEntityStatePhraseWithProperty_Entity(), this.getDeclarativeEntityRef(), null, "entity", null, 0, 1, DeclarativeEntityStatePhraseWithProperty.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getDeclarativeEntityStatePhraseWithProperty_State(), this.getStateName(), null, "state", null, 0, 1, DeclarativeEntityStatePhraseWithProperty.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getDeclarativeEntityStatePhraseWithProperty_Property(), this.getPropertyRef(), null, "property", null, 0, 1, DeclarativeEntityStatePhraseWithProperty.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getDeclarativeEntityStatePhraseWithProperty_Debug(), ecorePackage.getEString(), "debug", null, 0, 1, DeclarativeEntityStatePhraseWithProperty.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(imperativeEntityStatePhraseEClass, ImperativeEntityStatePhrase.class, "ImperativeEntityStatePhrase", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getImperativeEntityStatePhrase_Entity(), this.getImperativeEntityRef(), null, "entity", null, 0, 1, ImperativeEntityStatePhrase.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -2599,12 +2661,14 @@ public class BddDslPackageImpl extends EPackageImpl implements BddDslPackage
     initEReference(getVerbAction_Entity2(), this.getDeclarativeEntityRef(), null, "entity2", null, 0, 1, VerbAction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getVerbAction_Preposition3(), ecorePackage.getEString(), "preposition3", null, 0, 1, VerbAction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getVerbAction_Entity3(), this.getDeclarativeEntityRef(), null, "entity3", null, 0, 1, VerbAction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getVerbAction_Debug(), ecorePackage.getEString(), "debug", null, 0, 1, VerbAction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(declarativeEntityActionEClass, DeclarativeEntityAction.class, "DeclarativeEntityAction", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getDeclarativeEntityAction_Entity(), this.getDeclarativeEntityRef(), null, "entity", null, 0, 1, DeclarativeEntityAction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getDeclarativeEntityAction_ActionRef(), this.getActionRef(), null, "actionRef", null, 0, 1, DeclarativeEntityAction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getDeclarativeEntityAction_Preposition(), ecorePackage.getEString(), "preposition", null, 0, 1, DeclarativeEntityAction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getDeclarativeEntityAction_Entity2(), this.getDeclarativeEntityOrPropertyRef(), null, "entity2", null, 0, 1, DeclarativeEntityAction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getDeclarativeEntityAction_Debug(), ecorePackage.getEString(), "debug", null, 0, 1, DeclarativeEntityAction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(declarativeEntityPropertyActionEClass, DeclarativeEntityPropertyAction.class, "DeclarativeEntityPropertyAction", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getDeclarativeEntityPropertyAction_Entity(), this.getDeclarativeEntityRef(), null, "entity", null, 0, 1, DeclarativeEntityPropertyAction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -2613,6 +2677,7 @@ public class BddDslPackageImpl extends EPackageImpl implements BddDslPackage
     initEReference(getDeclarativeEntityPropertyAction_Property(), this.getPropertyRef(), null, "property", null, 0, 1, DeclarativeEntityPropertyAction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getDeclarativeEntityPropertyAction_Preposition2(), ecorePackage.getEString(), "preposition2", null, 0, 1, DeclarativeEntityPropertyAction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getDeclarativeEntityPropertyAction_Entity2(), this.getDeclarativeEntityRef(), null, "entity2", null, 0, 1, DeclarativeEntityPropertyAction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getDeclarativeEntityPropertyAction_Debug(), ecorePackage.getEString(), "debug", null, 0, 1, DeclarativeEntityPropertyAction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(imperativeVerbActionEClass, ImperativeVerbAction.class, "ImperativeVerbAction", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getImperativeVerbAction_Action(), this.getImperativeActionRef(), null, "action", null, 0, 1, ImperativeVerbAction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

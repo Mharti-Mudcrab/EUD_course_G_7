@@ -949,23 +949,18 @@ public class BddDslGrammarAccess extends AbstractElementFinder.AbstractGrammarEl
 		//       'Scenario:' scenarioName = STRING
 		//       'Given' preStateE = DeclarativeScenarioState
 		//       imperative1 = ImperativeScenario?
-		//       //debugStmt1 = DebugStatement?
 		//       'When' actionE = DeclarativeScenarioAction
 		//       imperative2 = ImperativeScenario?
-		//       //debugStmt2 = DebugStatement?
 		//       'Then' preStateE1 = DeclarativeScenarioState
 		//       imperative3 = ImperativeScenario?
-		//       //debugStmt3 = DebugStatement?
 		//;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//'Scenario:' scenarioName = STRING
 		//'Given' preStateE = DeclarativeScenarioState
 		//imperative1 = ImperativeScenario?
-		////debugStmt1 = DebugStatement?
 		//'When' actionE = DeclarativeScenarioAction
 		//imperative2 = ImperativeScenario?
-		////debugStmt2 = DebugStatement?
 		//'Then' preStateE1 = DeclarativeScenarioState
 		//imperative3 = ImperativeScenario?
 		public Group getGroup() { return cGroup; }
@@ -994,7 +989,6 @@ public class BddDslGrammarAccess extends AbstractElementFinder.AbstractGrammarEl
 		//ImperativeScenario
 		public RuleCall getImperative1ImperativeScenarioParserRuleCall_4_0() { return cImperative1ImperativeScenarioParserRuleCall_4_0; }
 		
-		////debugStmt1 = DebugStatement?
 		//'When'
 		public Keyword getWhenKeyword_5() { return cWhenKeyword_5; }
 		
@@ -1010,7 +1004,6 @@ public class BddDslGrammarAccess extends AbstractElementFinder.AbstractGrammarEl
 		//ImperativeScenario
 		public RuleCall getImperative2ImperativeScenarioParserRuleCall_7_0() { return cImperative2ImperativeScenarioParserRuleCall_7_0; }
 		
-		////debugStmt2 = DebugStatement?
 		//'Then'
 		public Keyword getThenKeyword_8() { return cThenKeyword_8; }
 		
@@ -1760,13 +1753,15 @@ public class BddDslGrammarAccess extends AbstractElementFinder.AbstractGrammarEl
 		private final Assignment cStateAssignment_2 = (Assignment)cGroup.eContents().get(2);
 		private final CrossReference cStateStateNameCrossReference_2_0 = (CrossReference)cStateAssignment_2.eContents().get(0);
 		private final RuleCall cStateStateNameIDTerminalRuleCall_2_0_1 = (RuleCall)cStateStateNameCrossReference_2_0.eContents().get(1);
+		private final Assignment cDebugAssignment_3 = (Assignment)cGroup.eContents().get(3);
+		private final RuleCall cDebugDebugStatementParserRuleCall_3_0 = (RuleCall)cDebugAssignment_3.eContents().get(0);
 		
 		//DeclarativeEntityStatePhrase:
-		//    entity = DeclarativeEntityRef ToBeWords state = [StateName]
+		//    entity = DeclarativeEntityRef ToBeWords state = [StateName] debug = DebugStatement?
 		//;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//entity = DeclarativeEntityRef ToBeWords state = [StateName]
+		//entity = DeclarativeEntityRef ToBeWords state = [StateName] debug = DebugStatement?
 		public Group getGroup() { return cGroup; }
 		
 		//entity = DeclarativeEntityRef
@@ -1786,6 +1781,12 @@ public class BddDslGrammarAccess extends AbstractElementFinder.AbstractGrammarEl
 		
 		//ID
 		public RuleCall getStateStateNameIDTerminalRuleCall_2_0_1() { return cStateStateNameIDTerminalRuleCall_2_0_1; }
+		
+		//debug = DebugStatement?
+		public Assignment getDebugAssignment_3() { return cDebugAssignment_3; }
+		
+		//DebugStatement
+		public RuleCall getDebugDebugStatementParserRuleCall_3_0() { return cDebugDebugStatementParserRuleCall_3_0; }
 	}
 	public class DeclarativeEntityStatePhraseWithPropertyElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "dk.sdu.bdd.xtext.BddDsl.DeclarativeEntityStatePhraseWithProperty");
@@ -1799,13 +1800,15 @@ public class BddDslGrammarAccess extends AbstractElementFinder.AbstractGrammarEl
 		private final Keyword cWithKeyword_3 = (Keyword)cGroup.eContents().get(3);
 		private final Assignment cPropertyAssignment_4 = (Assignment)cGroup.eContents().get(4);
 		private final RuleCall cPropertyPropertyRefParserRuleCall_4_0 = (RuleCall)cPropertyAssignment_4.eContents().get(0);
+		private final Assignment cDebugAssignment_5 = (Assignment)cGroup.eContents().get(5);
+		private final RuleCall cDebugDebugStatementParserRuleCall_5_0 = (RuleCall)cDebugAssignment_5.eContents().get(0);
 		
 		//DeclarativeEntityStatePhraseWithProperty:
-		//    entity = DeclarativeEntityRef ToBeWords state = [StateName] 'with' property = PropertyRef
+		//    entity = DeclarativeEntityRef ToBeWords state = [StateName] 'with' property = PropertyRef debug = DebugStatement?
 		//;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//entity = DeclarativeEntityRef ToBeWords state = [StateName] 'with' property = PropertyRef
+		//entity = DeclarativeEntityRef ToBeWords state = [StateName] 'with' property = PropertyRef debug = DebugStatement?
 		public Group getGroup() { return cGroup; }
 		
 		//entity = DeclarativeEntityRef
@@ -1834,6 +1837,12 @@ public class BddDslGrammarAccess extends AbstractElementFinder.AbstractGrammarEl
 		
 		//PropertyRef
 		public RuleCall getPropertyPropertyRefParserRuleCall_4_0() { return cPropertyPropertyRefParserRuleCall_4_0; }
+		
+		//debug = DebugStatement?
+		public Assignment getDebugAssignment_5() { return cDebugAssignment_5; }
+		
+		//DebugStatement
+		public RuleCall getDebugDebugStatementParserRuleCall_5_0() { return cDebugDebugStatementParserRuleCall_5_0; }
 	}
 	public class ImperativeEntityStatePhraseElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "dk.sdu.bdd.xtext.BddDsl.ImperativeEntityStatePhrase");
@@ -1937,14 +1946,12 @@ public class BddDslGrammarAccess extends AbstractElementFinder.AbstractGrammarEl
 		
 		//DeclarativeEntityPropertyStatePhrase:
 		//    property = PropertyRef? preposition = PREP  entity = DeclarativeEntityRef
-		//    toBeWord = ToBeWords value = ENTITY_IDENTITY
-		//    debug = DebugStatement?
+		//    toBeWord = ToBeWords value = ENTITY_IDENTITY debug = DebugStatement?
 		//;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//property = PropertyRef? preposition = PREP  entity = DeclarativeEntityRef
-		//toBeWord = ToBeWords value = ENTITY_IDENTITY
-		//debug = DebugStatement?
+		//toBeWord = ToBeWords value = ENTITY_IDENTITY debug = DebugStatement?
 		public Group getGroup() { return cGroup; }
 		
 		//property = PropertyRef?
@@ -2056,13 +2063,15 @@ public class BddDslGrammarAccess extends AbstractElementFinder.AbstractGrammarEl
 		private final RuleCall cPreposition3PREPParserRuleCall_4_0_0 = (RuleCall)cPreposition3Assignment_4_0.eContents().get(0);
 		private final Assignment cEntity3Assignment_4_1 = (Assignment)cGroup_4.eContents().get(1);
 		private final RuleCall cEntity3DeclarativeEntityRefParserRuleCall_4_1_0 = (RuleCall)cEntity3Assignment_4_1.eContents().get(0);
+		private final Assignment cDebugAssignment_5 = (Assignment)cGroup.eContents().get(5);
+		private final RuleCall cDebugDebugStatementParserRuleCall_5_0 = (RuleCall)cDebugAssignment_5.eContents().get(0);
 		
 		//VerbAction:
-		//    action = ActionRef preposition = PREP (entity = DeclarativeEntityRef)? (preposition2 = PREP entity2 = DeclarativeEntityRef)? (preposition3 = PREP entity3 = DeclarativeEntityRef)?
+		//    action = ActionRef preposition = PREP (entity = DeclarativeEntityRef)? (preposition2 = PREP entity2 = DeclarativeEntityRef)? (preposition3 = PREP entity3 = DeclarativeEntityRef)? debug = DebugStatement?
 		//;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//action = ActionRef preposition = PREP (entity = DeclarativeEntityRef)? (preposition2 = PREP entity2 = DeclarativeEntityRef)? (preposition3 = PREP entity3 = DeclarativeEntityRef)?
+		//action = ActionRef preposition = PREP (entity = DeclarativeEntityRef)? (preposition2 = PREP entity2 = DeclarativeEntityRef)? (preposition3 = PREP entity3 = DeclarativeEntityRef)? debug = DebugStatement?
 		public Group getGroup() { return cGroup; }
 		
 		//action = ActionRef
@@ -2112,6 +2121,12 @@ public class BddDslGrammarAccess extends AbstractElementFinder.AbstractGrammarEl
 		
 		//DeclarativeEntityRef
 		public RuleCall getEntity3DeclarativeEntityRefParserRuleCall_4_1_0() { return cEntity3DeclarativeEntityRefParserRuleCall_4_1_0; }
+		
+		//debug = DebugStatement?
+		public Assignment getDebugAssignment_5() { return cDebugAssignment_5; }
+		
+		//DebugStatement
+		public RuleCall getDebugDebugStatementParserRuleCall_5_0() { return cDebugDebugStatementParserRuleCall_5_0; }
 	}
 	public class DeclarativeEntityActionElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "dk.sdu.bdd.xtext.BddDsl.DeclarativeEntityAction");
@@ -2124,13 +2139,15 @@ public class BddDslGrammarAccess extends AbstractElementFinder.AbstractGrammarEl
 		private final RuleCall cPrepositionPREPParserRuleCall_2_0 = (RuleCall)cPrepositionAssignment_2.eContents().get(0);
 		private final Assignment cEntity2Assignment_3 = (Assignment)cGroup.eContents().get(3);
 		private final RuleCall cEntity2DeclarativeEntityOrPropertyRefParserRuleCall_3_0 = (RuleCall)cEntity2Assignment_3.eContents().get(0);
+		private final Assignment cDebugAssignment_4 = (Assignment)cGroup.eContents().get(4);
+		private final RuleCall cDebugDebugStatementParserRuleCall_4_0 = (RuleCall)cDebugAssignment_4.eContents().get(0);
 		
 		//DeclarativeEntityAction:
-		//    entity = DeclarativeEntityRef actionRef = ActionRef preposition = PREP entity2 = DeclarativeEntityOrPropertyRef
+		//    entity = DeclarativeEntityRef actionRef = ActionRef preposition = PREP entity2 = DeclarativeEntityOrPropertyRef debug = DebugStatement?
 		//;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//entity = DeclarativeEntityRef actionRef = ActionRef preposition = PREP entity2 = DeclarativeEntityOrPropertyRef
+		//entity = DeclarativeEntityRef actionRef = ActionRef preposition = PREP entity2 = DeclarativeEntityOrPropertyRef debug = DebugStatement?
 		public Group getGroup() { return cGroup; }
 		
 		//entity = DeclarativeEntityRef
@@ -2156,6 +2173,12 @@ public class BddDslGrammarAccess extends AbstractElementFinder.AbstractGrammarEl
 		
 		//DeclarativeEntityOrPropertyRef
 		public RuleCall getEntity2DeclarativeEntityOrPropertyRefParserRuleCall_3_0() { return cEntity2DeclarativeEntityOrPropertyRefParserRuleCall_3_0; }
+		
+		//debug = DebugStatement?
+		public Assignment getDebugAssignment_4() { return cDebugAssignment_4; }
+		
+		//DebugStatement
+		public RuleCall getDebugDebugStatementParserRuleCall_4_0() { return cDebugDebugStatementParserRuleCall_4_0; }
 	}
 	public class DeclarativeEntityPropertyActionElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "dk.sdu.bdd.xtext.BddDsl.DeclarativeEntityPropertyAction");
@@ -2172,13 +2195,15 @@ public class BddDslGrammarAccess extends AbstractElementFinder.AbstractGrammarEl
 		private final RuleCall cPreposition2PREPParserRuleCall_4_0 = (RuleCall)cPreposition2Assignment_4.eContents().get(0);
 		private final Assignment cEntity2Assignment_5 = (Assignment)cGroup.eContents().get(5);
 		private final RuleCall cEntity2DeclarativeEntityRefParserRuleCall_5_0 = (RuleCall)cEntity2Assignment_5.eContents().get(0);
+		private final Assignment cDebugAssignment_6 = (Assignment)cGroup.eContents().get(6);
+		private final RuleCall cDebugDebugStatementParserRuleCall_6_0 = (RuleCall)cDebugAssignment_6.eContents().get(0);
 		
 		//DeclarativeEntityPropertyAction:
-		//    entity = DeclarativeEntityRef actionRef = ActionRef preposition = PREP property = PropertyRef preposition2 = PREP entity2 = DeclarativeEntityRef
+		//    entity = DeclarativeEntityRef actionRef = ActionRef preposition = PREP property = PropertyRef preposition2 = PREP entity2 = DeclarativeEntityRef debug = DebugStatement?
 		//;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//entity = DeclarativeEntityRef actionRef = ActionRef preposition = PREP property = PropertyRef preposition2 = PREP entity2 = DeclarativeEntityRef
+		//entity = DeclarativeEntityRef actionRef = ActionRef preposition = PREP property = PropertyRef preposition2 = PREP entity2 = DeclarativeEntityRef debug = DebugStatement?
 		public Group getGroup() { return cGroup; }
 		
 		//entity = DeclarativeEntityRef
@@ -2216,6 +2241,12 @@ public class BddDslGrammarAccess extends AbstractElementFinder.AbstractGrammarEl
 		
 		//DeclarativeEntityRef
 		public RuleCall getEntity2DeclarativeEntityRefParserRuleCall_5_0() { return cEntity2DeclarativeEntityRefParserRuleCall_5_0; }
+		
+		//debug = DebugStatement?
+		public Assignment getDebugAssignment_6() { return cDebugAssignment_6; }
+		
+		//DebugStatement
+		public RuleCall getDebugDebugStatementParserRuleCall_6_0() { return cDebugDebugStatementParserRuleCall_6_0; }
 	}
 	public class ImperativeVerbActionElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "dk.sdu.bdd.xtext.BddDsl.ImperativeVerbAction");
@@ -2704,13 +2735,10 @@ public class BddDslGrammarAccess extends AbstractElementFinder.AbstractGrammarEl
 	//       'Scenario:' scenarioName = STRING
 	//       'Given' preStateE = DeclarativeScenarioState
 	//       imperative1 = ImperativeScenario?
-	//       //debugStmt1 = DebugStatement?
 	//       'When' actionE = DeclarativeScenarioAction
 	//       imperative2 = ImperativeScenario?
-	//       //debugStmt2 = DebugStatement?
 	//       'Then' preStateE1 = DeclarativeScenarioState
 	//       imperative3 = ImperativeScenario?
-	//       //debugStmt3 = DebugStatement?
 	//;
 	public ScenarioElements getScenarioAccess() {
 		return pScenario;
@@ -2954,7 +2982,7 @@ public class BddDslGrammarAccess extends AbstractElementFinder.AbstractGrammarEl
 	}
 	
 	//DeclarativeEntityStatePhrase:
-	//    entity = DeclarativeEntityRef ToBeWords state = [StateName]
+	//    entity = DeclarativeEntityRef ToBeWords state = [StateName] debug = DebugStatement?
 	//;
 	public DeclarativeEntityStatePhraseElements getDeclarativeEntityStatePhraseAccess() {
 		return pDeclarativeEntityStatePhrase;
@@ -2965,7 +2993,7 @@ public class BddDslGrammarAccess extends AbstractElementFinder.AbstractGrammarEl
 	}
 	
 	//DeclarativeEntityStatePhraseWithProperty:
-	//    entity = DeclarativeEntityRef ToBeWords state = [StateName] 'with' property = PropertyRef
+	//    entity = DeclarativeEntityRef ToBeWords state = [StateName] 'with' property = PropertyRef debug = DebugStatement?
 	//;
 	public DeclarativeEntityStatePhraseWithPropertyElements getDeclarativeEntityStatePhraseWithPropertyAccess() {
 		return pDeclarativeEntityStatePhraseWithProperty;
@@ -2999,8 +3027,7 @@ public class BddDslGrammarAccess extends AbstractElementFinder.AbstractGrammarEl
 	
 	//DeclarativeEntityPropertyStatePhrase:
 	//    property = PropertyRef? preposition = PREP  entity = DeclarativeEntityRef
-	//    toBeWord = ToBeWords value = ENTITY_IDENTITY
-	//    debug = DebugStatement?
+	//    toBeWord = ToBeWords value = ENTITY_IDENTITY debug = DebugStatement?
 	//;
 	public DeclarativeEntityPropertyStatePhraseElements getDeclarativeEntityPropertyStatePhraseAccess() {
 		return pDeclarativeEntityPropertyStatePhrase;
@@ -3023,7 +3050,7 @@ public class BddDslGrammarAccess extends AbstractElementFinder.AbstractGrammarEl
 	}
 	
 	//VerbAction:
-	//    action = ActionRef preposition = PREP (entity = DeclarativeEntityRef)? (preposition2 = PREP entity2 = DeclarativeEntityRef)? (preposition3 = PREP entity3 = DeclarativeEntityRef)?
+	//    action = ActionRef preposition = PREP (entity = DeclarativeEntityRef)? (preposition2 = PREP entity2 = DeclarativeEntityRef)? (preposition3 = PREP entity3 = DeclarativeEntityRef)? debug = DebugStatement?
 	//;
 	public VerbActionElements getVerbActionAccess() {
 		return pVerbAction;
@@ -3034,7 +3061,7 @@ public class BddDslGrammarAccess extends AbstractElementFinder.AbstractGrammarEl
 	}
 	
 	//DeclarativeEntityAction:
-	//    entity = DeclarativeEntityRef actionRef = ActionRef preposition = PREP entity2 = DeclarativeEntityOrPropertyRef
+	//    entity = DeclarativeEntityRef actionRef = ActionRef preposition = PREP entity2 = DeclarativeEntityOrPropertyRef debug = DebugStatement?
 	//;
 	public DeclarativeEntityActionElements getDeclarativeEntityActionAccess() {
 		return pDeclarativeEntityAction;
@@ -3045,7 +3072,7 @@ public class BddDslGrammarAccess extends AbstractElementFinder.AbstractGrammarEl
 	}
 	
 	//DeclarativeEntityPropertyAction:
-	//    entity = DeclarativeEntityRef actionRef = ActionRef preposition = PREP property = PropertyRef preposition2 = PREP entity2 = DeclarativeEntityRef
+	//    entity = DeclarativeEntityRef actionRef = ActionRef preposition = PREP property = PropertyRef preposition2 = PREP entity2 = DeclarativeEntityRef debug = DebugStatement?
 	//;
 	public DeclarativeEntityPropertyActionElements getDeclarativeEntityPropertyActionAccess() {
 		return pDeclarativeEntityPropertyAction;

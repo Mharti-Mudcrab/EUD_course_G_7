@@ -60,15 +60,12 @@ Scenario:
        'Scenario:' scenarioName = STRING
        'Given' preStateE = DeclarativeScenarioState 
        imperative1 = ImperativeScenario? 
-       //debugStmt1 = DebugStatement?
        
-       'When' actionE = DeclarativeScenarioAction
+       'When' actionE = DeclarativeScenarioAction 
 	   imperative2 = ImperativeScenario?
-	   //debugStmt2 = DebugStatement?
        
        'Then' preStateE1 = DeclarativeScenarioState 
 	   imperative3 = ImperativeScenario? 
-	   //debugStmt3 = DebugStatement?
 ;
 
 ImperativeScenario:
@@ -160,11 +157,11 @@ DeclarativeEntityOrPropertyRef:
 ;
 
 DeclarativeEntityStatePhrase:
-	entity = DeclarativeEntityRef ToBeWords state = [StateName]
+	entity = DeclarativeEntityRef ToBeWords state = [StateName] debug = DebugStatement?
 ;
 
 DeclarativeEntityStatePhraseWithProperty:
-	entity = DeclarativeEntityRef ToBeWords state = [StateName] 'with' property = PropertyRef
+	entity = DeclarativeEntityRef ToBeWords state = [StateName] 'with' property = PropertyRef debug = DebugStatement?
 ;
 
 ImperativeEntityStatePhrase:
@@ -177,9 +174,7 @@ ImperativeEntityStatePhraseWithProperty:
 
 DeclarativeEntityPropertyStatePhrase:
 	property = PropertyRef? preposition = PREP  entity = DeclarativeEntityRef
-	toBeWord = ToBeWords value = ENTITY_IDENTITY 
-	debug = DebugStatement?
-	
+	toBeWord = ToBeWords value = ENTITY_IDENTITY debug = DebugStatement?
 ;
 
 ImperativeEntityPropertyStatePhrase:
@@ -188,15 +183,15 @@ ImperativeEntityPropertyStatePhrase:
 ;
 
 VerbAction:
-	action = ActionRef preposition = PREP (entity = DeclarativeEntityRef)? (preposition2 = PREP entity2 = DeclarativeEntityRef)? (preposition3 = PREP entity3 = DeclarativeEntityRef)?
+	action = ActionRef preposition = PREP (entity = DeclarativeEntityRef)? (preposition2 = PREP entity2 = DeclarativeEntityRef)? (preposition3 = PREP entity3 = DeclarativeEntityRef)? debug = DebugStatement?
 ;
 
 DeclarativeEntityAction: 
-	entity = DeclarativeEntityRef actionRef = ActionRef preposition = PREP entity2 = DeclarativeEntityOrPropertyRef
+	entity = DeclarativeEntityRef actionRef = ActionRef preposition = PREP entity2 = DeclarativeEntityOrPropertyRef debug = DebugStatement?
 ;
 
 DeclarativeEntityPropertyAction:
-	entity = DeclarativeEntityRef actionRef = ActionRef preposition = PREP property = PropertyRef preposition2 = PREP entity2 = DeclarativeEntityRef
+	entity = DeclarativeEntityRef actionRef = ActionRef preposition = PREP property = PropertyRef preposition2 = PREP entity2 = DeclarativeEntityRef debug = DebugStatement?
 ;
 
 ImperativeVerbAction:

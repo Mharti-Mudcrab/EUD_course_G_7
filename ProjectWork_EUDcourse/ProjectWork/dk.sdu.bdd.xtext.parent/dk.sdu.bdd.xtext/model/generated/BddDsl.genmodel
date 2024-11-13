@@ -131,11 +131,13 @@
     <genClasses ecoreClass="BddDsl.ecore#//DeclarativeEntityStatePhrase">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BddDsl.ecore#//DeclarativeEntityStatePhrase/entity"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference BddDsl.ecore#//DeclarativeEntityStatePhrase/state"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BddDsl.ecore#//DeclarativeEntityStatePhrase/debug"/>
     </genClasses>
     <genClasses ecoreClass="BddDsl.ecore#//DeclarativeEntityStatePhraseWithProperty">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BddDsl.ecore#//DeclarativeEntityStatePhraseWithProperty/entity"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference BddDsl.ecore#//DeclarativeEntityStatePhraseWithProperty/state"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BddDsl.ecore#//DeclarativeEntityStatePhraseWithProperty/property"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BddDsl.ecore#//DeclarativeEntityStatePhraseWithProperty/debug"/>
     </genClasses>
     <genClasses ecoreClass="BddDsl.ecore#//ImperativeEntityStatePhrase">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BddDsl.ecore#//ImperativeEntityStatePhrase/entity"/>
@@ -169,12 +171,14 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BddDsl.ecore#//VerbAction/entity2"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BddDsl.ecore#//VerbAction/preposition3"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BddDsl.ecore#//VerbAction/entity3"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BddDsl.ecore#//VerbAction/debug"/>
     </genClasses>
     <genClasses ecoreClass="BddDsl.ecore#//DeclarativeEntityAction">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BddDsl.ecore#//DeclarativeEntityAction/entity"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BddDsl.ecore#//DeclarativeEntityAction/actionRef"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BddDsl.ecore#//DeclarativeEntityAction/preposition"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BddDsl.ecore#//DeclarativeEntityAction/entity2"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BddDsl.ecore#//DeclarativeEntityAction/debug"/>
     </genClasses>
     <genClasses ecoreClass="BddDsl.ecore#//DeclarativeEntityPropertyAction">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BddDsl.ecore#//DeclarativeEntityPropertyAction/entity"/>
@@ -183,6 +187,7 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BddDsl.ecore#//DeclarativeEntityPropertyAction/property"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BddDsl.ecore#//DeclarativeEntityPropertyAction/preposition2"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BddDsl.ecore#//DeclarativeEntityPropertyAction/entity2"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BddDsl.ecore#//DeclarativeEntityPropertyAction/debug"/>
     </genClasses>
     <genClasses ecoreClass="BddDsl.ecore#//ImperativeVerbAction">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BddDsl.ecore#//ImperativeVerbAction/action"/>

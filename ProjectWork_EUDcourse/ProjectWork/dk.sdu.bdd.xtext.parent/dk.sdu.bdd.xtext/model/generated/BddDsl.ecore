@@ -164,6 +164,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="entity" eType="#//DeclarativeEntityRef"
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="state" eType="#//StateName"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="debug" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="DeclarativeEntityStatePhraseWithProperty">
     <eStructuralFeatures xsi:type="ecore:EReference" name="entity" eType="#//DeclarativeEntityRef"
@@ -171,6 +172,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="state" eType="#//StateName"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="property" eType="#//PropertyRef"
         containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="debug" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ImperativeEntityStatePhrase">
     <eStructuralFeatures xsi:type="ecore:EReference" name="entity" eType="#//ImperativeEntityRef"
@@ -215,6 +217,7 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="preposition3" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="entity3" eType="#//DeclarativeEntityRef"
         containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="debug" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="DeclarativeEntityAction">
     <eStructuralFeatures xsi:type="ecore:EReference" name="entity" eType="#//DeclarativeEntityRef"
@@ -224,6 +227,7 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="preposition" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="entity2" eType="#//DeclarativeEntityOrPropertyRef"
         containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="debug" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="DeclarativeEntityPropertyAction">
     <eStructuralFeatures xsi:type="ecore:EReference" name="entity" eType="#//DeclarativeEntityRef"
@@ -236,6 +240,7 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="preposition2" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="entity2" eType="#//DeclarativeEntityRef"
         containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="debug" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ImperativeVerbAction">
     <eStructuralFeatures xsi:type="ecore:EReference" name="action" eType="#//ImperativeActionRef"

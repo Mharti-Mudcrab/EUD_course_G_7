@@ -32,6 +32,7 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
  *   <li>{@link dk.sdu.bdd.xtext.bddDsl.impl.DeclarativeEntityPropertyActionImpl#getProperty <em>Property</em>}</li>
  *   <li>{@link dk.sdu.bdd.xtext.bddDsl.impl.DeclarativeEntityPropertyActionImpl#getPreposition2 <em>Preposition2</em>}</li>
  *   <li>{@link dk.sdu.bdd.xtext.bddDsl.impl.DeclarativeEntityPropertyActionImpl#getEntity2 <em>Entity2</em>}</li>
+ *   <li>{@link dk.sdu.bdd.xtext.bddDsl.impl.DeclarativeEntityPropertyActionImpl#getDebug <em>Debug</em>}</li>
  * </ul>
  *
  * @generated
@@ -117,6 +118,26 @@ public class DeclarativeEntityPropertyActionImpl extends MinimalEObjectImpl.Cont
    * @ordered
    */
   protected DeclarativeEntityRef entity2;
+
+  /**
+   * The default value of the '{@link #getDebug() <em>Debug</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getDebug()
+   * @generated
+   * @ordered
+   */
+  protected static final String DEBUG_EDEFAULT = null;
+
+  /**
+   * The cached value of the '{@link #getDebug() <em>Debug</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getDebug()
+   * @generated
+   * @ordered
+   */
+  protected String debug = DEBUG_EDEFAULT;
 
   /**
    * <!-- begin-user-doc -->
@@ -395,6 +416,31 @@ public class DeclarativeEntityPropertyActionImpl extends MinimalEObjectImpl.Cont
    * @generated
    */
   @Override
+  public String getDebug()
+  {
+    return debug;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public void setDebug(String newDebug)
+  {
+    String oldDebug = debug;
+    debug = newDebug;
+    if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, BddDslPackage.DECLARATIVE_ENTITY_PROPERTY_ACTION__DEBUG, oldDebug, debug));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
   public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
   {
     switch (featureID)
@@ -433,6 +479,8 @@ public class DeclarativeEntityPropertyActionImpl extends MinimalEObjectImpl.Cont
         return getPreposition2();
       case BddDslPackage.DECLARATIVE_ENTITY_PROPERTY_ACTION__ENTITY2:
         return getEntity2();
+      case BddDslPackage.DECLARATIVE_ENTITY_PROPERTY_ACTION__DEBUG:
+        return getDebug();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -464,6 +512,9 @@ public class DeclarativeEntityPropertyActionImpl extends MinimalEObjectImpl.Cont
         return;
       case BddDslPackage.DECLARATIVE_ENTITY_PROPERTY_ACTION__ENTITY2:
         setEntity2((DeclarativeEntityRef)newValue);
+        return;
+      case BddDslPackage.DECLARATIVE_ENTITY_PROPERTY_ACTION__DEBUG:
+        setDebug((String)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -497,6 +548,9 @@ public class DeclarativeEntityPropertyActionImpl extends MinimalEObjectImpl.Cont
       case BddDslPackage.DECLARATIVE_ENTITY_PROPERTY_ACTION__ENTITY2:
         setEntity2((DeclarativeEntityRef)null);
         return;
+      case BddDslPackage.DECLARATIVE_ENTITY_PROPERTY_ACTION__DEBUG:
+        setDebug(DEBUG_EDEFAULT);
+        return;
     }
     super.eUnset(featureID);
   }
@@ -523,6 +577,8 @@ public class DeclarativeEntityPropertyActionImpl extends MinimalEObjectImpl.Cont
         return PREPOSITION2_EDEFAULT == null ? preposition2 != null : !PREPOSITION2_EDEFAULT.equals(preposition2);
       case BddDslPackage.DECLARATIVE_ENTITY_PROPERTY_ACTION__ENTITY2:
         return entity2 != null;
+      case BddDslPackage.DECLARATIVE_ENTITY_PROPERTY_ACTION__DEBUG:
+        return DEBUG_EDEFAULT == null ? debug != null : !DEBUG_EDEFAULT.equals(debug);
     }
     return super.eIsSet(featureID);
   }
@@ -542,6 +598,8 @@ public class DeclarativeEntityPropertyActionImpl extends MinimalEObjectImpl.Cont
     result.append(preposition);
     result.append(", preposition2: ");
     result.append(preposition2);
+    result.append(", debug: ");
+    result.append(debug);
     result.append(')');
     return result.toString();
   }

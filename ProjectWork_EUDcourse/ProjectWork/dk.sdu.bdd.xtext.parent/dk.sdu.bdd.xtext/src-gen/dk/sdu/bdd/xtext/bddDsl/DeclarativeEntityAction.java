@@ -18,6 +18,7 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link dk.sdu.bdd.xtext.bddDsl.DeclarativeEntityAction#getActionRef <em>Action Ref</em>}</li>
  *   <li>{@link dk.sdu.bdd.xtext.bddDsl.DeclarativeEntityAction#getPreposition <em>Preposition</em>}</li>
  *   <li>{@link dk.sdu.bdd.xtext.bddDsl.DeclarativeEntityAction#getEntity2 <em>Entity2</em>}</li>
+ *   <li>{@link dk.sdu.bdd.xtext.bddDsl.DeclarativeEntityAction#getDebug <em>Debug</em>}</li>
  * </ul>
  *
  * @see dk.sdu.bdd.xtext.bddDsl.BddDslPackage#getDeclarativeEntityAction()
@@ -113,5 +114,27 @@ public interface DeclarativeEntityAction extends EObject
    * @generated
    */
   void setEntity2(DeclarativeEntityOrPropertyRef value);
+
+  /**
+   * Returns the value of the '<em><b>Debug</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Debug</em>' attribute.
+   * @see #setDebug(String)
+   * @see dk.sdu.bdd.xtext.bddDsl.BddDslPackage#getDeclarativeEntityAction_Debug()
+   * @model
+   * @generated
+   */
+  String getDebug();
+
+  /**
+   * Sets the value of the '{@link dk.sdu.bdd.xtext.bddDsl.DeclarativeEntityAction#getDebug <em>Debug</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>Debug</em>' attribute.
+   * @see #getDebug()
+   * @generated
+   */
+  void setDebug(String value);
 
 } // DeclarativeEntityAction

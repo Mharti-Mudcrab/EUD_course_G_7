@@ -55,7 +55,6 @@ function getArgumentValue(argumentType, argumentName, block, generator) {
         return generator.valueToCode(block, argumentName, Order.ATOMIC);
     }
     else if (argumentType === "input_statement") {
-		console.log("block", block)
         return generator.statementToCode(block, argumentName);
     }
     else if (argumentType === "field_dropdown" || argumentType === "field_input") {

@@ -2856,6 +2856,25 @@ ruleDeclarativeEntityStatePhrase returns [EObject current=null]
 				}
 			)
 		)
+		(
+			(
+				{
+					newCompositeNode(grammarAccess.getDeclarativeEntityStatePhraseAccess().getDebugDebugStatementParserRuleCall_3_0());
+				}
+				lv_debug_3_0=ruleDebugStatement
+				{
+					if ($current==null) {
+						$current = createModelElementForParent(grammarAccess.getDeclarativeEntityStatePhraseRule());
+					}
+					set(
+						$current,
+						"debug",
+						lv_debug_3_0,
+						"dk.sdu.bdd.xtext.BddDsl.DebugStatement");
+					afterParserOrEnumRuleCall();
+				}
+			)
+		)?
 	)
 ;
 
@@ -2937,6 +2956,25 @@ ruleDeclarativeEntityStatePhraseWithProperty returns [EObject current=null]
 				}
 			)
 		)
+		(
+			(
+				{
+					newCompositeNode(grammarAccess.getDeclarativeEntityStatePhraseWithPropertyAccess().getDebugDebugStatementParserRuleCall_5_0());
+				}
+				lv_debug_5_0=ruleDebugStatement
+				{
+					if ($current==null) {
+						$current = createModelElementForParent(grammarAccess.getDeclarativeEntityStatePhraseWithPropertyRule());
+					}
+					set(
+						$current,
+						"debug",
+						lv_debug_5_0,
+						"dk.sdu.bdd.xtext.BddDsl.DebugStatement");
+					afterParserOrEnumRuleCall();
+				}
+			)
+		)?
 	)
 ;
 
@@ -3479,6 +3517,25 @@ ruleVerbAction returns [EObject current=null]
 				)
 			)
 		)?
+		(
+			(
+				{
+					newCompositeNode(grammarAccess.getVerbActionAccess().getDebugDebugStatementParserRuleCall_5_0());
+				}
+				lv_debug_7_0=ruleDebugStatement
+				{
+					if ($current==null) {
+						$current = createModelElementForParent(grammarAccess.getVerbActionRule());
+					}
+					set(
+						$current,
+						"debug",
+						lv_debug_7_0,
+						"dk.sdu.bdd.xtext.BddDsl.DebugStatement");
+					afterParserOrEnumRuleCall();
+				}
+			)
+		)?
 	)
 ;
 
@@ -3574,6 +3631,25 @@ ruleDeclarativeEntityAction returns [EObject current=null]
 				}
 			)
 		)
+		(
+			(
+				{
+					newCompositeNode(grammarAccess.getDeclarativeEntityActionAccess().getDebugDebugStatementParserRuleCall_4_0());
+				}
+				lv_debug_4_0=ruleDebugStatement
+				{
+					if ($current==null) {
+						$current = createModelElementForParent(grammarAccess.getDeclarativeEntityActionRule());
+					}
+					set(
+						$current,
+						"debug",
+						lv_debug_4_0,
+						"dk.sdu.bdd.xtext.BddDsl.DebugStatement");
+					afterParserOrEnumRuleCall();
+				}
+			)
+		)?
 	)
 ;
 
@@ -3707,6 +3783,25 @@ ruleDeclarativeEntityPropertyAction returns [EObject current=null]
 				}
 			)
 		)
+		(
+			(
+				{
+					newCompositeNode(grammarAccess.getDeclarativeEntityPropertyActionAccess().getDebugDebugStatementParserRuleCall_6_0());
+				}
+				lv_debug_6_0=ruleDebugStatement
+				{
+					if ($current==null) {
+						$current = createModelElementForParent(grammarAccess.getDeclarativeEntityPropertyActionRule());
+					}
+					set(
+						$current,
+						"debug",
+						lv_debug_6_0,
+						"dk.sdu.bdd.xtext.BddDsl.DebugStatement");
+					afterParserOrEnumRuleCall();
+				}
+			)
+		)?
 	)
 ;
 

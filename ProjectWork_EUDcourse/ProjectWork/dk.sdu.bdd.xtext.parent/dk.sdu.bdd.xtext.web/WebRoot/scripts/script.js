@@ -488,8 +488,10 @@ function runScenarioInteractive() {
 		}
 		else if (event.data.includes("pausetag")) {
             // Call update debugging visuals
-            websocket.send(prompt("Pause (breakpoint) has been hit\n\t1 - For continue\n\tanything else - For goto next step and pause"));
-        }
+			setTimeout(() => {
+            	websocket.send(prompt("Pause (breakpoint) has been hit\n\t1 - For continue\n\tanything else - For goto next step and pause"));
+        	}, 5); // ms delay
+		}
         else if (event.data.includes("Took ")) {
             websocket.close();
         }

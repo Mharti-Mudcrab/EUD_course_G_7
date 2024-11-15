@@ -71,8 +71,7 @@ def after_step(context, step):
             print("\t\t\t=== Step mode is on and triggered a pause === pausetag")
         
         #print all robot information here
-        #print(get_robot_information(context))
-        print("This is where robot information would be printed")
+        print(get_robot_information(context))
         
         if input() == '1':
             context.step_mode = 2

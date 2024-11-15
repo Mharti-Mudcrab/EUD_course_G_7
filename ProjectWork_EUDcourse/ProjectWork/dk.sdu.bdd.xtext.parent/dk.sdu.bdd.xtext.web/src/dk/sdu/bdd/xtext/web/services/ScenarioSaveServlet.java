@@ -50,7 +50,7 @@ public class ScenarioSaveServlet extends HttpServlet {
 
         try {
             // Save the version
-            String versionFileName = versionControl.saveVersion(extractedContent, absoluteFilePath, metadata);
+           // String versionFileName = versionControl.saveVersion(extractedContent, absoluteFilePath, metadata);
 
             // Save to the original file
             try (FileWriter fileWriter = new FileWriter(absoluteFilePath)) {
@@ -61,7 +61,7 @@ public class ScenarioSaveServlet extends HttpServlet {
             JSONObject responseJson = new JSONObject();
             responseJson.put("status", "success");
             responseJson.put("message", "Scenario saved successfully");
-            responseJson.put("version", versionFileName);
+            //responseJson.put("version", versionFileName);
             
             response.setStatus(HttpServletResponse.SC_OK);
             response.setContentType("application/json");

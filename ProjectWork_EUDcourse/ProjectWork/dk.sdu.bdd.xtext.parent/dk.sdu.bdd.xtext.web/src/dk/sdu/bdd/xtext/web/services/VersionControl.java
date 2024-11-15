@@ -8,8 +8,6 @@ import org.json.JSONObject;
 
 class VersionControl {
     private static final String VERSION_DIR = "versions";
-    private static final String SCENARIO_DIR = "scenarios";
-    private static final String METADATA_DIR = "metadata";
     private static final int MAX_VERSIONS = 50;
 
     private final String rootPath;
@@ -20,22 +18,32 @@ class VersionControl {
     }
 
     private void initializeDirectories() {
-        for (String dir : new String[]{VERSION_DIR, SCENARIO_DIR, METADATA_DIR}) {
-            File directory = new File(rootPath, dir);
-            if (!directory.exists()) {
-                directory.mkdirs();
-            }
+        File versionDir = new File(rootPath, VERSION_DIR);
+        if (!versionDir.exists()) {
+            versionDir.mkdirs();
         }
     }
 
-    public String saveVersion(String content, String originalFilePath, JSONObject metadata) throws IOException {
+    public String saveVersion(String contentScenario, String contentEntities, String originalScenarioFilePath, String originalEntitiesFilePath, JSONObject metadata) throws IOException {
         String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMdd-HHmmss"));
-        String versionFileName = "scenario-" + timestamp + ".bdd";
-        File versionFile = new File(new File(rootPath, SCENARIO_DIR), versionFileName);
+        String versionFolderName = "version-" + timestamp;
+        File versionFolder = new File(new File(rootPath, VERSION_DIR), versionFolderName);
 
-        // Save the content
-        try (FileWriter writer = new FileWriter(versionFile)) {
-            writer.write(content);
+        // Create the version folder
+        if (!versionFolder.exists()) {
+            versionFolder.mkdirs();
+        }
+
+        // Save scenario content
+        File scenarioFile = new File(versionFolder, "scenario.bdd");
+        try (FileWriter writer = new FileWriter(scenarioFile)) {
+            writer.write(contentScenario);
+        }
+
+        // Save entities content
+        File entitiesFile = new File(versionFolder, "entities.bdd");
+        try (FileWriter writer = new FileWriter(entitiesFile)) {
+            writer.write(contentEntities);
         }
 
         // Save metadata
@@ -43,49 +51,53 @@ class VersionControl {
             metadata = new JSONObject();
         }
         metadata.put("timestamp", timestamp);
-        metadata.put("originalFile", originalFilePath);
+        metadata.put("originalScenarioFile", originalScenarioFilePath);
+        metadata.put("originalEntitiesFile", originalEntitiesFilePath);
         metadata.put("createdAt", LocalDateTime.now().toString());
 
-        File metadataFile = new File(new File(rootPath, METADATA_DIR), versionFileName + ".json");
+        File metadataFile = new File(versionFolder, "metadata.json");
         try (FileWriter writer = new FileWriter(metadataFile)) {
             writer.write(metadata.toString(2));
         }
 
         cleanupOldVersions();
-        return versionFileName;
+        return versionFolderName;
     }
 
     private void cleanupOldVersions() throws IOException {
-        File scenarioDir = new File(rootPath, SCENARIO_DIR);
-        File[] versions = scenarioDir.listFiles((dir, name) -> name.endsWith(".bdd"));
+        File versionDir = new File(rootPath, VERSION_DIR);
+        File[] versions = versionDir.listFiles(File::isDirectory);
         if (versions != null && versions.length > MAX_VERSIONS) {
             Arrays.sort(versions, Comparator.comparing(File::lastModified));
             for (int i = 0; i < versions.length - MAX_VERSIONS; i++) {
-                File versionFile = versions[i];
-                File metadataFile = new File(new File(rootPath, METADATA_DIR), 
-                                           versionFile.getName() + ".json");
-                versionFile.delete();
-                if (metadataFile.exists()) {
-                    metadataFile.delete();
-                }
+                File versionFolder = versions[i];
+                deleteDirectory(versionFolder);
             }
         }
     }
 
+    private void deleteDirectory(File dir) throws IOException {
+        if (dir.isDirectory()) {
+            for (File file : dir.listFiles()) {
+                deleteDirectory(file);
+            }
+        }
+        dir.delete();
+    }
+
     public List<JSONObject> listVersions() throws IOException {
         List<JSONObject> versions = new ArrayList<>();
-        File scenarioDir = new File(rootPath, SCENARIO_DIR);
-        File[] versionFiles = scenarioDir.listFiles((dir, name) -> name.endsWith(".bdd"));
+        File versionDir = new File(rootPath, VERSION_DIR);
+        File[] versionFolders = versionDir.listFiles(File::isDirectory);
         
-        if (versionFiles != null) {
-            for (File file : versionFiles) {
+        if (versionFolders != null) {
+            for (File folder : versionFolders) {
                 JSONObject versionInfo = new JSONObject();
-                versionInfo.put("filename", file.getName());
-                versionInfo.put("lastModified", new Date(file.lastModified()).toString());
+                versionInfo.put("folderName", folder.getName());
+                versionInfo.put("lastModified", new Date(folder.lastModified()).toString());
                 
                 // Load metadata if exists
-                File metadataFile = new File(new File(rootPath, METADATA_DIR), 
-                                           file.getName() + ".json");
+                File metadataFile = new File(folder, "metadata.json");
                 if (metadataFile.exists()) {
                     try (BufferedReader reader = new BufferedReader(new FileReader(metadataFile))) {
                         StringBuilder content = new StringBuilder();
@@ -106,28 +118,58 @@ class VersionControl {
         return versions;
     }
 
-    public String loadVersion(String versionFileName) throws IOException {
-        File versionFile = new File(new File(rootPath, SCENARIO_DIR), versionFileName);
-        if (!versionFile.exists()) {
-            throw new FileNotFoundException("Version not found: " + versionFileName);
+    public Map<String, String> loadVersion(String versionFolderName) throws IOException {
+        File versionFolder = new File(new File(rootPath, VERSION_DIR), versionFolderName);
+        if (!versionFolder.exists()) {
+            throw new FileNotFoundException("Version not found: " + versionFolderName);
         }
 
-        StringBuilder content = new StringBuilder();
-        try (BufferedReader reader = new BufferedReader(new FileReader(versionFile))) {
-            String line;
-            while ((line = reader.readLine()) != null) {
-                content.append(line).append("\n");
+        Map<String, String> contents = new HashMap<>();
+
+        // Load scenario content
+        File scenarioFile = new File(versionFolder, "scenario.bdd");
+        if (scenarioFile.exists()) {
+            StringBuilder content = new StringBuilder();
+            try (BufferedReader reader = new BufferedReader(new FileReader(scenarioFile))) {
+                String line;
+                while ((line = reader.readLine()) != null) {
+                    content.append(line).append("\n");
+                }
             }
+            contents.put("contentScenario", content.toString());
         }
-        return content.toString();
+
+        // Load entities content
+        File entitiesFile = new File(versionFolder, "entities.bdd");
+        if (entitiesFile.exists()) {
+            StringBuilder content = new StringBuilder();
+            try (BufferedReader reader = new BufferedReader(new FileReader(entitiesFile))) {
+                String line;
+                while ((line = reader.readLine()) != null) {
+                    content.append(line).append("\n");
+                }
+            }
+            contents.put("contentEntities", content.toString());
+        }
+
+        return contents;
     }
 
-    public void revertToVersion(String versionFileName, String targetFilePath) throws IOException {
-        String versionContent = loadVersion(versionFileName);
+    public void revertToVersion(String versionFolderName, String targetScenarioFilePath, String targetEntitiesFilePath) throws IOException {
+        Map<String, String> versionContents = loadVersion(versionFolderName);
 
-        // Write the version content to the target file *directly*
-        try (FileWriter writer = new FileWriter(new File(targetFilePath))) {
-            writer.write(versionContent);
+        // Write the scenario content to the target file
+        if (versionContents.containsKey("contentScenario")) {
+            try (FileWriter writer = new FileWriter(new File(targetScenarioFilePath))) {
+                writer.write(versionContents.get("contentScenario"));
+            }
+        }
+
+        // Write the entities content to the target file
+        if (versionContents.containsKey("contentEntities")) {
+            try (FileWriter writer = new FileWriter(new File(targetEntitiesFilePath))) {
+                writer.write(versionContents.get("contentEntities"));
+            }
         }
     }
 }

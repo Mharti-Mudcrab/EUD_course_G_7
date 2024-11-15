@@ -17,6 +17,10 @@ def save_step_details_for_print(context, identifier, position):
     context.identifier = identifier
     context.position = position
 
+@step('.* pause')
+def step_pause(context):
+    print("\t\t>>>>>>>>>>>>>>>>>>>>>> Pause in step <<<<<<<<<<<<<<<<<<<<<<<<<<")
+
 @then('the position (.+) the robot "([^"]+)" is "([^"]+)"( pause)?')
 @given('the position (.+) the robot "([^"]+)" is "([^"]+)"( pause)?')
 def step_given(context, prep, identifier, position, pause):

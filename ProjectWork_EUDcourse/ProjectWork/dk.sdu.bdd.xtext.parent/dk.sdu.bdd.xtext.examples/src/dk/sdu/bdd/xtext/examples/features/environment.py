@@ -9,6 +9,7 @@ import rtde_io
 from logic.sdu_robotics.robotiq_gripper_control import RobotiqGripper
 from behave.model import Scenario
 from pyspark.resource import information
+import math
 
 # Dynamically find the path to Environment.json
 current_dir = os.path.dirname(os.path.abspath(__file__))
@@ -66,9 +67,9 @@ def before_step(context, step):
 def after_step(context, step):
     if context.step_mode in [1, 2]:
         if context.step_mode == 1:
-            print("\t\t\t=== Pause was detected === pausetag")
+            print("\t\t=== Pause was detected === pausetag")
         elif context.step_mode == 2:
-            print("\t\t\t=== Step mode is on and triggered a pause === pausetag")
+            print("\t\t=== Step mode is on and triggered a pause === pausetag")
         
         #print all robot information here
         print(get_robot_information(context))
@@ -82,12 +83,30 @@ def after_step(context, step):
             
     pass
 
+def to_degrees_str(radian_list):
+    degrees = [round(math.degrees(radian), 2) for radian in radian_list]
+    return ", ".join(f"J{i+1}: {angle}" for i, angle in enumerate(degrees))
+
 def get_robot_information(context):
-    information_string = "The robot information at the current step is:\n"
-    information_string += f" position: {get_position(context.position)}" 
-    information_string += f" speed: {get_speed(context.identifier)}"
-    information_string += f" acceleration: {get_acceleration(context.identifier)}"
-    information_string += f" IP: {get_robot_ip()}"
+    information_string = "\t\tThe robot information at the current step is:\n"
+    if hasattr(context, "identifier"):
+        information_string += f"\t\t\tName:\t\t{context.identifier}\n"     
+    if hasattr(context, "position"):
+        try:
+            information_string += f"\t\t\tPosition:\t{context.position} = {to_degrees_str(get_position(context.position))}\n" 
+        except:
+            information_string += f"\t\t\tPosition:\t{context.position} = NOT DEFINED\n"
+    if hasattr(context, "speed"):
+        try:
+            information_string += f"\t\t\tSpeed:\t{context.speed} = {get_speed(context.speed)}\n"
+        except:
+            information_string += f"\t\t\tSpeed:\t{context.speed} = NOT DEFINED\n"
+    if hasattr(context, "acceleration"):
+        try:
+            information_string += f"\t\t\tAcceleration:\t\"{context.acceleration}\" =  {get_acceleration(context.acceleration)}\n"
+        except:
+            information_string += f"\t\t\tAcceleration:\t\"{context.acceleration}\" =  NOT DEFINED\n"
+    information_string += f"\t\t\tIP:\t\t{get_robot_ip()}"
     return information_string
 
 

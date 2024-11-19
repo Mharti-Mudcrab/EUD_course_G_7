@@ -25,6 +25,19 @@
         <span id="scenario-tab" data-editor-id="xtext-editor-scenarios" class="tab">Scenarios</span>
         <span id="warning-message" style="color:red; visibility: hidden;">Entities should be defined first.</span>
       </div>
+	  <div class="debug-controls">
+	      <button id="debug-btn">Debug</button>
+	      <button id="step-btn" disabled>Step</button>
+	      <button id="stop-btn" disabled>Stop</button>
+	      <span id="debug-status" class="debug-status inactive">Not Debugging</span>
+	  </div>
+
+	  <div id="debug-variables"></div>
+
+	  <div class="editor-container">
+	      <div class="editor-line-numbers"></div>
+	      <div class="editor-content"></div>
+	  </div>
       <div class="content">
         <div class="xtext-wrapper">
           <div id="xtext-editor-scenarios" class="xtext-editor" style="display: none" 
@@ -48,6 +61,5 @@
         <button id="save-entities" onclick="saveEntities()">Save Entities</button>    
         <button id="run-scenario" onclick="runScenario()">Run Scenario</button>
       </div>
-    </div>
   </body>
 </html>

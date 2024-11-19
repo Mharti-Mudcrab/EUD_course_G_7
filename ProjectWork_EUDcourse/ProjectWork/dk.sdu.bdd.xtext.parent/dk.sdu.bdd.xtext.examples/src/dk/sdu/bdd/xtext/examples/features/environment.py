@@ -73,7 +73,8 @@ def after_step(context, step):
         
         #print all robot information here
         print(get_robot_information(context))
-        
+        clear_robot_information(context)
+                
         if input() == '1':
             context.step_mode = 2
         else:
@@ -81,34 +82,37 @@ def after_step(context, step):
     #else:
         #print("\t\t\t=== No-pause in step_when ===")
             
-    pass
+        
 
 def to_degrees_str(radian_list):
     degrees = [round(math.degrees(radian), 2) for radian in radian_list]
     return ", ".join(f"J{i+1}: {angle}" for i, angle in enumerate(degrees))
 
+def clear_robot_information(context):
+    if hasattr(context, "name"):
+        context.name = ''   
+    if hasattr(context, "position"):
+        context.position = ''
+    if hasattr(context, "speed"):
+        context.speed = ''
+    if hasattr(context, "acceleration"):
+        context.acceleration = ''
+    if hasattr(context, 'is_str'):
+        context.is_str = ''
+
 def get_robot_information(context):
     information_string = "\t\tThe robot information at the current step is:\n"
-    if hasattr(context, "identifier"):
-        information_string += f"\t\t\tName:\t\t{context.identifier}\n"     
-    if hasattr(context, "position"):
-        try:
-            information_string += f"\t\t\tPosition:\t{context.position} = {to_degrees_str(get_position(context.position))}\n" 
-        except:
-            information_string += f"\t\t\tPosition:\t{context.position} = NOT DEFINED\n"
-    if hasattr(context, "speed"):
-        try:
-            information_string += f"\t\t\tSpeed:\t{context.speed} = {get_speed(context.speed)}\n"
-        except:
-            information_string += f"\t\t\tSpeed:\t{context.speed} = NOT DEFINED\n"
-    if hasattr(context, "acceleration"):
-        try:
-            information_string += f"\t\t\tAcceleration:\t\"{context.acceleration}\" =  {get_acceleration(context.acceleration)}\n"
-        except:
-            information_string += f"\t\t\tAcceleration:\t\"{context.acceleration}\" =  NOT DEFINED\n"
-    information_string += f"\t\t\tIP:\t\t{get_robot_ip()}"
+    if hasattr(context, "name") and context.name != '':
+        information_string += f"\t\t\tRobot name:\t\t{context.name}\n"     
+    if hasattr(context, "position") and context.position != '':
+        information_string += f"\t\t\tPosition:\t\t{context.position}\n" 
+    if hasattr(context, "speed") and context.speed != '':
+        information_string += f"\t\t\tSpeed:\t\t\t{context.speed}\n"
+    if hasattr(context, "acceleration") and context.acceleration != '':
+        information_string += f"\t\t\tAcceleration:\t\t{context.acceleration}\n"
+    if hasattr(context, "is_str") and context.is_str != '':
+        information_string += f"\t\t\t{context.is_str[0]}:\t\t{context.is_str[1]}\n"
     return information_string
-
 
 # Get coordinate-location based on configured name
 def get_position(name):
@@ -116,6 +120,11 @@ def get_position(name):
     coordinate = locations[name]
 
     return coordinate
+
+# Get speed based naming (if not set, returns moderately)
+def get_name():
+    name = data["Robot"]["name"]
+    return name
 
 # Get speed based naming (if not set, returns moderately)
 def get_speed(identifier="moderate"):

@@ -248,6 +248,29 @@
       .collapsed .chevron {
         transform: rotate(180deg);
       }
+	  #chat-box {
+	        border: 1px solid #ccc;
+	        padding: 10px;
+	        height: 400px;
+	        overflow-y: auto;
+	        margin-bottom: 10px;
+	      }
+	      .user-message {
+	        text-align: right;
+	        color: blue;
+	      }
+	      .assistant-message {
+	        text-align: left;
+	        color: green;
+	      }
+	      #user-input {
+	        width: calc(100% - 80px);
+	        padding: 10px;
+	      }
+	      #send-button {
+	        width: 60px;
+	        padding: 10px;
+	      }
     </style>
   </head>
   <body>
@@ -281,6 +304,26 @@
             </div>
           </div>
         </div>
+		<div class="content">
+		        <div class="version-control-panel">
+		          <div class="version-header">
+		            <h3>Debugging helper</h3>
+		            <button class="toggle-button" onclick="toggleVersionPanel()">
+		              <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+		                <path d="M15 19l-7-7 7-7"/>
+		              </svg>
+		            </button>
+		          </div>
+				  <div class="chat-box" id="chat-box">
+				        <!-- Chat messages will appear here -->
+				      </div>
+
+				      <div class="input-container">
+				        <input type="text" id="user-input" placeholder="Type your message..." />
+				        <button id="send-button" onclick="sendMessage()">Send</button>
+				    </div>
+		</div>
+	
         <div class="editors-container">
           <div class="editor-tab">
             <span id="entity-tab" data-editor-id="xtext-editor-entities" class="tab">Entities</span>

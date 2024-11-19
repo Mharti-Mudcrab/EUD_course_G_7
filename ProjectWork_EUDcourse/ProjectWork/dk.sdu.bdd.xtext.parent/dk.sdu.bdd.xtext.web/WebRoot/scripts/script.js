@@ -416,19 +416,6 @@ function saveEntities() {
 }
 
 
-/*
-function runScenario() {
-  fetch('/run-scenario', {
-    method: 'POST',
-  }).then(response => {
-    if (response.ok) {
-      alert('Scenario running...');
-    } else {
-      alert('Error running scenario.');
-    }
-  });
-}*/
-
 document.addEventListener('DOMContentLoaded', function() {
     // Initialize console
     const consoleOutput = document.getElementById('console-output');
@@ -530,4 +517,68 @@ function updateDebugScenarioVisuals(linetext) {
 		}
 	}
 }
+
+/*
+function runScenario() {
+  fetch('/run-scenario', {
+    method: 'POST',
+  }).then(response => {
+    if (response.ok) {
+      alert('Scenario running...');
+    } else {
+      alert('Error running scenario.');
+    }
+  });
+}*/
+
+
+async function sendMessage() {
+  const inputField = document.getElementById("user-input");
+  const message = inputField.value;
+
+  if (!message.trim()) return;
+
+  const chatBox = document.getElementById("chat-box");
+
+  // Display user message
+  const userMessageDiv = document.createElement("div");
+  userMessageDiv.textContent = `You: ${message}`;
+  userMessageDiv.className = "user-message";
+  chatBox.appendChild(userMessageDiv);
+
+  // Send message to backend
+  try {
+    const response = await fetch("/chat", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({ message })
+    });
+
+    const data = await response.json();
+
+    if (data.error) {
+      throw new Error(data.error);
+	  appendToConsole("there was an error!" + data.error)
+    }
+
+    // Display assistant's response
+    const assistantMessageDiv = document.createElement("div");
+    assistantMessageDiv.textContent = `Assistant: ${data.message}`;
+    assistantMessageDiv.className = "assistant-message";
+    chatBox.appendChild(assistantMessageDiv);
+
+  } catch (error) {
+    console.error("Error:", error);
+    const errorMessageDiv = document.createElement("div");
+    errorMessageDiv.textContent = `Error: ${error.message}`;
+    chatBox.appendChild(errorMessageDiv);
+  }
+
+  // Clear input
+  inputField.value = "";
+  chatBox.scrollTop = chatBox.scrollHeight;
+}  
+
 

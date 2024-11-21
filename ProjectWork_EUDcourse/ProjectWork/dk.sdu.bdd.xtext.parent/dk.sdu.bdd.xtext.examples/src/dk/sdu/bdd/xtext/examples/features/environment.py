@@ -71,8 +71,7 @@ def after_step(context, step):
             print("\t\t\t=== Step mode is on and triggered a pause === pausetag")
         
         #print all robot information here
-        #print(get_robot_information(context))
-        print("This is where robot information would be printed")
+        print(get_robot_information(context))
         
         if input() == '1':
             context.step_mode = 2
@@ -85,10 +84,10 @@ def after_step(context, step):
 
 def get_robot_information(context):
     information_string = "The robot information at the current step is:\n"
-    information_string += get_position(context.position) 
-    information_string += get_speed(context.identifier)
-    information_string += get_acceleration(context.identifier)
-    information_string += get_robot_ip()
+    information_string += f" position: {get_position(context.position)}" 
+    information_string += f" speed: {get_speed(context.identifier)}"
+    information_string += f" acceleration: {get_acceleration(context.identifier)}"
+    information_string += f" IP: {get_robot_ip()}"
     return information_string
 
 

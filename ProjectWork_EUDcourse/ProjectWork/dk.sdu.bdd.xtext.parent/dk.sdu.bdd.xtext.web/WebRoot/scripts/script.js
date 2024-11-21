@@ -479,16 +479,22 @@ function runScenarioInteractive() {
     websocket.onmessage = function(event) {
         appendToConsole(event.data + '\n');
         //console.log(event.data);
-        if (event.data.includes("pausetag")) {
+        if (event.data.includes("../")) {
+			updateDebugScenarioVisuals(event.data);
+		}
+		else if (event.data.includes("pausetag")) {
             // Call update debugging visuals
-            websocket.send(prompt("Pause (breakpoint) has been hit\n\t1 - For continue\n\tanything else - For goto next step and pause"));
-        }
+			setTimeout(() => {
+            	websocket.send(prompt("Pause (breakpoint) has been hit\n\t1 - For continue\n\tanything else - For goto next step and pause"));
+        	}, 5); // ms delay
+		}
         else if (event.data.includes("Took ")) {
             websocket.close();
         }
     };
 
     websocket.onclose = function(event) {
+		updateDebugScenarioVisuals('');
         appendToConsole('Execution completed\n');  
         //console.log("WebSocket connection closed.");
     };
@@ -498,4 +504,25 @@ function runScenarioInteractive() {
         websocket.close();
         //console.error("WebSocket error:", error);
     };
+}
+
+// Find the target element
+const textLayer = document.querySelector('.ace_layer.ace_text-layer');
+
+// comment
+
+function updateDebugScenarioVisuals(linetext) {
+	const textLayer = document.querySelector('.ace_layer.ace_text-layer');
+	if (textLayer) {
+		// Get all child elements of the text layer
+		const children = textLayer.children;
+		
+		for (let i = 0; i < children.length; i++) {
+		    const child = children[i];
+			child.style.backgroundColor = ''; // reset child by default
+			if (child.textContent.trim() != '' && linetext.includes(child.textContent)) {
+				child.style.backgroundColor = 'rgba(127, 255, 0, 0.5)';
+			}
+		}
+	}
 }

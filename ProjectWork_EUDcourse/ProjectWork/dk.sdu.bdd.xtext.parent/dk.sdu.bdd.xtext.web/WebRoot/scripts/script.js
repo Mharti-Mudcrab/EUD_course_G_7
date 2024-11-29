@@ -710,3 +710,29 @@ document.addEventListener('DOMContentLoaded', function() {
 	  }
 
 
+<<<<<<< Updated upstream
+=======
+    websocket.onopen = function(event) {
+        console.log("WebSocket connection opened.");
+    };
+
+    websocket.onmessage = function(event) {
+        console.log(event.data);
+		if (event.data.includes("pausetag")) {
+			// Call update debugging visuals
+			websocket.send(prompt("Pause (breakpoint) has been hit\n\t1 - For continue\n\tanything else - For goto next step and pause"));
+		}
+		else if (event.data.includes("Took ")) {
+			websocket.close();
+		}
+    };
+
+    websocket.onclose = function(event) {
+        console.log("WebSocket connection closed.");
+    };
+
+    websocket.onerror = function(error) {
+        console.error("WebSocket error:", error);
+    };
+}
+>>>>>>> Stashed changes

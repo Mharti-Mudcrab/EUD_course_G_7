@@ -371,7 +371,7 @@ function saveScenario() {
   const scenarioEditor = ace.edit("xtext-editor-scenarios");
   const scenarioContent = scenarioEditor.getValue();
 
-  appendToConsole(`Hi: ${scenarioContent}!\n`);
+  appendToConsole(`${scenarioContent}!\n`);
 
   // Save the scenario content
   fetch('/save-scenario', {
@@ -395,7 +395,7 @@ function saveEntities() {
   const entitiesEditor = ace.edit("xtext-editor-entities");
   const entitiesContent = entitiesEditor.getValue();
   
-  appendToConsole(`Hi: ${entitiesContent}!\n`);
+  appendToConsole(`${entitiesContent}!\n`);
 
   // Save the entities content
   fetch('/save-entities', {
@@ -530,4 +530,183 @@ function updateDebugScenarioVisuals(linetext) {
 		}
 	}
 }
+
+document.addEventListener('DOMContentLoaded', function() {
+          initializeVersionControl();
+      });
+
+      function toggleVersionPanel() {
+          const panel = document.querySelector('.version-control-panel');
+          panel.classList.toggle('collapsed');
+      }
+
+      function initializeVersionControl() {
+          document.getElementById('save-version').addEventListener('click', saveVersion);
+          listVersions();
+      }
+
+      async function listVersions() {
+          try {
+              const response = await fetch('/list-versions');
+              const versions = await response.json();
+              
+              const versionsContainer = document.getElementById('versions-list');
+              versionsContainer.innerHTML = '';
+              
+              versions.forEach(version => {
+                  const versionElement = createVersionElement(version);
+                  versionsContainer.appendChild(versionElement);
+              });
+              
+              appendToConsole("Versions loaded successfully.\n");
+          } catch (error) {
+              appendToConsole(`Error loading versions: ${error.message}\n`);
+          }
+      }
+
+      function createVersionElement(version) {
+		let dateString = version.metadata?.createdAt;
+		if (!dateString) {
+		    dateString = version.metadata?.timestamp;
+		    if(dateString){
+		        // Parse the custom timestamp string into a Date object
+		        const year = parseInt(dateString.substring(0, 4));
+		        const month = parseInt(dateString.substring(4, 6)) - 1; // Month is 0-indexed
+		        const day = parseInt(dateString.substring(6, 8));
+		        const hour = parseInt(dateString.substring(9, 11));
+		        const minute = parseInt(dateString.substring(11, 13));
+		        const second = parseInt(dateString.substring(13, 15));
+		        dateString = new Date(year, month, day, hour, minute, second).toISOString();
+		    } else {
+		        dateString = version.lastModified;  // Fallback if both custom and createdAt are missing
+		    }
+		}
+		const date = new Date(dateString); // Create date object once
+
+		const fileName = version.metadata?.fileName || 'Unnamed';
+		const folderName = version.folderName || 'Unversioned';
+
+          const versionDiv = document.createElement('div');
+          versionDiv.className = 'version-item';
+          versionDiv.dataset.version = version.folderName;
+          
+          versionDiv.innerHTML = `
+              <div class="version-item-header">
+                  <div class="version-info">
+                      <div class="version-name">${fileName}</div>
+                      <div class="version-timestamp">
+                          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                              <circle cx="12" cy="12" r="10"/>
+                              <path d="M12 6v6l4 2"/>
+                          </svg>
+                          ${date.toLocaleString()}
+                      </div>
+                  </div>
+                  <div class="version-actions">
+                      <button onclick="revertToVersion('${version.folderName}')">
+                          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                              <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/>
+                              <path d="M3 3v5h5"/>
+                          </svg>
+                          Revert
+                      </button>
+                  </div>
+              </div>
+          `;
+          
+          return versionDiv;
+      }
+
+	  async function revertToVersion(versionFileName) {
+	      if (!versionFileName) {
+	          appendToConsole("No version selected for revert.\n");
+	          return;
+	      }
+
+	      try {
+	          const response = await fetch('/revert-version', {
+	              method: 'POST',
+	              headers: {
+	                  'Content-Type': 'application/json'
+	              },
+	              body: JSON.stringify({ versionFileName })
+	          });
+
+	          const result = await response.json();
+
+	          if (response.ok) {
+	              appendToConsole(`Reverted to version: ${versionFileName}\n`);
+	              
+	              if (result.contentScenario && result.contentEntities) {
+	                  const editorScenario = getScenarioAceEditor();
+	                  editorScenario.setValue(result.contentScenario);
+	                  editorScenario.clearSelection();
+
+	                  const editorEntities = getEntitiesAceEditor();
+	                  editorEntities.setValue(result.contentEntities);
+	                  editorEntities.clearSelection();
+	              }
+	              
+	              document.querySelectorAll('.version-item').forEach(item => {
+	                  item.classList.remove('selected');
+	                  if (item.dataset.version === versionFileName) {
+	                      item.classList.add('selected');
+	                  }
+	              });
+	              
+	              await listVersions();
+	          } else {
+	              appendToConsole(`Failed to revert to version: ${result.message}\n`);
+	          }
+	      } catch (error) {
+	          appendToConsole(`Error reverting version: ${error.message}\n`);
+	      }
+	  }
+
+	  async function saveVersion() {
+	      const editorScenario = getScenarioAceEditor(); // Function to get scenario editor
+	      const contentScenario = editorScenario.getValue();
+	      
+	      const editorEntities = getEntitiesAceEditor(); // Function to get entities editor
+	      const contentEntities = editorEntities.getValue();
+	      
+	      const metadata = {
+	          fileName: document.getElementById("fileName").value || 'Unnamed Scenario',
+	          timestamp: new Date().toISOString()
+	      };
+		  const payload = { contentScenario, contentEntities, metadata }; // Prepare payload
+
+		  // Log the payload to the console
+		  console.log("Payload to /save-both:", JSON.stringify(payload, null, 2));
+		  appendToConsole(`Payload to be sent: ${JSON.stringify(payload, null, 2)}\n`);
+
+		  try {
+		      const response = await fetch('/save-both', {
+		          method: 'POST',
+		          headers: {
+		              'Content-Type': 'application/json'
+		          },
+		          body: JSON.stringify(payload)
+		      });
+
+		      if (response.ok) {
+		          const result = await response.json();
+		          appendToConsole(`Version saved successfully: ${result.version}\n`);
+		          await listVersions();
+		      } else {
+		          const error = await response.text();
+		          appendToConsole(`Failed to save version: ${error}\n`);
+		      }
+		  } catch (error) {
+		      appendToConsole(`Error: ${error.message}\n`);
+		  }
+	  }
+	  function getScenarioAceEditor() {
+		return ace.edit("xtext-editor-scenarios");
+	  }
+
+	  function getEntitiesAceEditor() {
+		return ace.edit("xtext-editor-entities"); 
+	  }
+
 

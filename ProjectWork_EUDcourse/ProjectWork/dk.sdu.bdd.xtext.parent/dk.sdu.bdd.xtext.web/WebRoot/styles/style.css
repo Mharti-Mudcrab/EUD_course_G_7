@@ -96,3 +96,240 @@ a:hover {
 	flex: 3;
 	height: 100%;
 } 
+
+body {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  font: 16px Helvetica, sans-serif;
+}
+
+a {
+  color: #22a;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+.editor-tab {
+  height: 2rem;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  box-sizing: border-box;
+}
+
+.header {
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 60px;
+  padding: 10px;
+}
+
+.content {
+  display: flex;
+  flex-direction: row;
+  flex: 1;
+  overflow: hidden;
+}
+
+.version-control-panel {
+  width: 300px;
+  background: white;
+  border-right: 1px solid #ddd;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  transition: width 0.3s ease;
+}
+
+.version-control-panel.collapsed {
+  width: 40px;
+}
+
+.version-control-panel.collapsed .version-content,
+.version-control-panel.collapsed .version-header h3,
+.version-control-panel.collapsed .version-actions {
+  display: none;
+}
+
+.editors-container {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.xtext-wrapper {
+  flex: 1;
+  height: 100%;
+  box-sizing: border-box;
+  border: 1px solid #aaa;
+}
+
+#blockly-editor {
+  flex: 1;
+  height: 100%;
+  box-sizing: border-box;
+}
+
+.version-header {
+  padding: 12px 16px;
+  border-bottom: 1px solid #eee;
+  background: #f8f9fa;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.version-header h3 {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.version-content {
+  flex: 1;
+  overflow-y: auto;
+  padding: 16px;
+}
+
+.version-actions {
+  margin-bottom: 16px;
+}
+
+.versions-container {
+  overflow-y: auto;
+}
+
+.version-item {
+  padding: 12px;
+  border: 1px solid #eee;
+  border-radius: 6px;
+  margin-bottom: 8px;
+  background: #f8f9fa;
+  transition: all 0.2s ease;
+}
+
+.version-item:hover {
+  border-color: #0066cc;
+  background: #f0f7ff;
+}
+
+.version-item.selected {
+  border-color: #0066cc;
+  background: #e6f0ff;
+}
+
+.version-item-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 8px;
+}
+
+.version-info {
+  flex: 1;
+}
+
+.version-name {
+  font-weight: 500;
+  margin-bottom: 4px;
+}
+
+.version-timestamp {
+  font-size: 12px;
+  color: #666;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.editors-section {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+}
+
+#console-section {
+  display: flex;
+  flex-direction: column;
+  background-color: #1e1e1e;
+  color: #fff;
+  border-top: 2px solid #444;
+  height: 300px;
+  max-height: 30vh;
+  overflow: hidden;
+}
+
+.console-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 15px;
+  background-color: #333;
+  border-bottom: 1px solid #444;
+}
+
+#console-output {
+  flex: 1;
+  overflow-y: auto;
+  padding: 15px;
+  font-family: 'Courier New', monospace;
+  font-size: 14px;
+  line-height: 1.5;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
+
+.primary-button {
+  background: #0066cc;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+}
+
+.primary-button:hover {
+  background: #0052a3;
+}
+
+.toggle-button {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.toggle-button:hover {
+  background: #f0f0f0;
+  border-radius: 4px;
+}
+
+.chevron {
+  width: 20px;
+  height: 20px;
+  transition: transform 0.3s ease;
+}
+
+.collapsed .chevron {
+  transform: rotate(180deg);
+}
+

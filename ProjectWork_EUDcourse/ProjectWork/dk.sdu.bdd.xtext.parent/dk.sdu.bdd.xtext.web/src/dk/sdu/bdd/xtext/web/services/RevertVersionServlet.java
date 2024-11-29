@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.json.JSONObject;
 import java.io.*;
+import java.util.Map;
 
 @WebServlet("/revert-version")
 public class RevertVersionServlet extends HttpServlet {
@@ -32,37 +33,36 @@ public class RevertVersionServlet extends HttpServlet {
 
             // Parse the JSON request
             JSONObject requestJson = new JSONObject(content.toString());
-            String versionFileName = requestJson.getString("versionFileName");
+            String versionFolderName = requestJson.getString("versionFileName");
 
-            // Validate the version filename
-            if (versionFileName == null || versionFileName.trim().isEmpty()) {
-                throw new IllegalArgumentException("Version filename cannot be empty");
+            // Validate the version folder name
+            if (versionFolderName == null || versionFolderName.trim().isEmpty()) {
+                throw new IllegalArgumentException("Version folder name cannot be empty");
             }
 
             // Get the WebRoot path
             String webRootPath = getServletContext().getRealPath("/");
             
-            // Construct paths using WebRoot
-            File scenarioFile = new File(webRootPath, "scenarios/" + versionFileName);
-            File targetFile = new File(webRootPath, "../../dk.sdu.bdd.xtext.examples/src/dk/sdu/bdd/xtext/examples/sample.bdd");
-            String absoluteTargetPath = targetFile.getCanonicalPath();
+            // Paths to the target files
+            String relativeScenarioPath = "../../dk.sdu.bdd.xtext.examples/src/dk/sdu/bdd/xtext/examples/sample.bdd";
+            String absoluteScenarioFilePath = new File(webRootPath, relativeScenarioPath).getCanonicalPath();
+
+            String relativeEntitiesPath = "../../dk.sdu.bdd.xtext.examples/src/dk/sdu/bdd/xtext/examples/robotic_domain.bdd";
+            String absoluteEntitiesFilePath = new File(webRootPath, relativeEntitiesPath).getCanonicalPath();
 
             // Initialize version control with WebRoot path
             VersionControl versionControl = new VersionControl(webRootPath);
 
-            if (!scenarioFile.exists()) {
-                throw new FileNotFoundException("Version file not found: " + versionFileName);
-            }
-
             // Perform the revert operation
-            versionControl.revertToVersion(versionFileName, absoluteTargetPath);
+            versionControl.revertToVersion(versionFolderName, absoluteScenarioFilePath, absoluteEntitiesFilePath);
 
-            // Load the reverted content
-            String revertedContent = versionControl.loadVersion(versionFileName);
+            // Load the reverted contents
+            Map<String, String> revertedContents = versionControl.loadVersion(versionFolderName);
 
             responseJson.put("status", "success");
-            responseJson.put("message", "Successfully reverted to version: " + versionFileName);
-            responseJson.put("content", revertedContent);
+            responseJson.put("message", "Successfully reverted to version: " + versionFolderName);
+            responseJson.put("contentScenario", revertedContents.get("contentScenario"));
+            responseJson.put("contentEntities", revertedContents.get("contentEntities"));
             
             response.setStatus(HttpServletResponse.SC_OK);
             response.getWriter().write(responseJson.toString());
@@ -87,12 +87,5 @@ public class RevertVersionServlet extends HttpServlet {
             responseJson.put("details", e.toString()); // Include more error details
             response.getWriter().write(responseJson.toString());
         }
-    }
-
-    // Helper method to validate file path is within allowed directory
-    private boolean isValidFilePath(File file, File baseDir) throws IOException {
-        String canonicalBasePath = baseDir.getCanonicalPath();
-        String canonicalTargetPath = file.getCanonicalPath();
-        return canonicalTargetPath.startsWith(canonicalBasePath);
     }
 }

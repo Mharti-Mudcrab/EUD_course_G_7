@@ -100,7 +100,17 @@ a:hover {
 }
 
 .version-actions {
-  margin-bottom: 16px;
+    display: flex;
+    flex-direction: column; /* Stack buttons vertically */
+    align-items: flex-end; /* Align buttons to the right */
+}
+
+.action-button {
+    margin-bottom: 8px; /* Space between buttons */
+}
+
+.delete-button {
+    margin-bottom: 0; /* No margin needed for the last button */
 }
 
 .versions-container {
@@ -138,6 +148,11 @@ a:hover {
 }
 
 .version-name {
+	word-wrap: break-word; /* Older syntax for breaking words */
+	word-break: break-word; /* Breaks long words */
+	overflow-wrap: break-word; /* Modern syntax for word breaking */
+	max-width: 200px; /* Adjust width as needed to constrain the element */
+	white-space: normal; /* Ensures it wraps onto the next line */
   font-weight: 500;
   margin-bottom: 4px;
 }
@@ -268,5 +283,23 @@ a:hover {
 .collapsed .chevron {
   transform: rotate(180deg);
 }
+
+.version-content::-webkit-scrollbar {
+    width: 6px; /* Slimmer scrollbar width */
+}
+
+.version-content::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0.5); /* Scrollbar thumb color */
+    border-radius: 3px; /* Rounded scrollbar handle */
+}
+
+.version-content::-webkit-scrollbar-thumb:hover {
+    background-color: rgba(0, 0, 0, 0.7); /* Darker on hover */
+}
+
+.version-content::-webkit-scrollbar-track {
+    background-color: rgba(0, 0, 0, 0.1); /* Scrollbar track color */
+}
+
 
 

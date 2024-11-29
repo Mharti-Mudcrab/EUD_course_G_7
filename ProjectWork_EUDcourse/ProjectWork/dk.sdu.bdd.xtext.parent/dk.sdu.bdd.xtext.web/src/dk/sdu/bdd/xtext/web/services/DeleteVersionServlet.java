@@ -6,11 +6,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.json.JSONObject;
-import java.io.*;
-import java.util.Map;
 
-@WebServlet("/revert-version")
-public class RevertVersionServlet extends HttpServlet {
+import java.io.*;
+
+@WebServlet("/delete-version")
+public class DeleteVersionServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
     @Override
@@ -33,7 +33,7 @@ public class RevertVersionServlet extends HttpServlet {
 
             // Parse the JSON request
             JSONObject requestJson = new JSONObject(content.toString());
-            String versionFolderName = requestJson.getString("versionFileName");
+            String versionFolderName = requestJson.getString("versionFolderName");
 
             // Validate the version folder name
             if (versionFolderName == null || versionFolderName.trim().isEmpty()) {
@@ -43,27 +43,14 @@ public class RevertVersionServlet extends HttpServlet {
             // Get the WebRoot path
             String webRootPath = getServletContext().getRealPath("/");
 
-            // Paths to the target files
-            String relativeScenarioPath = "../../dk.sdu.bdd.xtext.examples/src/dk/sdu/bdd/xtext/examples/sample.bdd";
-            String absoluteScenarioFilePath = new File(webRootPath, relativeScenarioPath).getCanonicalPath();
-
-            String relativeEntitiesPath = "../../dk.sdu.bdd.xtext.examples/src/dk/sdu/bdd/xtext/examples/robotic_domain.bdd";
-            String absoluteEntitiesFilePath = new File(webRootPath, relativeEntitiesPath).getCanonicalPath();
-
             // Initialize version control with WebRoot path
             VersionControl versionControl = new VersionControl(webRootPath);
 
-            // Perform the revert operation
-            versionControl.revertToVersion(versionFolderName, absoluteScenarioFilePath, absoluteEntitiesFilePath);
-
-            // Load the reverted contents including metadata
-            Map<String, Object> revertedContents = versionControl.loadVersion(versionFolderName);
+            // Perform the delete operation
+            versionControl.deleteVersion(versionFolderName);
 
             responseJson.put("status", "success");
-            responseJson.put("message", "Successfully reverted to version: " + versionFolderName);
-            responseJson.put("contentScenario", revertedContents.get("contentScenario"));
-            responseJson.put("contentEntities", revertedContents.get("contentEntities"));
-            responseJson.put("metadata", revertedContents.get("metadata")); // Include metadata
+            responseJson.put("message", "Successfully deleted version: " + versionFolderName);
 
             response.setStatus(HttpServletResponse.SC_OK);
             response.getWriter().write(responseJson.toString());

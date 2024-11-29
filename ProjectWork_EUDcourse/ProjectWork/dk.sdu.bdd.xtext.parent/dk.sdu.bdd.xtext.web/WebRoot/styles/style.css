@@ -301,5 +301,33 @@ a:hover {
     background-color: rgba(0, 0, 0, 0.1); /* Scrollbar track color */
 }
 
+.delete-button {
+    background-color: #ff4d4f; /* Bright red */
+    color: white; /* White text for contrast */
+    border: none; /* Remove border */
+    padding: 6px 12px;
+    border-radius: 4px; /* Slightly rounded corners */
+    cursor: pointer;
+}
+
+.delete-button:hover {
+    background-color: #d9363e; /* Darker red for hover */
+}
+
+/* Style for the revert button */
+.revert-button {
+    background-color: #1890ff; /* Soft blue */
+    color: white;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.revert-button:hover {
+    background-color: #096dd9; /* Darker blue for hover */
+}
+
+
 
 

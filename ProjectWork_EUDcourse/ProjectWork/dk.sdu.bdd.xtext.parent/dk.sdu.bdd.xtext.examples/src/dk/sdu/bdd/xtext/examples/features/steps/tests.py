@@ -7,7 +7,7 @@ import re
 from behave.matchers import use_step_matcher
 import json
 from environment import *
-from pandas.core.computation.expr import _is_str
+
 
 # Specify that matchers in step decorators should be parsed as Regular Expressions
 use_step_matcher("re")

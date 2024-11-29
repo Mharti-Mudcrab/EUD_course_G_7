@@ -9,6 +9,7 @@ import rtde_io
 from logic.sdu_robotics.robotiq_gripper_control import RobotiqGripper
 from behave.model import Scenario
 from pyspark.resource import information
+import math
 
 # Dynamically find the path to Environment.json
 current_dir = os.path.dirname(os.path.abspath(__file__))
@@ -66,13 +67,14 @@ def before_step(context, step):
 def after_step(context, step):
     if context.step_mode in [1, 2]:
         if context.step_mode == 1:
-            print("\t\t\t=== Pause was detected === pausetag")
+            print("\t\t=== Pause was detected === pausetag")
         elif context.step_mode == 2:
-            print("\t\t\t=== Step mode is on and triggered a pause === pausetag")
+            print("\t\t=== Step mode is on and triggered a pause === pausetag")
         
         #print all robot information here
         print(get_robot_information(context))
-        
+        clear_robot_information(context)
+                
         if input() == '1':
             context.step_mode = 2
         else:
@@ -80,16 +82,37 @@ def after_step(context, step):
     #else:
         #print("\t\t\t=== No-pause in step_when ===")
             
-    pass
+        
+
+def to_degrees_str(radian_list):
+    degrees = [round(math.degrees(radian), 2) for radian in radian_list]
+    return ", ".join(f"J{i+1}: {angle}" for i, angle in enumerate(degrees))
+
+def clear_robot_information(context):
+    if hasattr(context, "name"):
+        context.name = ''   
+    if hasattr(context, "position"):
+        context.position = ''
+    if hasattr(context, "speed"):
+        context.speed = ''
+    if hasattr(context, "acceleration"):
+        context.acceleration = ''
+    if hasattr(context, 'is_str'):
+        context.is_str = ''
 
 def get_robot_information(context):
-    information_string = "The robot information at the current step is:\n"
-    information_string += f" position: {get_position(context.position)}" 
-    information_string += f" speed: {get_speed(context.identifier)}"
-    information_string += f" acceleration: {get_acceleration(context.identifier)}"
-    information_string += f" IP: {get_robot_ip()}"
+    information_string = "\t\tThe robot information at the current step is:\n"
+    if hasattr(context, "name") and context.name != '':
+        information_string += f"\t\t\tRobot name:\t\t{context.name}\n"     
+    if hasattr(context, "position") and context.position != '':
+        information_string += f"\t\t\tPosition:\t\t{context.position}\n" 
+    if hasattr(context, "speed") and context.speed != '':
+        information_string += f"\t\t\tSpeed:\t\t\t{context.speed}\n"
+    if hasattr(context, "acceleration") and context.acceleration != '':
+        information_string += f"\t\t\tAcceleration:\t\t{context.acceleration}\n"
+    if hasattr(context, "is_str") and context.is_str != '':
+        information_string += f"\t\t\t{context.is_str[0]}:\t\t{context.is_str[1]}\n"
     return information_string
-
 
 # Get coordinate-location based on configured name
 def get_position(name):
@@ -97,6 +120,11 @@ def get_position(name):
     coordinate = locations[name]
 
     return coordinate
+
+# Get speed based naming (if not set, returns moderately)
+def get_name():
+    name = data["Robot"]["name"]
+    return name
 
 # Get speed based naming (if not set, returns moderately)
 def get_speed(identifier="moderate"):

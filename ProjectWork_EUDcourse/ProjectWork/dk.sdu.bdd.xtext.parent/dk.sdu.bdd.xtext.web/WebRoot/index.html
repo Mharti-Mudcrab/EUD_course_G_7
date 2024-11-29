@@ -48,10 +48,10 @@
         </span>
       </div>
 	  <div class="debug-controls">
-	      <button id="debug-btn">Debug</button>
-	      <button id="step-btn" disabled>Step</button>
-	      <button id="stop-btn" disabled>Stop</button>
-	      <span id="debug-status" class="debug-status inactive">Not Debugging</span>
+		  <button id="run-scenario" onclick="runScenarioInteractive()">Run Scenario</button>  
+	      <button id="step-btn" onclick="stepOnclick()"Disabled>Step</button>
+		  <button id="continue-btn" onclick="continueOnclick()"Disabled>Continue</button>
+	      <button id="stop-btn" onclick="stopOnclick()"Disabled>Stop</button>
 	  </div>
       <div class="content">
         <div class="version-control-panel">
@@ -101,13 +101,7 @@
         </div>
       </div>
       <div>
-        <button id="save-button" value="Save" title="Save">Save</button>
-        <input id="file-input" type="file" style="display: none;"/>
-        <button id="load-button" value="Load" title="Load">Load</button>
-        <button id="get-ast">Get ast</button>
-        <button id="save-scenario" onclick="saveScenario()">Save Scenario</button>
-        <button id="save-entities" onclick="saveEntities()">Save Entities</button>
-		<button id="run-scenario" onclick="runScenarioInteractive()">Run Scenario</button>   
+        <input id="file-input" type="file" style="display: none;"/> 
 		<button id="clear-console">Clear</button>
       </div>
 	  <div class="drag-handle" id="drag-handle"></div>

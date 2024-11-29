@@ -6,6 +6,11 @@ When the robot "Assembler" moves to position "point299"
 Then the position of the robot "Assembler" is "point2" 
 
 
+ 
+ 
+ 
+
+
 
              
           
@@ -32,4 +37,6 @@ Then the position of the robot "Assembler" is "point2"
               
               
               
+              
+
               

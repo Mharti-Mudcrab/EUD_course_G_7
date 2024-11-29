@@ -220,15 +220,16 @@ window.onload = () => {
   }, 200)
 }
 
-let astBtn = document.getElementById('get-ast')
-astBtn.onclick = () => {
-	fetch('/xtext-service/ast?resource=multi-resource/scenarios.bdd')
-		.then(response => response.json())
-		.then(response => {
-			console.log(response);
-			console.log(JSON.stringify(response));
-		})
-}
+
+//let astBtn = document.getElementById('get-ast')
+//astBtn.onclick = () => {
+//	fetch('/xtext-service/ast?resource=multi-resource/scenarios.bdd')
+//		.then(response => response.json())
+//		.then(response => {
+//			console.log(response);
+//			console.log(JSON.stringify(response));
+//		})
+//}
 
 function loadBlocks(element, skipAddingBlocks) {
 	fetch('/xtext-service/blocks?resource=multi-resource/scenarios.bdd')
@@ -416,18 +417,6 @@ function saveEntities() {
 }
 
 
-/*
-function runScenario() {
-  fetch('/run-scenario', {
-    method: 'POST',
-  }).then(response => {
-    if (response.ok) {
-      alert('Scenario running...');
-    } else {
-      alert('Error running scenario.');
-    }
-  });
-}*/
 
 document.addEventListener('DOMContentLoaded', function() {
     // Initialize console
@@ -449,48 +438,57 @@ function appendToConsole(message) {
     consoleOutput.scrollTop = consoleOutput.scrollHeight;
 }
 
-function runScenario() {
-    const consoleOutput = document.getElementById('console-output');
-    consoleOutput.textContent = ''; // Clear previous output
-    appendToConsole('Starting scenario execution...\n');
-
-    const eventSource = new EventSource('/console-output');
-
-    eventSource.onmessage = function(event) {
-        appendToConsole(event.data + '\n');
-    };
-
-    eventSource.onerror = function() {
-        appendToConsole('Error: Connection to server lost\n');
-        eventSource.close();
-    };
-
-    eventSource.addEventListener('close', function(event) {
-        appendToConsole('Execution completed\n');
-        eventSource.close();
-    });
+function stepOnclick() {
+	globalWebsocketPointer.send('1');
 }
+
+function continueOnclick() {
+	globalWebsocketPointer.send('');
+	toggleDebugButtons();
+}
+
+function stopOnclick() {
+	globalWebsocketPointer.close();
+}
+
+function toggleDebugButtons(){
+	const cont = document.getElementById('continue-btn');
+	const step = document.getElementById('step-btn');
+	cont.disabled = !cont.disabled;
+	step.disabled = !step.disabled;
+}
+
+function toggleRunStopButtons(){
+	const runScenario = document.getElementById('run-scenario');
+	const stop = document.getElementById('stop-btn');
+	runScenario.disabled 	= !runScenario.disabled;
+	stop.disabled 			= !stop.disabled;
+}
+
+var globalWebsocketPointer;
 
 function runScenarioInteractive() {
     const websocket = new WebSocket('ws://localhost:8081/run-scenario-interactive'); // Use ws:// for non-secure, wss:// for secure connections
-    appendToConsole('Starting scenario execution...\n');
+    globalWebsocketPointer = websocket;
+	appendToConsole('Starting scenario execution...\n');
+	toggleRunStopButtons();
   
     websocket.onopen = function(event) {
         appendToConsole('WebSocket connection opened.\n');
         console.log("WebSocket connection opened.");
+		
     };
 
     websocket.onmessage = function(event) {
         appendToConsole(event.data + '\n');
-        //console.log(event.data);
+      
         if (event.data.includes("../")) {
 			updateDebugScenarioVisuals(event.data);
 		}
 		else if (event.data.includes("pausetag")) {
-            // Call update debugging visuals
-			setTimeout(() => {
-            	websocket.send(prompt("Pause (breakpoint) has been hit\n\t1 - For continue\n\tanything else - For goto next step and pause"));
-        	}, 5); // ms delay
+			if (document.getElementById('continue-btn').disabled)
+            	toggleDebugButtons();
+			
 		}
         else if (event.data.includes("Took ")) {
             websocket.close();
@@ -498,6 +496,9 @@ function runScenarioInteractive() {
     };
 
     websocket.onclose = function(event) {
+		toggleRunStopButtons();
+		if (!document.getElementById('continue-btn').disabled)
+		            	toggleDebugButtons();
 		updateDebugScenarioVisuals('');
         appendToConsole('Execution completed\n');  
         //console.log("WebSocket connection closed.");
@@ -524,7 +525,7 @@ function updateDebugScenarioVisuals(linetext) {
 		for (let i = 0; i < children.length; i++) {
 		    const child = children[i];
 			child.style.backgroundColor = ''; // reset child by default
-			if (child.textContent.trim() != '' && linetext.includes(child.textContent)) {
+			if (child.textContent.trim() != '' && linetext.includes(child.textContent.trim())) {
 				child.style.backgroundColor = 'rgba(127, 255, 0, 0.5)';
 			}
 		}

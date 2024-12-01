@@ -1,17 +1,18 @@
 import os
 
-def readFile():
-    scenarioCounter = 0
+
+def readFile(): 
     # Get the directory of the current script
     current_dir = os.path.dirname(os.path.abspath(__file__))
 
     # Construct the path to the sample.bdd file
     bdd_file_path = os.path.abspath(os.path.join(current_dir , os.pardir, os.pardir))
-    bdd_file_path = bdd_file_path + "\sample.bdd"
+    bdd_file_path = bdd_file_path + "\\sample.bdd"
     
     # Construct the path to the tests.feature file
     feature_file_path = os.path.abspath(os.path.join(current_dir , os.pardir))
     feature_file_path = feature_file_path + "\\tests.feature"
+    
     # Check if the file exists
     if not os.path.exists(bdd_file_path):
         print(f"File not found: {bdd_file_path}")
@@ -35,4 +36,4 @@ def readFile():
                     s = '\tScenario: '
                     fileWriter.write(s + '\n')
                 else:
-                    fileWriter.write(line)
+                    fileWriter.write(line + '\n')

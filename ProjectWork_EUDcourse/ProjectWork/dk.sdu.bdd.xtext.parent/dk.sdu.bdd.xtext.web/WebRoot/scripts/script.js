@@ -382,13 +382,13 @@ function saveScenario() {
   })
   .then(response => {
     if (response.ok) {
-      appendToConsole('Scenario saved successfully!\n');
+      appendToConsole('Scenario saved successfully!\n', 'console-output', 'success');
     } else {
-      appendToConsole('Error saving scenario.\n');
+      appendToConsole('Error saving scenario.\n', 'console-output', 'error');
     }
   })
   .catch(error => {
-    appendToConsole('Error: An error occurred while saving the scenario.\n');
+    appendToConsole('Error: An error occurred while saving the scenario.\n', 'console-output', 'error');
   });
 }
 
@@ -406,13 +406,13 @@ function saveEntities() {
   })
   .then(response => {
     if (response.ok) {
-      appendToConsole('Entities saved successfully!\n');
+      appendToConsole('Entities saved successfully!\n', 'console-output', 'success');
     } else {
-      appendToConsole('Error saving entities.\n');
+      appendToConsole('Error saving entities.\n', 'console-output', 'error');
     }
   })
   .catch(error => {
-    appendToConsole('Error: An error occurred while saving the entities.\n');
+    appendToConsole('Error: An error occurred while saving the entities.\n', 'console-output', 'error');
   });
 }
 
@@ -429,13 +429,38 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     // Add initial message
-    appendToConsole('Console ready. Click "Run Scenario" to begin.\n');
+    appendToConsole('Console ready. Click "Run Scenario" to begin.\n', 'console-output', 'info');
+	appendToConsole('Add a "pause" to a scenario to begin debuggin. Then click "Run Scenario". \n', 'debug-output', 'info');
 });
 
-function appendToConsole(message) {
-    const consoleOutput = document.getElementById('console-output');
-    consoleOutput.textContent += message;
-    consoleOutput.scrollTop = consoleOutput.scrollHeight;
+
+function clearDebugConsole(){
+	document.getElementById('debug-output').textContent = '';
+}
+
+function clearOutputConsole(){
+	document.getElementById('console-output').textContent = '';
+}
+
+
+
+function appendToConsole(message, output, type ='info') {
+    const consoleOutput = document.getElementById(output);
+   
+	// Create a new div for the message
+	const messageElement = document.createElement('div');
+
+	// Add appropriate classes for styling
+	messageElement.classList.add('console-message', type);
+	
+	// Set the message text
+	messageElement.textContent = message;
+
+	 // Append the message to the output
+  	consoleOutput.appendChild(messageElement);
+
+	// Auto-scroll to the bottom
+	consoleOutput.scrollTop = consoleOutput.scrollHeight;
 }
 
 function stepOnclick() {
@@ -467,47 +492,81 @@ function toggleRunStopButtons(){
 
 var globalWebsocketPointer;
 
+// Utility function to remove paths from a string
+function removePathFromLine(line) {
+    // Check if the line contains the pattern "# ../"
+    if (line.includes("# ../")) {
+        const beforePath = line.split('#')[0].trim(); // Text before the path
+        const afterPath = line.split('#')[1].split(':').slice(1).join(':').trim(); // Text after the path
+        return `${beforePath} ${afterPath}`.trim(); // Combine and return
+    }
+    return line; // Return unmodified if no path is found
+}
+
+
 function runScenarioInteractive() {
     const websocket = new WebSocket('ws://localhost:8081/run-scenario-interactive'); // Use ws:// for non-secure, wss:// for secure connections
     globalWebsocketPointer = websocket;
-	appendToConsole('Starting scenario execution...\n');
+	appendToConsole('Starting scenario execution...\n', 'console-output', 'info');
 	toggleRunStopButtons();
   
-    websocket.onopen = function(event) {
-        appendToConsole('WebSocket connection opened.\n');
-        console.log("WebSocket connection opened.");
-		
-    };
+	websocket.onmessage = function (event) {
+	    // Initialize the context buffer if not already done
+	    if (!window.contextBuffer) {
+	        window.contextBuffer = ''; // Buffer to accumulate context data
+	    }
 
-    websocket.onmessage = function(event) {
-        appendToConsole(event.data + '\n');
-      
-        if (event.data.includes("../")) {
-			updateDebugScenarioVisuals(event.data);
-		}
-		else if (event.data.includes("pausetag")) {
-			if (document.getElementById('continue-btn').disabled)
-            	toggleDebugButtons();
-			
-		}
-        else if (event.data.includes("Took ")) {
-            websocket.close();
-        }
-    };
+	    // Remove paths from the incoming data
+	    const cleanData = removePathFromLine(event.data);
+		
+	    // Extract stepmode from event.data
+	    const stepmodeMatch = event.data.match(/step_mode=(\d)/);
+	    if (stepmodeMatch) {
+	        stepmode = parseInt(stepmodeMatch[1], 10); // Extract stepmode as an integer
+	    }
+
+	    // Check for end-of-context marker
+	    if (event.data.includes("EOC")) {
+	        // Process the accumulated context data
+	        let fullContext = window.contextBuffer.replace("EOC", "").trim();
+			fullContext = fullContext.replace(/step_mode=\d/, "").trim(); // Remove step_mode and trim whitespace
+	        // Append full context to the appropriate console based on stepmode
+	        if (stepmode === 1 || stepmode === 2) {
+	            appendToConsole(fullContext + '\n', 'debug-output', 'info');
+	        } else if (stepmode === 0) {
+	            appendToConsole(fullContext + '\n', 'console-output', 'info');
+	        }
+
+	        // Clear the context buffer
+	        window.contextBuffer = '';
+	    } else {
+	        // Accumulate data into the buffer if it's part of a context
+	        window.contextBuffer += cleanData + '\n';
+
+	        // Handle other conditions when not accumulating
+	        if (event.data.includes("../")) {
+	            updateDebugScenarioVisuals(event.data);
+	        } else if (event.data.includes("pausetag")) {
+	            if (document.getElementById('continue-btn').disabled)
+	                toggleDebugButtons();
+	        } else if (event.data.includes("Took ")) {
+				appendToConsole(window.contextBuffer + '\n', 'console-output', 'info');
+	            websocket.close();
+	        }
+	    }
+	};
 
     websocket.onclose = function(event) {
 		toggleRunStopButtons();
 		if (!document.getElementById('continue-btn').disabled)
 		            	toggleDebugButtons();
 		updateDebugScenarioVisuals('');
-        appendToConsole('Execution completed\n');  
-        //console.log("WebSocket connection closed.");
+        appendToConsole('Execution completed\n', 'console-output', 'info');  
     };
 
     websocket.onerror = function(error) {
-        appendToConsole('Error: Connection to server lost\n');
+        appendToConsole('Error: Connection to server lost\n', 'console-output', 'error');
         websocket.close();
-        //console.error("WebSocket error:", error);
     };
 }
 
@@ -677,9 +736,9 @@ document.addEventListener('DOMContentLoaded', function() {
                   versionsContainer.appendChild(versionElement);
               });
               
-              appendToConsole("Versions loaded successfully.\n");
+              appendToConsole("Versions loaded successfully.\n",'console-output','success');
           } catch (error) {
-              appendToConsole(`Error loading versions: ${error.message}\n`);
+              appendToConsole(`Error loading versions: ${error.message}\n`,'console-output','error');
           }
       }
 
@@ -738,7 +797,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 	  async function revertToVersion(versionFileName) {
 	      if (!versionFileName) {
-	          appendToConsole("No version selected for revert.\n");
+	          appendToConsole("No version selected for revert.\n", 'console-output', 'info');
 	          return;
 	      }
 
@@ -775,10 +834,10 @@ document.addEventListener('DOMContentLoaded', function() {
 	              
 	              await listVersions();
 	          } else {
-	              appendToConsole(`Failed to revert to version: ${result.message}\n`);
+	              appendToConsole(`Failed to revert to version: ${result.message}\n`, 'console-output', 'error');
 	          }
 	      } catch (error) {
-	          appendToConsole(`Error reverting version: ${error.message}\n`);
+	          appendToConsole(`Error reverting version: ${error.message}\n`, 'console-output', 'error');
 	      }
 	  }
 
@@ -797,7 +856,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 		  // Log the payload to the console
 		  console.log("Payload to /save-both:", JSON.stringify(payload, null, 2));
-		  appendToConsole(`Payload to be sent: ${JSON.stringify(payload, null, 2)}\n`);
+		  appendToConsole(`Payload to be sent: ${JSON.stringify(payload, null, 2)}\n`, 'console-output', 'info');
 
 		  try {
 		      const response = await fetch('/save-both', {
@@ -810,14 +869,14 @@ document.addEventListener('DOMContentLoaded', function() {
 
 		      if (response.ok) {
 		          const result = await response.json();
-		          appendToConsole(`Version saved successfully: ${result.version}\n`);
+		          appendToConsole(`Version saved successfully: ${result.version}\n`, 'console-output', 'success');
 		          await listVersions();
 		      } else {
 		          const error = await response.text();
-		          appendToConsole(`Failed to save version: ${error}\n`);
+		          appendToConsole(`Failed to save version: ${error}\n`, 'console-output', 'error');
 		      }
 		  } catch (error) {
-		      appendToConsole(`Error: ${error.message}\n`);
+		      appendToConsole(`Error: ${error.message}\n`, 'console-output', 'error');
 		  }
 	  }
 	  function getScenarioAceEditor() {

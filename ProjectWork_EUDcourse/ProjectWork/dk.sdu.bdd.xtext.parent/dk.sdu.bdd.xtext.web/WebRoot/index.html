@@ -225,7 +225,27 @@
           <div id="debug-output">
           </div>
         </div>
-      </div>	<script>
+      </div>	
+	  <div class="drag-handle" id="drag-handle"></div>
+	  <div id="console-section">
+	    <div class="output-container">
+	      <div class="console-header">
+	        Program information
+	        <button id="clear-console" class="clear-button" onclick ="clearOutputConsole()">Clear</button>
+	      </div>
+	      <div id="console-output">
+	      </div>
+	    </div>
+	    <div class="output-container">
+	      <div class="console-header">
+	        Debugging information
+	        <button id="clear-debug" class="clear-button" onclick ="clearDebugConsole()">Clear</button>
+	      </div>
+	      <div id="debug-output">
+	      </div>
+	    </div>
+	  </div>
+	<script>
 		(function() {
 		  // Existing Console Resizing
 		  const consoleDragHandle = document.getElementById('drag-handle');
@@ -247,8 +267,8 @@
 		    if (!isConsoleDragging) return;
 		    const dy = e.clientY - consoleStartY;
 		    let newHeight = consoleStartHeight - dy;
-		    const minHeight = 100; // Minimum console height in px
-		    const maxHeight = window.innerHeight - 200; // Maximum console height
+		    const minHeight = 40; // Minimum console height in px
+		    const maxHeight = window.innerHeight ; // Maximum console height
 		    if (newHeight < minHeight) newHeight = minHeight;
 		    if (newHeight > maxHeight) newHeight = maxHeight;
 		    consoleSection.style.height = newHeight + 'px';

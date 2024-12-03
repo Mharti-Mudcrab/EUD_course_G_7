@@ -292,7 +292,7 @@ function loadBlocks(element, skipAddingBlocks) {
 
 			//Debugging toolbox
 			let debugArr = []
-			debugArr.push({ "kind": "block", "type": "DebugStatement" });  // Add debug_pause block here
+			debugArr.push({ "kind": "block", "type": "DebugStatement" });  // Add debug_to begin debuggin block here
 			response.toolBox.contents.push({ "kind": "category", "name": "Debugging", contents: debugArr })
 			
       		originalToolbox = response.toolBox;
@@ -430,7 +430,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Add initial message
     appendToConsole('Console ready. Click "Run Scenario" to begin.\n', 'console-output', 'info');
-	appendToConsole('Add a "pause" to a scenario to begin debuggin. Then click "Run Scenario". \n', 'debug-output', 'info');
+	appendToConsole('Either add a "pause" block to a scenario or write pause at the end of a line to begin debugging. Then click "Run Scenario". \n', 'debug-output', 'info');
 });
 
 

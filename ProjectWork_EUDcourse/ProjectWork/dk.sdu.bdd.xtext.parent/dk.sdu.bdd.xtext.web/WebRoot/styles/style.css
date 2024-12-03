@@ -545,7 +545,7 @@ a:hover {
 }
 
 .debug-controls button:disabled {
-    opacity: 0.6;
+    opacity: 0.1;
     cursor: not-allowed;
 }
 

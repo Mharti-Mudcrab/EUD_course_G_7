@@ -33,26 +33,136 @@
 		.vertical-drag-handle:hover {
 		  background: #ccc;
 		}
+		.top-controls {
+		  display: flex;
+		  justify-content: space-between;
+		  align-items: center;
+		  margin: 0; /* Remove default margins */
+		  padding: 10px;
+		  background-color: #f0f0f0; /* Light gray background */
+		  border-bottom: 1px solid #ccc; /* Optional border at the bottom */
+		}
+
+		.right-controls {
+		  display: flex;
+		  align-items: center;
+		}
+
+		.file-name {
+		  display: flex;
+		  align-items: center;
+		  margin-right: 8px;
+		}
+
+		.file-name label {
+		  margin-right: 4px;
+		  font-size: 14px;
+		}
+
+		.file-name input {
+		  padding: 6px 12px;
+		  font-size: 14px;
+		  border: 1px solid #ccc;
+		  border-radius: 4px;
+		}
 		
+		.top-controls button {
+		  margin-right: 8px;
+		  padding: 8px 16px;
+		  border: none;
+		  border-radius: 4px;
+		  cursor: pointer;
+		  font-size: 14px;
+		  transition: background-color 0.2s ease;
+		  display: flex;
+		  align-items: center;
+		}
+
+		/* Save Version Button - Blue */
+		.button-save {
+		  background-color: blue; /* Bootstrap Primary Blue */
+		  color: white;
+		}
+
+		.debug-controls {
+		  display: flex;
+		  flex-direction: row;
+		  align-items: center;
+		}
+		
+		/* Run Scenario Button - Green */
+		.button-run {
+		  background-color: lightgreen !important;
+		}
+
+
+		/* Stop Button - Red */
+		.button-stop {
+			background-color: #FF9999 !important;
+		}
+
+		.debug-controls {
+		  display: flex;
+		  flex-direction: row;
+		  align-items: center;
+		}
+		
+		.button-run:disabled {
+		  background-color: initial !important;
+		}
+
+		.button-stop:disabled {
+		  background-color: initial !important;
+		}
 
 
     </style>
   </head>
   <body>
     <div class="container">
-      <div class="header">
-        <h1>Editor for BDD Scenarios</h1>
-        <span class="file-name">
-          <label for="fileName">File name</label>
-          <input id="fileName" type="text" maxlength="35"/>
-        </span>
+      <!-- Removed the big title -->
+	  <div class="top-controls">
+	    <div class="debug-controls">
+	      <button id="run-scenario" class="button-run" onclick="runScenarioInteractive()">
+	        <!-- Run Icon -->
+	        <svg class="button-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+	          <path d="M5.5 3.5v9l7-4.5-7-4.5z"/>
+	        </svg>
+	        Run Scenario
+	      </button>
+		  <button id="step-over-btn" onclick="stepOverOnClick()" disabled>
+		    <img src="styles/debug-step-over.svg" alt="Step Over" width="16" height="16">
+		    Step Over
+		  </button>
+		  <button id="continue-btn" onclick="continueOnclick()" disabled>
+		    <!-- Continue Icon -->
+		    <svg class="button-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+		      <path d="M4.5 3.5l5 4.5-5 4.5v-9zM8.5 3.5l5 4.5-5 4.5v-9z"/>
+		    </svg>
+		    Continue
+		  </button>
+	      <button id="stop-btn" class="button-stop" onclick="stopOnclick()" disabled>
+	        <!-- Stop Icon -->
+	        <svg class="button-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+	          <rect width="10" height="10" x="3" y="3" rx="1.5"/>
+	        </svg>
+	        Stop
+	      </button>
+	    </div>
+        <div class="right-controls">
+          <span class="file-name">
+            <label for="fileName">File name</label>
+            <input id="fileName" type="text" maxlength="35"/>
+          </span>
+		  <button id="save-version" class="button-save">
+		    <!-- Save Version Icon -->
+		    <svg class="button-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+		      <path d="M6 2.5v6h4v-6h2a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1v-8a1 1 0 0 1 1-1h2zm1 0v4h2v-4H7zM4 12v-2h8v2H4z"/>
+		    </svg>
+		    Save Version
+		  </button>
+        </div>
       </div>
-	  <div class="debug-controls">
-		  <button id="run-scenario" onclick="runScenarioInteractive()">Run Scenario</button>  
-	      <button id="step-btn" onclick="stepOnclick()"Disabled>Step</button>
-		  <button id="continue-btn" onclick="continueOnclick()"Disabled>Continue</button>
-	      <button id="stop-btn" onclick="stopOnclick()"Disabled>Stop</button>
-	  </div>
       <div class="content">
         <div class="version-control-panel">
           <div class="version-header">
@@ -64,12 +174,7 @@
             </button>
           </div>
           <div class="version-content">
-            <div class="version-actions">
-              <button id="save-version" class="primary-button">
-                <span class="save-icon"></span>
-                Save Version
-              </button>
-            </div>
+            <!-- Removed the Save Version button from here -->
             <div id="versions-list" class="versions-container">
               <!-- Versions will be populated here -->
             </div>
@@ -92,9 +197,8 @@
                 data-editor-xtext-lang="bdd">
               </div>
             </div>
-			<!-- Vertical Drag Handle -->
-			<div class="vertical-drag-handle" id="vertical-drag-handle"></div>
-
+            <!-- Vertical Drag Handle -->
+            <div class="vertical-drag-handle" id="vertical-drag-handle"></div>
             <div class="blockly" id="blockly-editor" style="display:block;"></div>
             <div class="blockly" id="blockly-editor2" style="display:none;"></div>
           </div>
@@ -103,26 +207,25 @@
       <div>
         <input id="file-input" type="file" style="display: none;"/> 
       </div>
-	  <div class="drag-handle" id="drag-handle"></div>
-	  <div id="console-section">
-	    <div class="output-container">
-	      <div class="console-header">
-	        Execution information
-	        <button id="clear-console" class="clear-button" onclick ="clearOutputConsole()">Clear</button>
-	      </div>
-	      <div id="console-output">
-	      </div>
-	    </div>
-	    <div class="output-container">
-	      <div class="console-header">
-	        Debugging information
-	        <button id="clear-debug" class="clear-button" onclick ="clearDebugConsole()">Clear</button>
-	      </div>
-	      <div id="debug-output">
-	      </div>
-	    </div>
-	  </div>
-	<script>
+      <div class="drag-handle" id="drag-handle"></div>
+      <div id="console-section">
+        <div class="output-container">
+          <div class="console-header">
+            Execution information
+            <button id="clear-console" class="clear-button" onclick="clearOutputConsole()">Clear</button>
+          </div>
+          <div id="console-output">
+          </div>
+        </div>
+        <div class="output-container">
+          <div class="console-header">
+            Debugging information
+            <button id="clear-debug" class="clear-button" onclick="clearDebugConsole()">Clear</button>
+          </div>
+          <div id="debug-output">
+          </div>
+        </div>
+      </div>	<script>
 		(function() {
 		  // Existing Console Resizing
 		  const consoleDragHandle = document.getElementById('drag-handle');

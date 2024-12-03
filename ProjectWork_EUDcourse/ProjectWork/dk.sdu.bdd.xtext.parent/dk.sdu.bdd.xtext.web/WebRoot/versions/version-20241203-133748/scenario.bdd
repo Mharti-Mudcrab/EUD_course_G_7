@@ -1,28 +1,24 @@
-Feature: New Test
+model sample using robotic_domain
 
+declarative entity robot {
+	actions: moves
+	properties: position, speed
+}
 
-
-
-
-
+declarative entity gripper {
+	actions: closes, opens
+	states: closed, opened	 
+}
 
 
 Scenario: "Assembling 1"
-
-Given the position of the robot "Assembler" is "default" pause 
-
-When the robot "Assembler" moves to position "point299" 
-
+Given the position of the robot "Assembler" is "default" pause
+When the robot "Assembler" moves to position "point299" pause
 Then the position of the robot "Assembler" is "point2"
-
-
 
 Scenario: "Assembling 2"
-
 Given the position of the robot "Assembler" is "default"  
-
 When the robot "Assembler" moves to position "point299" 
-
 Then the position of the robot "Assembler" is "point2"
 
 
@@ -43,60 +39,18 @@ Then the position of the robot "Assembler" is "point2"
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+              
+              
+              
+              
+              
+              
               
 
               
-
               
-
               
-
               
-
               
-
               
-
-
-
-              
-
-              
-
-              
-
-              
-
-              
-
-              
-
-              
-
-              
-
               

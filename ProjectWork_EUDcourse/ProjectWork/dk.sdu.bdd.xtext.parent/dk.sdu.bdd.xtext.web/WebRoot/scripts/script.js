@@ -505,6 +505,8 @@ function removePathFromLine(line) {
 
 
 function runScenarioInteractive() {
+	saveScenario()
+	saveEntities()
     const websocket = new WebSocket('ws://localhost:8081/run-scenario-interactive'); // Use ws:// for non-secure, wss:// for secure connections
     globalWebsocketPointer = websocket;
 	appendToConsole('Starting scenario execution...\n', 'console-output', 'info');
@@ -530,6 +532,7 @@ function runScenarioInteractive() {
 	        // Process the accumulated context data
 	        let fullContext = window.contextBuffer.replace("EOC", "").trim();
 			fullContext = fullContext.replace(/step_mode=\d/, "").trim(); // Remove step_mode and trim whitespace
+			fullContext = fullContext.replace(/pausetag/, "").trim();
 	        // Append full context to the appropriate console based on stepmode
 	        if (stepmode === 1 || stepmode === 2) {
 	            appendToConsole(fullContext + '\n', 'debug-output', 'info');

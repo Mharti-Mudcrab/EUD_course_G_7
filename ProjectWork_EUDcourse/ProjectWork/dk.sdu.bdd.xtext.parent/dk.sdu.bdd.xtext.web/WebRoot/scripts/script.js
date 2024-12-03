@@ -561,6 +561,7 @@ function runScenarioInteractive() {
 		if (!document.getElementById('continue-btn').disabled)
 		            	toggleDebugButtons();
 		updateDebugScenarioVisuals('');
+		latestLinenumber = -1;
         appendToConsole('Execution completed\n', 'console-output', 'info');  
     };
 
@@ -574,6 +575,7 @@ function runScenarioInteractive() {
 const textLayer = document.querySelector('.ace_layer.ace_text-layer');
 
 // comment
+var latestLinenumber = -1;
 
 function updateDebugScenarioVisuals(linetext) {
 	const textLayer = document.querySelector('.ace_layer.ace_text-layer');
@@ -584,8 +586,9 @@ function updateDebugScenarioVisuals(linetext) {
 		for (let i = 0; i < children.length; i++) {
 		    const child = children[i];
 			child.style.backgroundColor = ''; // reset child by default
-			if (child.textContent.trim() != '' && linetext.includes(child.textContent.trim())) {
+			if (child.textContent.trim() != '' && linetext.includes(child.textContent.trim()) && i > latestLinenumber) {
 				child.style.backgroundColor = 'rgba(127, 255, 0, 0.5)';
+				latestLinenumber = i; 
 			}
 		}
 	}
@@ -599,33 +602,33 @@ document.addEventListener('DOMContentLoaded', function() {
 	  function toggleVersionPanel() {
 	    const panel = document.querySelector('.version-control-panel');
 	    panel.classList.toggle('collapsed');
-
+	
 	  }
-
-      function initializeVersionControl() {
-          document.getElementById('save-version').addEventListener('click', saveVersion);
-          listVersions();
-      }
-
-      async function listVersions() {
-          try {
-              const response = await fetch('/list-versions');
-              const versions = await response.json();
-              
-              const versionsContainer = document.getElementById('versions-list');
-              versionsContainer.innerHTML = '';
-              
-              versions.forEach(version => {
-                  const versionElement = createVersionElement(version);
-                  versionsContainer.appendChild(versionElement);
-              });
-              
-              appendToConsole("Versions loaded successfully.\n",'console-output','success');
-          } catch (error) {
-              appendToConsole(`Error loading versions: ${error.message}\n`,'console-output','error');
-          }
-      }
-
+	
+	  function initializeVersionControl() {
+	      document.getElementById('save-version').addEventListener('click', saveVersion);
+	      listVersions();
+	  }
+	
+	  async function listVersions() {
+	      try {
+	          const response = await fetch('/list-versions');
+	          const versions = await response.json();
+	          
+	          const versionsContainer = document.getElementById('versions-list');
+	          versionsContainer.innerHTML = '';
+	          
+	          versions.forEach(version => {
+	              const versionElement = createVersionElement(version);
+	              versionsContainer.appendChild(versionElement);
+	          });
+	          
+	          appendToConsole("Versions loaded successfully.\n",'console-output','success');
+	      } catch (error) {
+	          appendToConsole(`Error loading versions: ${error.message}\n`,'console-output','error');
+	      }
+	  }
+	
 	  function createVersionElement(version) {
 	      let dateString = version.metadata?.createdAt;
 	      if (!dateString) {
@@ -644,14 +647,14 @@ document.addEventListener('DOMContentLoaded', function() {
 	          }
 	      }
 	      const date = new Date(dateString); // Create date object once
-
+	
 	      const fileName = version.metadata?.fileName || 'Unnamed';
 	      const folderName = version.folderName || 'Unversioned';
-
+	
 	      const versionDiv = document.createElement('div');
 	      versionDiv.className = 'version-item';
 	      versionDiv.dataset.version = version.folderName;
-
+	
 	      versionDiv.innerHTML = `
 	          <div class="version-item-header">
 	              <div class="version-info">
@@ -685,13 +688,13 @@ document.addEventListener('DOMContentLoaded', function() {
 	      `;          
 	      return versionDiv;
 	  }
-
+	
 	  async function revertToVersion(versionFileName) {
 	      if (!versionFileName) {
 	          appendToConsole("No version selected for revert.\n", 'console-output', 'info');
 	          return;
 	      }
-
+	
 	      try {
 	          const response = await fetch('/revert-version', {
 	              method: 'POST',
@@ -700,9 +703,9 @@ document.addEventListener('DOMContentLoaded', function() {
 	              },
 	              body: JSON.stringify({ versionFileName })
 	          });
-
+	
 	          const result = await response.json();
-
+	
 	          if (response.ok) {
 	              appendToConsole(`Reverted to version: ${versionFileName}\n`);
 	              
@@ -710,7 +713,7 @@ document.addEventListener('DOMContentLoaded', function() {
 	                  const editorScenario = getScenarioAceEditor();
 	                  editorScenario.setValue(result.contentScenario);
 	                  editorScenario.clearSelection();
-
+	
 	                  const editorEntities = getEntitiesAceEditor();
 	                  editorEntities.setValue(result.contentEntities);
 	                  editorEntities.clearSelection();
@@ -721,8 +724,8 @@ document.addEventListener('DOMContentLoaded', function() {
 				  } else {
 				      document.getElementById('fileName').value = 'Unnamed Scenario';
 				  }
-
-
+	
+	
 	              document.querySelectorAll('.version-item').forEach(item => {
 	                  item.classList.remove('selected');
 	                  if (item.dataset.version === versionFileName) {
@@ -744,11 +747,11 @@ document.addEventListener('DOMContentLoaded', function() {
 	          appendToConsole("No version selected for deletion.\n");
 	          return;
 	      }
-
+	
 	      if (!confirm(`Are you sure you want to delete version: ${versionFolderName}?`)) {
 	          return;
 	      }
-
+	
 	      try {
 	          const response = await fetch('/delete-version', {
 	              method: 'POST',
@@ -757,9 +760,9 @@ document.addEventListener('DOMContentLoaded', function() {
 	              },
 	              body: JSON.stringify({ versionFolderName })
 	          });
-
+	
 	          const result = await response.json();
-
+	
 	          if (response.ok) {
 	              appendToConsole(`Deleted version: ${versionFolderName}\n`);
 	              await listVersions();
@@ -770,8 +773,8 @@ document.addEventListener('DOMContentLoaded', function() {
 	          appendToConsole(`Error deleting version: ${error.message}\n`);
 	      }
 	  }
-
-
+	
+	
 	  async function saveVersion() {
 	      const editorScenario = getScenarioAceEditor(); // Function to get scenario editor
 	      const contentScenario = editorScenario.getValue();
@@ -784,11 +787,11 @@ document.addEventListener('DOMContentLoaded', function() {
 	          timestamp: new Date().toISOString()
 	      };
 		  const payload = { contentScenario, contentEntities, metadata }; // Prepare payload
-
+	
 		  // Log the payload to the console
 		  console.log("Payload to /save-both:", JSON.stringify(payload, null, 2));
 		  appendToConsole(`Payload to be sent: ${JSON.stringify(payload, null, 2)}\n`, 'console-output', 'info');
-
+	
 		  try {
 		      const response = await fetch('/save-both', {
 		          method: 'POST',
@@ -797,7 +800,7 @@ document.addEventListener('DOMContentLoaded', function() {
 		          },
 		          body: JSON.stringify(payload)
 		      });
-
+	
 		      if (response.ok) {
 		          const result = await response.json();
 		          appendToConsole(`Version saved successfully: ${result.version}\n`, 'console-output', 'success');
@@ -813,8 +816,7 @@ document.addEventListener('DOMContentLoaded', function() {
 	  function getScenarioAceEditor() {
 		return ace.edit("xtext-editor-scenarios");
 	  }
-
+	
 	  function getEntitiesAceEditor() {
 		return ace.edit("xtext-editor-entities"); 
 	  }
-

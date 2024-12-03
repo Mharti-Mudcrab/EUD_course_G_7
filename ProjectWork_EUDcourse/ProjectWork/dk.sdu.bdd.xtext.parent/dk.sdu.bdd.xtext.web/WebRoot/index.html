@@ -107,7 +107,7 @@
 	  <div id="console-section">
 	    <div class="output-container">
 	      <div class="console-header">
-	        Execution information
+	        Program information
 	        <button id="clear-console" class="clear-button" onclick ="clearOutputConsole()">Clear</button>
 	      </div>
 	      <div id="console-output">
@@ -144,8 +144,8 @@
 		    if (!isConsoleDragging) return;
 		    const dy = e.clientY - consoleStartY;
 		    let newHeight = consoleStartHeight - dy;
-		    const minHeight = 100; // Minimum console height in px
-		    const maxHeight = window.innerHeight - 200; // Maximum console height
+		    const minHeight = 40; // Minimum console height in px
+		    const maxHeight = window.innerHeight ; // Maximum console height
 		    if (newHeight < minHeight) newHeight = minHeight;
 		    if (newHeight > maxHeight) newHeight = maxHeight;
 		    consoleSection.style.height = newHeight + 'px';

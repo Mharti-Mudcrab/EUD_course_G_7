@@ -444,7 +444,7 @@ function clearOutputConsole(){
 
 
 
-function appendToConsole(message, output, type ='info') {
+function appendToConsole(message, output='console-output', type ='info') {
     const consoleOutput = document.getElementById(output);
    
 	// Create a new div for the message

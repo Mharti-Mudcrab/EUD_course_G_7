@@ -24,3 +24,4 @@ Then the position of the robot "Assembler" is "point2"
 
 
               
+

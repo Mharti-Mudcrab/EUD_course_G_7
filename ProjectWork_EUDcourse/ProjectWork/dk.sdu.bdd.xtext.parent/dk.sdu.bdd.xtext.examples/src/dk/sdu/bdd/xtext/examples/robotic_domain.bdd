@@ -7,3 +7,4 @@ imperative entity robot {
 imperative entity gripper { 
     states: closed , opened 
 }  
+

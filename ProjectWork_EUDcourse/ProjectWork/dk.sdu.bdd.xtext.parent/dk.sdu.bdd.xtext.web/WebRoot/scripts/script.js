@@ -589,6 +589,7 @@ function updateDebugScenarioVisuals(linetext) {
 			if (child.textContent.trim() != '' && linetext.includes(child.textContent.trim()) && i > latestLinenumber) {
 				child.style.backgroundColor = 'rgba(127, 255, 0, 0.5)';
 				latestLinenumber = i; 
+				break;
 			}
 		}
 	}

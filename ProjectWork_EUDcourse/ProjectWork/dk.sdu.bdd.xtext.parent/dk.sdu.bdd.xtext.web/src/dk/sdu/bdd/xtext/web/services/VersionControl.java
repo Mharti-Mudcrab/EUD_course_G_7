@@ -76,15 +76,6 @@ class VersionControl {
         }
     }
 
-    private void deleteDirectory(File dir) throws IOException {
-        if (dir.isDirectory()) {
-            for (File file : dir.listFiles()) {
-                deleteDirectory(file);
-            }
-        }
-        dir.delete();
-    }
-
     public List<JSONObject> listVersions() throws IOException {
         List<JSONObject> versions = new ArrayList<>();
         File versionDir = new File(rootPath, VERSION_DIR);
@@ -118,13 +109,13 @@ class VersionControl {
         return versions;
     }
 
-    public Map<String, String> loadVersion(String versionFolderName) throws IOException {
+    public Map<String, Object> loadVersion(String versionFolderName) throws IOException {
         File versionFolder = new File(new File(rootPath, VERSION_DIR), versionFolderName);
         if (!versionFolder.exists()) {
             throw new FileNotFoundException("Version not found: " + versionFolderName);
         }
 
-        Map<String, String> contents = new HashMap<>();
+        Map<String, Object> contents = new HashMap<>();
 
         // Load scenario content
         File scenarioFile = new File(versionFolder, "scenario.bdd");
@@ -152,24 +143,66 @@ class VersionControl {
             contents.put("contentEntities", content.toString());
         }
 
+        // Load metadata
+        File metadataFile = new File(versionFolder, "metadata.json");
+        if (metadataFile.exists()) {
+            StringBuilder metadataContent = new StringBuilder();
+            try (BufferedReader reader = new BufferedReader(new FileReader(metadataFile))) {
+                String line;
+                while ((line = reader.readLine()) != null) {
+                    metadataContent.append(line);
+                }
+            }
+            JSONObject metadata = new JSONObject(metadataContent.toString());
+            contents.put("metadata", metadata);
+        }
+
         return contents;
     }
 
     public void revertToVersion(String versionFolderName, String targetScenarioFilePath, String targetEntitiesFilePath) throws IOException {
-        Map<String, String> versionContents = loadVersion(versionFolderName);
+        Map<String, Object> versionContents = loadVersion(versionFolderName);
 
-        // Write the scenario content to the target file
         if (versionContents.containsKey("contentScenario")) {
+            String contentScenario = (String) versionContents.get("contentScenario");
             try (FileWriter writer = new FileWriter(new File(targetScenarioFilePath))) {
-                writer.write(versionContents.get("contentScenario"));
+                writer.write(contentScenario);
             }
         }
 
         // Write the entities content to the target file
         if (versionContents.containsKey("contentEntities")) {
+            String contentEntities = (String) versionContents.get("contentEntities");
             try (FileWriter writer = new FileWriter(new File(targetEntitiesFilePath))) {
-                writer.write(versionContents.get("contentEntities"));
+                writer.write(contentEntities);
             }
         }
     }
+    
+    public void deleteVersion(String versionFolderName) throws IOException {
+        File versionDir = new File(rootPath, VERSION_DIR);
+        File versionFolder = new File(versionDir, versionFolderName);
+
+        if (!versionFolder.exists() || !versionFolder.isDirectory()) {
+            throw new FileNotFoundException("Version not found: " + versionFolderName);
+        }
+
+        // Delete the version folder and its contents
+        deleteDirectory(versionFolder);
+    }
+
+    private void deleteDirectory(File dir) throws IOException {
+        if (dir.isDirectory()) {
+            File[] files = dir.listFiles();
+            if (files != null) { // Check if not null
+                for (File file : files) {
+                    deleteDirectory(file);
+                }
+            }
+        }
+        if (!dir.delete()) {
+            throw new IOException("Failed to delete: " + dir.getAbsolutePath());
+        }
+    }
+
 }

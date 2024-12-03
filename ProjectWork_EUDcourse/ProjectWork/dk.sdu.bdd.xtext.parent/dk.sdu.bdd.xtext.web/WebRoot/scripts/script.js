@@ -592,122 +592,6 @@ function updateDebugScenarioVisuals(linetext) {
 }
 
 document.addEventListener('DOMContentLoaded', function() {
-		(function() {
-		  // Existing Console Resizing
-		  const consoleDragHandle = document.getElementById('drag-handle');
-		  const consoleSection = document.getElementById('console-section');
-
-		  let isConsoleDragging = false;
-		  let consoleStartY = 0;
-		  let consoleStartHeight = 0;
-
-		  consoleDragHandle.addEventListener('mousedown', function(e) {
-		    isConsoleDragging = true;
-		    consoleStartY = e.clientY;
-		    consoleStartHeight = consoleSection.getBoundingClientRect().height;
-		    document.body.style.cursor = 'ns-resize';
-		    document.body.style.userSelect = 'none';
-		  });
-
-		  document.addEventListener('mousemove', function(e) {
-		    if (!isConsoleDragging) return;
-		    const dy = e.clientY - consoleStartY;
-		    let newHeight = consoleStartHeight - dy;
-		    const minHeight = 100; // Minimum console height in px
-		    const maxHeight = window.innerHeight - 200; // Maximum console height
-		    if (newHeight < minHeight) newHeight = minHeight;
-		    if (newHeight > maxHeight) newHeight = maxHeight;
-		    consoleSection.style.height = newHeight + 'px';
-		  });
-
-		  document.addEventListener('mouseup', function(e) {
-		    if (isConsoleDragging) {
-		      isConsoleDragging = false;
-		      document.body.style.cursor = 'default';
-		      document.body.style.userSelect = 'auto';
-		    }
-		  });
-
-		  const verticalDragHandle = document.getElementById('vertical-drag-handle');
-		  const xtextWrapper = document.querySelector('.xtext-wrapper');
-		  const blocklyEditor = document.getElementById('blockly-editor');
-
-		  let isVerticalDragging = false;
-		  let verticalStartX = 0;
-		  let xtextStartWidth = 0;
-		  let blocklyStartWidth = 0;
-
-		  verticalDragHandle.addEventListener('mousedown', function(e) {
-		    isVerticalDragging = true;
-		    verticalStartX = e.clientX;
-		    xtextStartWidth = xtextWrapper.getBoundingClientRect().width;
-		    blocklyStartWidth = blocklyEditor.getBoundingClientRect().width;
-		    document.body.style.cursor = 'ew-resize';
-		    document.body.style.userSelect = 'none';
-		  });
-
-		  document.addEventListener('mousemove', function(e) {
-		    if (!isVerticalDragging) return;
-		    const dx = e.clientX - verticalStartX;
-		    let newXtextWidth = xtextStartWidth + dx;
-		    let newBlocklyWidth = blocklyStartWidth - dx;
-
-		    const minWidth = 150; // Minimum width for editors
-
-		    // Ensure minimum widths
-		    if (newXtextWidth < minWidth) {
-		      newXtextWidth = minWidth;
-		      newBlocklyWidth = xtextStartWidth + blocklyStartWidth - minWidth;
-		    }
-		    if (newBlocklyWidth < minWidth) {
-		      newBlocklyWidth = minWidth;
-		      newXtextWidth = xtextStartWidth + blocklyStartWidth - minWidth;
-		    }
-
-		    // Use flex-basis instead of width
-		    xtextWrapper.style.flexBasis = `${newXtextWidth}px`;
-		    blocklyEditor.style.flexBasis = `${newBlocklyWidth}px`;
-
-		    Blockly.svgResize(Blockly.getMainWorkspace());
-		  });
-
-		  document.addEventListener('mouseup', function(e) {
-		    if (isVerticalDragging) {
-		      isVerticalDragging = false;
-		      document.body.style.cursor = 'default';
-		      document.body.style.userSelect = 'auto';
-		    }
-		  });
-
-		  document.addEventListener('mouseup', function(e) {
-		    if (isVerticalDragging) {
-		      isVerticalDragging = false;
-		      document.body.style.cursor = 'default';
-		      document.body.style.userSelect = 'auto';
-		    }
-		  });
-
-		  // Optional: Adjust editor widths on window resize to maintain layout
-		  window.addEventListener('resize', function() {
-		    const totalWidth = xtextWrapper.getBoundingClientRect().width + blocklyEditor.getBoundingClientRect().width + verticalDragHandle.getBoundingClientRect().width;
-		    const containerWidth = document.querySelector('.editors-section').getBoundingClientRect().width;
-
-		    if (totalWidth > containerWidth) {
-		      // Adjust widths proportionally
-		      const excessWidth = totalWidth - containerWidth;
-		      let newXtextWidth = xtextWrapper.getBoundingClientRect().width - (excessWidth / 2);
-		      let newBlocklyWidth = blocklyEditor.getBoundingClientRect().width - (excessWidth / 2);
-
-		      const minWidth = 150;
-		      if (newXtextWidth < minWidth) newXtextWidth = minWidth;
-		      if (newBlocklyWidth < minWidth) newBlocklyWidth = minWidth;
-
-		      xtextWrapper.style.width = newXtextWidth + 'px';
-		      blocklyEditor.style.width = newBlocklyWidth + 'px';
-		    }
-		  });
-		})();
-
           initializeVersionControl();
       });
 
@@ -742,58 +626,65 @@ document.addEventListener('DOMContentLoaded', function() {
           }
       }
 
-      function createVersionElement(version) {
-		let dateString = version.metadata?.createdAt;
-		if (!dateString) {
-		    dateString = version.metadata?.timestamp;
-		    if(dateString){
-		        // Parse the custom timestamp string into a Date object
-		        const year = parseInt(dateString.substring(0, 4));
-		        const month = parseInt(dateString.substring(4, 6)) - 1; // Month is 0-indexed
-		        const day = parseInt(dateString.substring(6, 8));
-		        const hour = parseInt(dateString.substring(9, 11));
-		        const minute = parseInt(dateString.substring(11, 13));
-		        const second = parseInt(dateString.substring(13, 15));
-		        dateString = new Date(year, month, day, hour, minute, second).toISOString();
-		    } else {
-		        dateString = version.lastModified;  // Fallback if both custom and createdAt are missing
-		    }
-		}
-		const date = new Date(dateString); // Create date object once
+	  function createVersionElement(version) {
+	      let dateString = version.metadata?.createdAt;
+	      if (!dateString) {
+	          dateString = version.metadata?.timestamp;
+	          if (dateString) {
+	              // Parse the custom timestamp string into a Date object
+	              const year = parseInt(dateString.substring(0, 4));
+	              const month = parseInt(dateString.substring(4, 6)) - 1; // Month is 0-indexed
+	              const day = parseInt(dateString.substring(6, 8));
+	              const hour = parseInt(dateString.substring(9, 11));
+	              const minute = parseInt(dateString.substring(11, 13));
+	              const second = parseInt(dateString.substring(13, 15));
+	              dateString = new Date(year, month, day, hour, minute, second).toISOString();
+	          } else {
+	              dateString = version.lastModified; // Fallback if both custom and createdAt are missing
+	          }
+	      }
+	      const date = new Date(dateString); // Create date object once
 
-		const fileName = version.metadata?.fileName || 'Unnamed';
-		const folderName = version.folderName || 'Unversioned';
+	      const fileName = version.metadata?.fileName || 'Unnamed';
+	      const folderName = version.folderName || 'Unversioned';
 
-          const versionDiv = document.createElement('div');
-          versionDiv.className = 'version-item';
-          versionDiv.dataset.version = version.folderName;
-          
-          versionDiv.innerHTML = `
-              <div class="version-item-header">
-                  <div class="version-info">
-                      <div class="version-name">${fileName}</div>
-                      <div class="version-timestamp">
-                          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                              <circle cx="12" cy="12" r="10"/>
-                              <path d="M12 6v6l4 2"/>
-                          </svg>
-                          ${date.toLocaleString()}
-                      </div>
-                  </div>
-                  <div class="version-actions">
-                      <button onclick="revertToVersion('${version.folderName}')">
-                          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                              <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/>
-                              <path d="M3 3v5h5"/>
-                          </svg>
-                          Revert
-                      </button>
-                  </div>
-              </div>
-          `;
-          
-          return versionDiv;
-      }
+	      const versionDiv = document.createElement('div');
+	      versionDiv.className = 'version-item';
+	      versionDiv.dataset.version = version.folderName;
+
+	      versionDiv.innerHTML = `
+	          <div class="version-item-header">
+	              <div class="version-info">
+	                  <div class="version-name">${fileName}</div>
+	                  <div class="version-timestamp">
+	                      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+	                          <circle cx="12" cy="12" r="10"/>
+	                          <path d="M12 6v6l4 2"/>
+	                      </svg>
+	                      ${date.toLocaleString()}
+	                  </div>
+	              </div>
+	              <div class="version-actions">
+	                  <button class="action-button revert-button" onclick="revertToVersion('${version.folderName}')">
+	                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+	                          <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/>
+	                          <path d="M3 3v5h5"/>
+	                      </svg>
+	                      Revert
+	                  </button>
+	                  <button class="action-button delete-button" onclick="deleteVersion('${version.folderName}')">
+	                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+	                          <path d="M3 6h18"/>
+	                          <path d="M6 6v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V6"/>
+	                          <path d="M9 6V4a3 3 0 0 1 6 0v2"/>
+	                      </svg>
+	                      Delete
+	                  </button>
+	              </div>
+	          </div>
+	      `;          
+	      return versionDiv;
+	  }
 
 	  async function revertToVersion(versionFileName) {
 	      if (!versionFileName) {
@@ -824,7 +715,14 @@ document.addEventListener('DOMContentLoaded', function() {
 	                  editorEntities.setValue(result.contentEntities);
 	                  editorEntities.clearSelection();
 	              }
-	              
+				  // Update the file name input field with the fileName from metadata
+				  if (result.metadata && result.metadata.fileName) {
+				      document.getElementById('fileName').value = result.metadata.fileName;
+				  } else {
+				      document.getElementById('fileName').value = 'Unnamed Scenario';
+				  }
+
+
 	              document.querySelectorAll('.version-item').forEach(item => {
 	                  item.classList.remove('selected');
 	                  if (item.dataset.version === versionFileName) {
@@ -840,6 +738,39 @@ document.addEventListener('DOMContentLoaded', function() {
 	          appendToConsole(`Error reverting version: ${error.message}\n`, 'console-output', 'error');
 	      }
 	  }
+	  
+	  async function deleteVersion(versionFolderName) {
+	      if (!versionFolderName) {
+	          appendToConsole("No version selected for deletion.\n");
+	          return;
+	      }
+
+	      if (!confirm(`Are you sure you want to delete version: ${versionFolderName}?`)) {
+	          return;
+	      }
+
+	      try {
+	          const response = await fetch('/delete-version', {
+	              method: 'POST',
+	              headers: {
+	                  'Content-Type': 'application/json'
+	              },
+	              body: JSON.stringify({ versionFolderName })
+	          });
+
+	          const result = await response.json();
+
+	          if (response.ok) {
+	              appendToConsole(`Deleted version: ${versionFolderName}\n`);
+	              await listVersions();
+	          } else {
+	              appendToConsole(`Failed to delete version: ${result.message}\n`);
+	          }
+	      } catch (error) {
+	          appendToConsole(`Error deleting version: ${error.message}\n`);
+	      }
+	  }
+
 
 	  async function saveVersion() {
 	      const editorScenario = getScenarioAceEditor(); // Function to get scenario editor

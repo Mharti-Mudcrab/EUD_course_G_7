@@ -15,6 +15,8 @@ import math
 current_dir = os.path.dirname(os.path.abspath(__file__))
 json_file_path = os.path.join(current_dir, 'Environment.json')
 
+# Global step_mode variable
+global_step_mode = 0
 
 # Check if the file exists
 if not os.path.exists(json_file_path):
@@ -53,11 +55,14 @@ def before_feature(context, feature):
 def after_feature(context, feature):
     pass
 
-def before_scenario(context, scenario): 
-    pass
+# Functions for carry over step mode from scenario to scenario
+def before_scenario(context, scenario):
+    global global_step_mode
+    context.step_mode = global_step_mode
 
 def after_scenario(context, scenario):
-    pass
+    global global_step_mode
+    global_step_mode = context.step_mode
 
 def before_step(context, step):
     pass

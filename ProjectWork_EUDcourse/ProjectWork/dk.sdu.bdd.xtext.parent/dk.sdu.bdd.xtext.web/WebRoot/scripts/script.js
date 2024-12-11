@@ -469,25 +469,25 @@ function stepOnclick() {
 
 function continueOnclick() {
 	globalWebsocketPointer.send('');
-	toggleDebugButtons();
+	disableDebugButtons();
 }
 
-function stopOnclick() {
+function abortOnclick() {
 	globalWebsocketPointer.close();
 }
 
-function toggleDebugButtons(){
+function disableDebugButtons(){
 	const cont = document.getElementById('continue-btn');
 	const step = document.getElementById('step-btn');
-	cont.disabled = !cont.disabled;
-	step.disabled = !step.disabled;
+	cont.disabled = true;
+	step.disabled = true;
 }
 
-function toggleRunStopButtons(){
+function toggleRunAbortButtons(){
 	const runScenario = document.getElementById('run-scenario');
-	const stop = document.getElementById('stop-btn');
+	const abort = document.getElementById('abort-btn');
 	runScenario.disabled 	= !runScenario.disabled;
-	stop.disabled 			= !stop.disabled;
+	abort.disabled 			= !abort.disabled;
 }
 
 var globalWebsocketPointer;
@@ -510,7 +510,7 @@ function runScenarioInteractive() {
     const websocket = new WebSocket('ws://localhost:8081/run-scenario-interactive'); // Use ws:// for non-secure, wss:// for secure connections
     globalWebsocketPointer = websocket;
 	appendToConsole('Starting scenario execution...\n', 'console-output', 'info');
-	toggleRunStopButtons();
+	toggleRunAbortButtons();
   
 	websocket.onmessage = function (event) {
 	    // Initialize the context buffer if not already done
@@ -551,7 +551,9 @@ function runScenarioInteractive() {
 	            updateDebugScenarioVisuals(event.data);
 	        } else if (event.data.includes("pausetag")) {
 	            if (document.getElementById('continue-btn').disabled)
-	                toggleDebugButtons();
+	                document.getElementById('continue-btn').disabled = false;
+				document.getElementById('step-btn').disabled = latestLinenumber == lastNotEmptyLineNr;
+					
 	        } else if (event.data.includes("Took ")) {
 				appendToConsole(window.contextBuffer + '\n', 'console-output', 'info');
 	            websocket.close();
@@ -560,9 +562,9 @@ function runScenarioInteractive() {
 	};
 
     websocket.onclose = function(event) {
-		toggleRunStopButtons();
+		toggleRunAbortButtons();
 		if (!document.getElementById('continue-btn').disabled)
-		            	toggleDebugButtons();
+			disableDebugButtons();
 		updateDebugScenarioVisuals('');
 		latestLinenumber = -1;
         appendToConsole('Execution completed\n', 'console-output', 'info');  
@@ -574,17 +576,20 @@ function runScenarioInteractive() {
     };
 }
 
-// Find the target element
-const textLayer = document.querySelector('.ace_layer.ace_text-layer');
-
-// comment
+// global vars to keep track of execution for visuals
 var latestLinenumber = -1;
+var lastNotEmptyLineNr = 0;
 
 function updateDebugScenarioVisuals(linetext) {
 	const textLayer = document.querySelector('.ace_layer.ace_text-layer');
 	if (textLayer) {
-		// Get all child elements of the text layer
 		const children = textLayer.children;
+		for (let i = 0; i < children.length; i++) {
+			if (children[i].textContent.trim() != '') {
+				lastNotEmptyLineNr = i;
+			}
+		} 
+		
 		
 		for (let i = 0; i < children.length; i++) {
 		    const child = children[i];

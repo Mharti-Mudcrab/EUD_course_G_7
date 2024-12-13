@@ -429,8 +429,8 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     // Add initial message
-    appendToConsole('Console ready. Click "Run Scenario" to begin.\n', 'console-output', 'info');
-	appendToConsole('Either add a "pause" block to a scenario or write pause at the end of a line to begin debugging. Then click "Run Scenario". \n', 'debug-output', 'info');
+    appendToConsole('Console ready. Click <span style="background-color: lightgreen; border-radius: 3px; padding: 2px; padding-right: 5px;">&#9205Run Scenario</span> to run the program.\n', 'console-output', 'info');
+	appendToConsole('Either add a <img style="margin-bottom: -11px; width: 67px;" src="pause_block.png"> to a scenario in the block editor or write <span style="font-weight: bold; color: rgb(127, 0, 85);">pause</span> at the end of a step in the text editor. Then click <span style="background-color: lightgreen; border-radius: 3px; padding: 2px; padding-right: 5px;">&#9205Run Scenario</span> to begin debugging the program. \n', 'debug-output', 'info');
 });
 
 
@@ -454,7 +454,7 @@ function appendToConsole(message, output='console-output', type ='info') {
 	messageElement.classList.add('console-message', type);
 	
 	// Set the message text
-	messageElement.textContent = message;
+	messageElement.innerHTML = message;
 
 	 // Append the message to the output
   	consoleOutput.appendChild(messageElement);

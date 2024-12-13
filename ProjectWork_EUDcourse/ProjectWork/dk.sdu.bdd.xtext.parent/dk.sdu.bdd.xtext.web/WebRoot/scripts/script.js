@@ -429,8 +429,8 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     // Add initial message
-    appendToConsole('Console ready. Click <span style="background-color: lightgreen; border-radius: 3px; padding: 2px; padding-right: 5px;">&#9205Run Scenario</span> to run the program.\n', 'console-output', 'info');
-	appendToConsole('Either add a <img style="margin-bottom: -11px; width: 67px;" src="pause_block.png"> to a scenario in the block editor or write <span style="font-weight: bold; color: rgb(127, 0, 85);">pause</span> at the end of a step in the text editor. Then click <span style="background-color: lightgreen; border-radius: 3px; padding: 2px; padding-right: 5px;">&#9205Run Scenario</span> to begin debugging the program. \n', 'debug-output', 'info');
+    appendToConsole('Console ready. Click <span style="background-color: lightgreen; border-radius: 3px; padding: 2px; padding-right: 5px; padding-left: 5px;">▶Run Scenario</span> to run the program.\n', 'console-output', 'info');
+	appendToConsole('Either add a <img style="margin-bottom: -11px; width: 67px;" src="pause_block.png"> to a scenario in the block editor or write <span style="font-weight: bold; color: rgb(127, 0, 85);">pause</span> at the end of a step in the text editor. Then click <span style="background-color: lightgreen; border-radius: 3px; padding: 2px; padding-right: 5px; padding-left: 5px;">▶Run Scenario</span> to begin debugging the program. \n', 'debug-output', 'info');
 });
 
 

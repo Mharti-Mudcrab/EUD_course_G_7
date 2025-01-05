@@ -158,6 +158,7 @@ public class Block  {
 		switch (type)
 		{
 			case "Model":
+			case "DebugStatement":
 			case "ModelRef":
 				return "Model";
 			case "DeclarativeEntityDef":		

@@ -18,10 +18,13 @@ public class ScenarioRunServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
         try {
+        	response.setContentType("text/event-stream");
+        	response.setCharacterEncoding("UTF-8");
+        	
             // Get the root path of the web application
             String rootPath = getServletContext().getRealPath("/");
 
@@ -42,14 +45,16 @@ public class ScenarioRunServlet extends HttpServlet {
 
             // Start the process
             Process process = processBuilder.start();
-
+            
             // Capture and log the output
             StringBuilder output = new StringBuilder();
             try (BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()))) {
                 String line;
                 while ((line = reader.readLine()) != null) {
                     output.append(line).append("\n");
-                    System.out.println(line); // Log to Eclipse console
+                    response.getWriter().write("data: " + line + "\n\n"+"");
+                    response.getWriter().flush();
+                    System.out.println(line); // Log to Eclipse console´
                 }
             }
 

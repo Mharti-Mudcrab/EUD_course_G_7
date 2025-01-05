@@ -17,6 +17,7 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link dk.sdu.bdd.xtext.bddDsl.DeclarativeEntityStatePhraseWithProperty#getEntity <em>Entity</em>}</li>
  *   <li>{@link dk.sdu.bdd.xtext.bddDsl.DeclarativeEntityStatePhraseWithProperty#getState <em>State</em>}</li>
  *   <li>{@link dk.sdu.bdd.xtext.bddDsl.DeclarativeEntityStatePhraseWithProperty#getProperty <em>Property</em>}</li>
+ *   <li>{@link dk.sdu.bdd.xtext.bddDsl.DeclarativeEntityStatePhraseWithProperty#getDebug <em>Debug</em>}</li>
  * </ul>
  *
  * @see dk.sdu.bdd.xtext.bddDsl.BddDslPackage#getDeclarativeEntityStatePhraseWithProperty()
@@ -90,5 +91,27 @@ public interface DeclarativeEntityStatePhraseWithProperty extends EObject
    * @generated
    */
   void setProperty(PropertyRef value);
+
+  /**
+   * Returns the value of the '<em><b>Debug</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Debug</em>' attribute.
+   * @see #setDebug(String)
+   * @see dk.sdu.bdd.xtext.bddDsl.BddDslPackage#getDeclarativeEntityStatePhraseWithProperty_Debug()
+   * @model
+   * @generated
+   */
+  String getDebug();
+
+  /**
+   * Sets the value of the '{@link dk.sdu.bdd.xtext.bddDsl.DeclarativeEntityStatePhraseWithProperty#getDebug <em>Debug</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>Debug</em>' attribute.
+   * @see #getDebug()
+   * @generated
+   */
+  void setDebug(String value);
 
 } // DeclarativeEntityStatePhraseWithProperty

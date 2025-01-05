@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html>
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -11,43 +12,338 @@
     <script src="./scripts/generators/bdd.js" defer></script>
     <script src="./scripts/generators/blockGenerator.js" defer></script>
     <script src="./scripts/script.js" defer></script>
+    <style>
+		.drag-handle {
+		  height: 5px;
+		  background: #ddd;
+		  cursor: ns-resize;
+		}
+
+		/* Optional: Change the handle's appearance on hover */
+		.drag-handle:hover {
+		  background: #ccc;
+		}
+		.vertical-drag-handle {
+		  width: 5px;
+		  background: #ddd;
+		  cursor: ew-resize;
+		}
+
+		/* Optional: Change the handle's appearance on hover */
+		.vertical-drag-handle:hover {
+		  background: #ccc;
+		}
+		.top-controls {
+		  display: flex;
+		  justify-content: space-between;
+		  align-items: center;
+		  margin: 0; /* Remove default margins */
+		  padding: 10px;
+		  background-color: #f0f0f0; /* Light gray background */
+		  border-bottom: 1px solid #ccc; /* Optional border at the bottom */
+		}
+
+		.right-controls {
+		  display: flex;
+		  align-items: center;
+		}
+
+		.file-name {
+		  display: flex;
+		  align-items: center;
+		  margin-right: 8px;
+		}
+
+		.file-name label {
+		  margin-right: 4px;
+		  font-size: 14px;
+		}
+
+		.file-name input {
+		  padding: 6px 12px;
+		  font-size: 14px;
+		  border: 1px solid #ccc;
+		  border-radius: 4px;
+		}
+		
+		.top-controls button {
+		  margin-right: 8px;
+		  padding: 8px 16px;
+		  border: none;
+		  border-radius: 4px;
+		  cursor: pointer;
+		  font-size: 14px;
+		  transition: background-color 0.2s ease;
+		  display: flex;
+		  align-items: center;
+		}
+
+		/* Save Version Button - Blue */
+		.button-save {
+		  background-color: blue; /* Bootstrap Primary Blue */
+		  color: white;
+		}
+
+		.debug-controls {
+		  display: flex;
+		  flex-direction: row;
+		  align-items: center;
+		}
+		
+		/* Run Scenario Button - Green */
+		.button-run {
+		  background-color: lightgreen !important;
+		}
+
+
+		/* Abort Button - Red */
+		.button-abort {
+			background-color: #FF9999 !important;
+		}
+
+		.debug-controls {
+		  display: flex;
+		  flex-direction: row;
+		  align-items: center;
+		}
+		
+		.button-run:disabled {
+		  background-color: initial !important;
+		}
+
+		.button-abort:disabled {
+		  background-color: initial !important;
+		}
+
+
+    </style>
   </head>
   <body>
     <div class="container">
-      <div class="header">
-        <h1>Editor for BDD Scenarios</h1>
-        <span class=file-name>
-          <label for="fileName">File name</label>
-          <input id="fileName" type="text" maxlength="35"/>
-      </div>
-      <div class="editor-tab">
-        <span id="entity-tab" data-editor-id="xtext-editor-entities" class="tab">Entities</span>
-        <span id="scenario-tab" data-editor-id="xtext-editor-scenarios" class="tab">Scenarios</span>
-        <span id="warning-message" style="color:red; visibility: hidden;">Entities should be defined first.</span>
+      <!-- Removed the big title -->
+	  <div class="top-controls">
+	    <div class="debug-controls">
+	      <button id="run-scenario" class="button-run" onclick="runScenarioInteractive()">
+	        <!-- Run Icon -->
+	        <svg class="button-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+	          <path d="M5.5 3.5v9l7-4.5-7-4.5z"/>
+	        </svg>
+	        Run Scenario
+	      </button>
+		  <button id="step-btn" onclick="stepOnclick()" disabled>
+		    <img src="styles/debug-step-over.svg" alt="Step Over" width="16" height="16">
+		    Next step
+		  </button>
+		  <button id="continue-btn" onclick="continueOnclick()" disabled>
+		    <!-- Continue Icon -->
+		    <svg class="button-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+		      <path d="M4.5 3.5l5 4.5-5 4.5v-9zM8.5 3.5l5 4.5-5 4.5v-9z"/>
+		    </svg>
+		    Continue
+		  </button>
+	      <button id="abort-btn" class="button-abort" onclick="abortOnclick()" disabled>
+	        <!-- Abort Icon -->
+			<svg class="button-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24" style="margin:-4;">
+				<path d="M6.99486 7.00636C6.60433 7.39689 6.60433 8.03005 6.99486 8.42058L10.58 12.0057L6.99486 15.5909C6.60433 15.9814 6.60433 16.6146 6.99486 17.0051C7.38538 17.3956 8.01855 17.3956 8.40907 17.0051L11.9942 13.4199L15.5794 17.0051C15.9699 17.3956 16.6031 17.3956 16.9936 17.0051C17.3841 16.6146 17.3841 15.9814 16.9936 15.5909L13.4084 12.0057L16.9936 8.42059C17.3841 8.03007 17.3841 7.3969 16.9936 7.00638C16.603 6.61585 15.9699 6.61585 15.5794 7.00638L11.9942 10.5915L8.40907 7.00636C8.01855 6.61584 7.38538 6.61584 6.99486 7.00636Z" fill="#0F0F0F"/>
+			</svg>
+	        Abort
+	      </button>
+	    </div>
+        <div class="right-controls">
+          <span class="file-name">
+            <label for="fileName">Version name</label>
+            <input id="fileName" type="text" maxlength="60"/>
+          </span>
+		  <button id="save-version" class="button-save">
+		    <!-- Save Version Icon -->
+		    <svg class="button-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+		      <path d="M6 2.5v6h4v-6h2a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1v-8a1 1 0 0 1 1-1h2zm1 0v4h2v-4H7zM4 12v-2h8v2H4z"/>
+		    </svg>
+		    Save Version
+		  </button>
+        </div>
       </div>
       <div class="content">
-        <div class="xtext-wrapper">
-          <div id="xtext-editor-scenarios" class="xtext-editor" style="display: none" 
-            data-editor-resource-id="multi-resource/scenarios.bdd" 
-            data-editor-xtext-lang="bdd">
+        <div class="version-control-panel">
+          <div class="version-header">
+            <h3>Version History</h3>
+            <button class="toggle-button" onclick="toggleVersionPanel()">
+              <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M15 19l-7-7 7-7"/>
+              </svg>
+            </button>
           </div>
-          <div id="xtext-editor-entities" class="xtext-editor" style="display: block"
-            data-editor-resource-id="multi-resource/widgets.bdd" 
-            data-editor-xtext-lang="bdd">
+          <div class="version-content">
+            <!-- Removed the Save Version button from here -->
+            <div id="versions-list" class="versions-container">
+              <!-- Versions will be populated here -->
+            </div>
           </div>
         </div>
-        <div class="blockly" id="blockly-editor" style="display:block;"></div>
-        <div class="blockly" id="blockly-editor2" style="display:none;"></div>
+        <div class="editors-container">
+          <div class="editor-tab">
+            <span id="entity-tab" data-editor-id="xtext-editor-entities" class="tab">Entities</span>
+            <span id="scenario-tab" data-editor-id="xtext-editor-scenarios" class="tab">Scenarios</span>
+            <span id="warning-message" style="color:red; visibility: hidden;">Entities should be defined first.</span>
+          </div>
+          <div class="editors-section">
+            <div class="xtext-wrapper">
+              <div id="xtext-editor-scenarios" class="xtext-editor" style="display: none" 
+                data-editor-resource-id="multi-resource/scenarios.bdd" 
+                data-editor-xtext-lang="bdd">
+              </div>
+              <div id="xtext-editor-entities" class="xtext-editor" style="display: block"
+                data-editor-resource-id="multi-resource/widgets.bdd" 
+                data-editor-xtext-lang="bdd">
+              </div>
+            </div>
+            <!-- Vertical Drag Handle -->
+            <div class="vertical-drag-handle" id="vertical-drag-handle"></div>
+            <div class="blockly" id="blockly-editor" style="display:block;"></div>
+            <div class="blockly" id="blockly-editor2" style="display:none;"></div>
+          </div>
+        </div>
       </div>
       <div>
-        <button id="save-button" value="Save" title="Save">Save</button>
-        <input id="file-input" type="file" style="display: none;"/>
-        <button id="load-button" value="Load" title="Load">Load</button>
-        <button id="get-ast">Get ast</button>
-        <button id="save-scenario" onclick="saveScenario()">Save Scenario</button>
-        <button id="save-entities" onclick="saveEntities()">Save Entities</button>    
-        <button id="run-scenario" onclick="runScenario()">Run Scenario</button>
+        <input id="file-input" type="file" style="display: none;"/> 
       </div>
-    </div>
+     	
+	  <div class="drag-handle" id="drag-handle"></div>
+	  <div id="console-section">
+	    <div class="output-container">
+	      <div class="console-header">
+	        Program information
+	        <button id="clear-console" class="clear-button" onclick ="clearOutputConsole()">Clear</button>
+	      </div>
+	      <div id="console-output">
+	      </div>
+	    </div>
+	    <div class="output-container">
+	      <div class="console-header">
+	        Debugging information
+	        <button id="clear-debug" class="clear-button" onclick ="clearDebugConsole()">Clear</button>
+	      </div>
+	      <div id="debug-output">
+	      </div>
+	    </div>
+	  </div>
+	<script>
+		(function() {
+		  // Existing Console Resizing
+		  const consoleDragHandle = document.getElementById('drag-handle');
+		  const consoleSection = document.getElementById('console-section');
+
+		  let isConsoleDragging = false;
+		  let consoleStartY = 0;
+		  let consoleStartHeight = 0;
+
+		  consoleDragHandle.addEventListener('mousedown', function(e) {
+		    isConsoleDragging = true;
+		    consoleStartY = e.clientY;
+		    consoleStartHeight = consoleSection.getBoundingClientRect().height;
+		    document.body.style.cursor = 'ns-resize';
+		    document.body.style.userSelect = 'none';
+		  });
+
+		  document.addEventListener('mousemove', function(e) {
+		    if (!isConsoleDragging) return;
+		    const dy = e.clientY - consoleStartY;
+		    let newHeight = consoleStartHeight - dy;
+		    const minHeight = 40; // Minimum console height in px
+		    const maxHeight = window.innerHeight ; // Maximum console height
+		    if (newHeight < minHeight) newHeight = minHeight;
+		    if (newHeight > maxHeight) newHeight = maxHeight;
+		    consoleSection.style.height = newHeight + 'px';
+		  });
+
+		  document.addEventListener('mouseup', function(e) {
+		    if (isConsoleDragging) {
+		      isConsoleDragging = false;
+		      document.body.style.cursor = 'default';
+		      document.body.style.userSelect = 'auto';
+		    }
+		  });
+
+		  const verticalDragHandle = document.getElementById('vertical-drag-handle');
+		  const xtextWrapper = document.querySelector('.xtext-wrapper');
+		  const blocklyEditor = document.getElementById('blockly-editor');
+
+		  let isVerticalDragging = false;
+		  let verticalStartX = 0;
+		  let xtextStartWidth = 0;
+		  let blocklyStartWidth = 0;
+
+		  verticalDragHandle.addEventListener('mousedown', function(e) {
+		    isVerticalDragging = true;
+		    verticalStartX = e.clientX;
+		    xtextStartWidth = xtextWrapper.getBoundingClientRect().width;
+		    blocklyStartWidth = blocklyEditor.getBoundingClientRect().width;
+		    document.body.style.cursor = 'ew-resize';
+		    document.body.style.userSelect = 'none';
+		  });
+
+		  document.addEventListener('mousemove', function(e) {
+		    if (!isVerticalDragging) return;
+		    const dx = e.clientX - verticalStartX;
+		    let newXtextWidth = xtextStartWidth + dx;
+		    let newBlocklyWidth = blocklyStartWidth - dx;
+
+		    const minWidth = 150; // Minimum width for editors
+
+		    // Ensure minimum widths
+		    if (newXtextWidth < minWidth) {
+		      newXtextWidth = minWidth;
+		      newBlocklyWidth = xtextStartWidth + blocklyStartWidth - minWidth;
+		    }
+		    if (newBlocklyWidth < minWidth) {
+		      newBlocklyWidth = minWidth;
+		      newXtextWidth = xtextStartWidth + blocklyStartWidth - minWidth;
+		    }
+
+		    // Use flex-basis instead of width
+		    xtextWrapper.style.flexBasis = `${newXtextWidth}px`;
+		    blocklyEditor.style.flexBasis = `${newBlocklyWidth}px`;
+
+		    Blockly.svgResize(Blockly.getMainWorkspace());
+		  });
+
+		  document.addEventListener('mouseup', function(e) {
+		    if (isVerticalDragging) {
+		      isVerticalDragging = false;
+		      document.body.style.cursor = 'default';
+		      document.body.style.userSelect = 'auto';
+		    }
+		  });
+
+		  document.addEventListener('mouseup', function(e) {
+		    if (isVerticalDragging) {
+		      isVerticalDragging = false;
+		      document.body.style.cursor = 'default';
+		      document.body.style.userSelect = 'auto';
+		    }
+		  });
+
+		  // Optional: Adjust editor widths on window resize to maintain layout
+		  window.addEventListener('resize', function() {
+		    const totalWidth = xtextWrapper.getBoundingClientRect().width + blocklyEditor.getBoundingClientRect().width + verticalDragHandle.getBoundingClientRect().width;
+		    const containerWidth = document.querySelector('.editors-section').getBoundingClientRect().width;
+
+		    if (totalWidth > containerWidth) {
+		      // Adjust widths proportionally
+		      const excessWidth = totalWidth - containerWidth;
+		      let newXtextWidth = xtextWrapper.getBoundingClientRect().width - (excessWidth / 2);
+		      let newBlocklyWidth = blocklyEditor.getBoundingClientRect().width - (excessWidth / 2);
+
+		      const minWidth = 150;
+		      if (newXtextWidth < minWidth) newXtextWidth = minWidth;
+		      if (newBlocklyWidth < minWidth) newBlocklyWidth = minWidth;
+
+		      xtextWrapper.style.width = newXtextWidth + 'px';
+		      blocklyEditor.style.width = newBlocklyWidth + 'px';
+		    }
+		  });
+		})();
+	</script>
+
   </body>
 </html>

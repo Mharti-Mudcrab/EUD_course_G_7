@@ -240,26 +240,11 @@ public class BddDslSemanticSequencer extends AbstractDelegatingSemanticSequencer
 	 *     DeclarativeEntityAction returns DeclarativeEntityAction
 	 *
 	 * Constraint:
-	 *     (entity=DeclarativeEntityRef actionRef=ActionRef preposition=PREP entity2=DeclarativeEntityOrPropertyRef)
+	 *     (entity=DeclarativeEntityRef actionRef=ActionRef preposition=PREP entity2=DeclarativeEntityOrPropertyRef debug=DebugStatement?)
 	 * </pre>
 	 */
 	protected void sequence_DeclarativeEntityAction(ISerializationContext context, DeclarativeEntityAction semanticObject) {
-		if (errorAcceptor != null) {
-			if (transientValues.isValueTransient(semanticObject, BddDslPackage.Literals.DECLARATIVE_ENTITY_ACTION__ENTITY) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, BddDslPackage.Literals.DECLARATIVE_ENTITY_ACTION__ENTITY));
-			if (transientValues.isValueTransient(semanticObject, BddDslPackage.Literals.DECLARATIVE_ENTITY_ACTION__ACTION_REF) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, BddDslPackage.Literals.DECLARATIVE_ENTITY_ACTION__ACTION_REF));
-			if (transientValues.isValueTransient(semanticObject, BddDslPackage.Literals.DECLARATIVE_ENTITY_ACTION__PREPOSITION) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, BddDslPackage.Literals.DECLARATIVE_ENTITY_ACTION__PREPOSITION));
-			if (transientValues.isValueTransient(semanticObject, BddDslPackage.Literals.DECLARATIVE_ENTITY_ACTION__ENTITY2) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, BddDslPackage.Literals.DECLARATIVE_ENTITY_ACTION__ENTITY2));
-		}
-		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getDeclarativeEntityActionAccess().getEntityDeclarativeEntityRefParserRuleCall_0_0(), semanticObject.getEntity());
-		feeder.accept(grammarAccess.getDeclarativeEntityActionAccess().getActionRefActionRefParserRuleCall_1_0(), semanticObject.getActionRef());
-		feeder.accept(grammarAccess.getDeclarativeEntityActionAccess().getPrepositionPREPParserRuleCall_2_0(), semanticObject.getPreposition());
-		feeder.accept(grammarAccess.getDeclarativeEntityActionAccess().getEntity2DeclarativeEntityOrPropertyRefParserRuleCall_3_0(), semanticObject.getEntity2());
-		feeder.finish();
+		genericSequencer.createSequence(context, semanticObject);
 	}
 	
 	
@@ -309,33 +294,13 @@ public class BddDslSemanticSequencer extends AbstractDelegatingSemanticSequencer
 	 *         preposition=PREP 
 	 *         property=PropertyRef 
 	 *         preposition2=PREP 
-	 *         entity2=DeclarativeEntityRef
+	 *         entity2=DeclarativeEntityRef 
+	 *         debug=DebugStatement?
 	 *     )
 	 * </pre>
 	 */
 	protected void sequence_DeclarativeEntityPropertyAction(ISerializationContext context, DeclarativeEntityPropertyAction semanticObject) {
-		if (errorAcceptor != null) {
-			if (transientValues.isValueTransient(semanticObject, BddDslPackage.Literals.DECLARATIVE_ENTITY_PROPERTY_ACTION__ENTITY) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, BddDslPackage.Literals.DECLARATIVE_ENTITY_PROPERTY_ACTION__ENTITY));
-			if (transientValues.isValueTransient(semanticObject, BddDslPackage.Literals.DECLARATIVE_ENTITY_PROPERTY_ACTION__ACTION_REF) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, BddDslPackage.Literals.DECLARATIVE_ENTITY_PROPERTY_ACTION__ACTION_REF));
-			if (transientValues.isValueTransient(semanticObject, BddDslPackage.Literals.DECLARATIVE_ENTITY_PROPERTY_ACTION__PREPOSITION) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, BddDslPackage.Literals.DECLARATIVE_ENTITY_PROPERTY_ACTION__PREPOSITION));
-			if (transientValues.isValueTransient(semanticObject, BddDslPackage.Literals.DECLARATIVE_ENTITY_PROPERTY_ACTION__PROPERTY) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, BddDslPackage.Literals.DECLARATIVE_ENTITY_PROPERTY_ACTION__PROPERTY));
-			if (transientValues.isValueTransient(semanticObject, BddDslPackage.Literals.DECLARATIVE_ENTITY_PROPERTY_ACTION__PREPOSITION2) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, BddDslPackage.Literals.DECLARATIVE_ENTITY_PROPERTY_ACTION__PREPOSITION2));
-			if (transientValues.isValueTransient(semanticObject, BddDslPackage.Literals.DECLARATIVE_ENTITY_PROPERTY_ACTION__ENTITY2) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, BddDslPackage.Literals.DECLARATIVE_ENTITY_PROPERTY_ACTION__ENTITY2));
-		}
-		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getDeclarativeEntityPropertyActionAccess().getEntityDeclarativeEntityRefParserRuleCall_0_0(), semanticObject.getEntity());
-		feeder.accept(grammarAccess.getDeclarativeEntityPropertyActionAccess().getActionRefActionRefParserRuleCall_1_0(), semanticObject.getActionRef());
-		feeder.accept(grammarAccess.getDeclarativeEntityPropertyActionAccess().getPrepositionPREPParserRuleCall_2_0(), semanticObject.getPreposition());
-		feeder.accept(grammarAccess.getDeclarativeEntityPropertyActionAccess().getPropertyPropertyRefParserRuleCall_3_0(), semanticObject.getProperty());
-		feeder.accept(grammarAccess.getDeclarativeEntityPropertyActionAccess().getPreposition2PREPParserRuleCall_4_0(), semanticObject.getPreposition2());
-		feeder.accept(grammarAccess.getDeclarativeEntityPropertyActionAccess().getEntity2DeclarativeEntityRefParserRuleCall_5_0(), semanticObject.getEntity2());
-		feeder.finish();
+		genericSequencer.createSequence(context, semanticObject);
 	}
 	
 	
@@ -345,7 +310,14 @@ public class BddDslSemanticSequencer extends AbstractDelegatingSemanticSequencer
 	 *     DeclarativeEntityPropertyStatePhrase returns DeclarativeEntityPropertyStatePhrase
 	 *
 	 * Constraint:
-	 *     (property=PropertyRef? preposition=PREP entity=DeclarativeEntityRef toBeWord=ToBeWords value=ENTITY_IDENTITY)
+	 *     (
+	 *         property=PropertyRef? 
+	 *         preposition=PREP 
+	 *         entity=DeclarativeEntityRef 
+	 *         toBeWord=ToBeWords 
+	 *         value=ENTITY_IDENTITY 
+	 *         debug=DebugStatement?
+	 *     )
 	 * </pre>
 	 */
 	protected void sequence_DeclarativeEntityPropertyStatePhrase(ISerializationContext context, DeclarativeEntityPropertyStatePhrase semanticObject) {
@@ -374,23 +346,11 @@ public class BddDslSemanticSequencer extends AbstractDelegatingSemanticSequencer
 	 *     DeclarativeEntityStatePhraseWithProperty returns DeclarativeEntityStatePhraseWithProperty
 	 *
 	 * Constraint:
-	 *     (entity=DeclarativeEntityRef state=[StateName|ID] property=PropertyRef)
+	 *     (entity=DeclarativeEntityRef state=[StateName|ID] property=PropertyRef debug=DebugStatement?)
 	 * </pre>
 	 */
 	protected void sequence_DeclarativeEntityStatePhraseWithProperty(ISerializationContext context, DeclarativeEntityStatePhraseWithProperty semanticObject) {
-		if (errorAcceptor != null) {
-			if (transientValues.isValueTransient(semanticObject, BddDslPackage.Literals.DECLARATIVE_ENTITY_STATE_PHRASE_WITH_PROPERTY__ENTITY) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, BddDslPackage.Literals.DECLARATIVE_ENTITY_STATE_PHRASE_WITH_PROPERTY__ENTITY));
-			if (transientValues.isValueTransient(semanticObject, BddDslPackage.Literals.DECLARATIVE_ENTITY_STATE_PHRASE_WITH_PROPERTY__STATE) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, BddDslPackage.Literals.DECLARATIVE_ENTITY_STATE_PHRASE_WITH_PROPERTY__STATE));
-			if (transientValues.isValueTransient(semanticObject, BddDslPackage.Literals.DECLARATIVE_ENTITY_STATE_PHRASE_WITH_PROPERTY__PROPERTY) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, BddDslPackage.Literals.DECLARATIVE_ENTITY_STATE_PHRASE_WITH_PROPERTY__PROPERTY));
-		}
-		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getDeclarativeEntityStatePhraseWithPropertyAccess().getEntityDeclarativeEntityRefParserRuleCall_0_0(), semanticObject.getEntity());
-		feeder.accept(grammarAccess.getDeclarativeEntityStatePhraseWithPropertyAccess().getStateStateNameIDTerminalRuleCall_2_0_1(), semanticObject.eGet(BddDslPackage.Literals.DECLARATIVE_ENTITY_STATE_PHRASE_WITH_PROPERTY__STATE, false));
-		feeder.accept(grammarAccess.getDeclarativeEntityStatePhraseWithPropertyAccess().getPropertyPropertyRefParserRuleCall_4_0(), semanticObject.getProperty());
-		feeder.finish();
+		genericSequencer.createSequence(context, semanticObject);
 	}
 	
 	
@@ -400,20 +360,11 @@ public class BddDslSemanticSequencer extends AbstractDelegatingSemanticSequencer
 	 *     DeclarativeEntityStatePhrase returns DeclarativeEntityStatePhrase
 	 *
 	 * Constraint:
-	 *     (entity=DeclarativeEntityRef state=[StateName|ID])
+	 *     (entity=DeclarativeEntityRef state=[StateName|ID] debug=DebugStatement?)
 	 * </pre>
 	 */
 	protected void sequence_DeclarativeEntityStatePhrase(ISerializationContext context, DeclarativeEntityStatePhrase semanticObject) {
-		if (errorAcceptor != null) {
-			if (transientValues.isValueTransient(semanticObject, BddDslPackage.Literals.DECLARATIVE_ENTITY_STATE_PHRASE__ENTITY) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, BddDslPackage.Literals.DECLARATIVE_ENTITY_STATE_PHRASE__ENTITY));
-			if (transientValues.isValueTransient(semanticObject, BddDslPackage.Literals.DECLARATIVE_ENTITY_STATE_PHRASE__STATE) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, BddDslPackage.Literals.DECLARATIVE_ENTITY_STATE_PHRASE__STATE));
-		}
-		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getDeclarativeEntityStatePhraseAccess().getEntityDeclarativeEntityRefParserRuleCall_0_0(), semanticObject.getEntity());
-		feeder.accept(grammarAccess.getDeclarativeEntityStatePhraseAccess().getStateStateNameIDTerminalRuleCall_2_0_1(), semanticObject.eGet(BddDslPackage.Literals.DECLARATIVE_ENTITY_STATE_PHRASE__STATE, false));
-		feeder.finish();
+		genericSequencer.createSequence(context, semanticObject);
 	}
 	
 	
@@ -989,7 +940,8 @@ public class BddDslSemanticSequencer extends AbstractDelegatingSemanticSequencer
 	 *         preposition=PREP 
 	 *         entity=DeclarativeEntityRef? 
 	 *         (preposition2=PREP entity2=DeclarativeEntityRef)? 
-	 *         (preposition3=PREP entity3=DeclarativeEntityRef)?
+	 *         (preposition3=PREP entity3=DeclarativeEntityRef)? 
+	 *         debug=DebugStatement?
 	 *     )
 	 * </pre>
 	 */

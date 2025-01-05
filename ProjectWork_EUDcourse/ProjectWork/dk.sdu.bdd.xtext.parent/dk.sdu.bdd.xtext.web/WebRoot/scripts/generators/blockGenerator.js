@@ -15,14 +15,16 @@ function generateBlocksFromAst(ast, workspace, blockArray, tabName) {
     currentScenarioComponent = 'given';
     isFirstDeclarativeEntityRefForDeclarativeEntityAction = true;
 
+	//Creates blocks for entities
     if (tabName === 'entities' && ast._children.length > 0)
     {
-        generateBlocks(ast._children[ast._children.length - 1], workspace, null); // entities are here
+        generateBlocks(ast._children[ast._children.length - 1], workspace, null); 
     }
-
+	
+	//Creates blocks for scenarios
     if (tabName === 'scenarios' && ast._children.length > 1)
     {
-        generateBlocks(ast._children[0], workspace, null); // scenarios are here
+        generateBlocks(ast._children[0], workspace, null); 
     }
 
     workspace.render();
@@ -32,26 +34,29 @@ function generateBlocks(root, workspace, parentBlock)
 {
     if (!root || !root._children)
         return;
-
+	
+	//Checks if root.children is array
     var childrenIsArray = Array.isArray(root._children);
 
-    // sometimes we need to reverse the order.
+    // In case of 'Model' or 'DeclarativeEntityDef' parent block reverse the order
     if (childrenIsArray && (parentBlock.type === 'Model' 
         || parentBlock.type === 'DeclarativeEntityDef')) {
         root._children.reverse();
     }
 
     for (var i = 0; i < (childrenIsArray ? root._children.length : 1); i++) {
+	
         var current = childrenIsArray ? root._children[i]._children : root._children;
+		
         if (!current)
             continue;
 
         var currentParentBlock = null;
 
         if (current.value) {
-            console.log('Current value: ' + current.value._value);
 
-            var parsedObj = parseValueString(current.value._value);    
+            var parsedObj = parseValueString(current.value._value);  
+			 
             if (parsedObj && parsedObj.type) {
                 var addedBlock = addBlockToWorkspace(parsedObj, workspace, parentBlock); 
                 currentParentBlock = addedBlock ? addedBlock : parentBlock;
@@ -70,7 +75,7 @@ function generateBlocks(root, workspace, parentBlock)
 
 function addBlockToWorkspace(parsedObj, workspace, parentBlock) {
     var blockToAdd = null;
-
+	
     // Keep track of what part of the scenario we are working on.
     // This is because we need to know where to add the 'And' blocks.
     if (parsedObj.type === 'DeclarativeScenarioState') {
@@ -80,8 +85,8 @@ function addBlockToWorkspace(parsedObj, workspace, parentBlock) {
     else if (parsedObj.type === 'DeclarativeScenarioAction') {
         if (currentScenarioComponent === 'given') 
             currentScenarioComponent = 'when';
-    }
-
+    }	
+	
     // we have special cases: DeclarativeEntityRef, ActionRef, PropertyRef etc.
     // they require special blocks to be connected.
     if (parsedObj.type === 'DeclarativeEntityRef') {
@@ -121,7 +126,7 @@ function addBlockToWorkspace(parsedObj, workspace, parentBlock) {
     else if (parsedObj.type === 'ActionRef') {
         addIdBlock(parsedObj.id, parentBlock, workspace, false);
         return parentBlock;
-    }   
+	  }
     else if (parsedObj.type === 'DeclarativeEntityOrPropertyRef') {
         blockToAdd = workspace.newBlock('subBlock_DeclarativeEntityAction');
         addIdBlock(parsedObj.id, blockToAdd, workspace, false);
@@ -140,6 +145,7 @@ function addBlockToWorkspace(parsedObj, workspace, parentBlock) {
     else if (parsedObj.type === 'DeclarativeScenarioActionAnd') {
         blockToAdd = workspace.newBlock("subBlock_Scenario_And0");
     }
+	
 
     var blockDefinition = blockDefinitions.find(function(b) {
         return b.type === parsedObj.type;
@@ -273,6 +279,10 @@ function addBlockToWorkspace(parsedObj, workspace, parentBlock) {
 
     if (parsedObj.preposition3)
         setDropdownValue(parsedObj.preposition3, blockToAdd, workspace, false); 
+	//TODO: it should just be if(parsedObj.debug), but for object types, where debug is a option the null value gets parsed as the 
+	// string 'null'. Not sure why, but it means this extra check is neccesary or else to many pause blocks gets added 
+	if (parsedObj.debug === 'pause')
+		addDebugBlock(blockToAdd, workspace) 
 
     if (parentBlock)
         addParentBlock(parentBlock, blockToAdd, workspace);
@@ -290,6 +300,7 @@ function addParentBlock(parentBlock, blockToAdd, workspace)
     });
     
     var blockToAddType = blockToAdd.type;
+	
     if (blockToAddType === 'subBlock_Scenario_And0') // SPECIAL CASE! this input argument does not exist - it's custom.
     {
         blockToAddType = 'subBlock_Scenario_And';
@@ -385,7 +396,7 @@ function addStringBlock(stringValue, blockToAdd, workspace)
     var blockDefinition = blockDefinitions.find(function(b) {
         return b.type === blockToAdd.type;
     });
-
+	
     var stringBlock = workspace.newBlock('STRING');
     stringBlock.setFieldValue(stringValue, 'TEXT_INPUT');
     
@@ -393,7 +404,9 @@ function addStringBlock(stringValue, blockToAdd, workspace)
         return a.check && a.check.includes('STRING') && a.type === 'input_value';
     });
 
+	
     var inputConnection = blockToAdd.getInput(inputArgument.name).connection;
+	
     stringBlock.outputConnection.connect(inputConnection);
 
     workspace.getBlockById(stringBlock.id).initSvg();
@@ -405,6 +418,13 @@ function addValueBlock(valueString, parentBlock, workspace) {
     addStringBlock(valueString, blockToAdd, workspace);
     workspace.getBlockById(blockToAdd.id).initSvg();
 }
+
+function addDebugBlock(parentBlock, workspace){
+	var blockToAdd = workspace.newBlock('DebugStatement');	
+	addParentBlock(parentBlock, blockToAdd, workspace);
+	workspace.getBlockById(blockToAdd.id).initSvg();
+}
+
 
 function setDropdownValue(dropdownValue, blockToAdd, workspace, skip) {
     if (dropdownValue === 'null')
@@ -437,8 +457,9 @@ function setDropdownValue(dropdownValue, blockToAdd, workspace, skip) {
         block.setFieldValue(dropdownValue, dropdownInputName)
 }
 
+
 function parseValueString(str) {
-    var regex = /(\w+)\s*(?:\(preposition:\s+(\w+))?(?:,\s*preposition2:\s+(\w+))?(?:,\s*toBeWord:\s+(\w+))?(?:,\s*value:\s*(\w+(?:\s+\w+)*))?\)?(?:\(scenarioName:\s*(\w+(?:\s+\w+)*)\))?(?:\(propertyValue:\s*(\w+(?:\s+\w+)*)\))?\s*(?:\(entityValue:\s*(\w+(?:\s+\w+)*)\))?(?:->\s*(\w+))?\s*(?:\(name:\s+(\w+))?(?:,\s*preposition:\s+(\w+))?(?:,\s*argument:\s+(\w+))?\)?/;
+    var regex = /(\w+)\s*(?:\(preposition:\s+(\w+))?(?:,\s*preposition2:\s+(\w+))?(?:,\s*toBeWord:\s+(\w+))?(?:,\s*value:\s*(\w+(?:\s+\w+)*))?\)?(?:\(scenarioName:\s*(\w+(?:\s+\w+)*)\))?(?:\(propertyValue:\s*(\w+(?:\s+\w+)*)\))?\s*(?:\(entityValue:\s*(\w+(?:\s+\w+)*)\))?(?:->\s*(\w+))?\s*(?:\(name:\s+(\w+))?(?:,\s*preposition:\s+(\w+))?(?:,\s*debug:\s+(\w+))?(?:,\s*argument:\s+(\w+))?\)?/;
     var matches = str.match(regex);
 
     if (matches) {
@@ -453,8 +474,9 @@ function parseValueString(str) {
         var reference = matches[9] || null;
         var id = matches[10] || null;
         var preposition3 = matches[11] || null;
-        var argument = matches[12] || null;
-
+		var debug = matches [12] || null;
+        var argument = matches[13] || null;
+		
         return {
             type: type,
             scenarioName: scenarioName,
@@ -467,7 +489,8 @@ function parseValueString(str) {
             preposition2: preposition2,
             preposition3: preposition3,
             argument: argument,
-            toBeWord: toBeWord
+            toBeWord: toBeWord,
+			debug: debug
         };
     } 
     else {

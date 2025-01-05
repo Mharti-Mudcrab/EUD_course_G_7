@@ -564,6 +564,7 @@ public class AstServiceDispatcher extends XtextServiceDispatcher {
 			System.out.println("rule " + rule);
 			System.out.println(rule.getRule());
 			System.out.println(rule.getArguments());
+			System.out.flush();
 		}
 		
 		return true;

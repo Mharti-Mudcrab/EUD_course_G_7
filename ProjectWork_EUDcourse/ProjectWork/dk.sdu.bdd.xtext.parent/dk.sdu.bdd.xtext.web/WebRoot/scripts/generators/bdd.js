@@ -17,6 +17,7 @@ bddGenerator.forBlock['ID'] = function(block) {
     return [code, Order.ATOMIC];
 };
 
+
 bddGenerator.scrub_ = function(block, code, thisOnly) {
     const nextBlock = block.nextConnection && block.nextConnection.targetBlock();
     if (nextBlock && !thisOnly) {
@@ -33,12 +34,12 @@ function getBddGenerator(blockArray)
 
 function registerRuleForBlock(blockArrayElement)
 {
-    bddGenerator.forBlock[blockArrayElement.type] = function(block, generator) {        
+    bddGenerator.forBlock[blockArrayElement.type] = function(block, generator) {       
         var code = blockArrayElement.message0;
+		 
         for (var i = 0; i < blockArrayElement.args0.length; i++) {
             var argument = blockArrayElement.args0[i];
             var argumentValue = getArgumentValue(argument.type, argument.name, block, generator);
-
             code = code.replace(`%${i+1}`, argumentValue); // starts from %1
         }
         

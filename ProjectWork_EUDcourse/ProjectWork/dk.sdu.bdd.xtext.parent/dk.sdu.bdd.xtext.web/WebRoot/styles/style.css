@@ -60,8 +60,30 @@ a:hover {
 
 
 .tab {
-  background-color: #ddd;
-  padding: 5px 2.5px;
+  background-color: #f0f0f0; /* Soft and neutral background */
+  color: #333; /* Text color for good contrast */
+  padding: 2px 4px; /* Increased padding for better spacing */
+  border: 1px solid #ccc; /* Subtle border for definition */
+  border-radius: 5px; /* Rounded corners for a modern look */
+  font-size: 13px; /* Adjust font size for readability */
+  font-family: Arial, sans-serif; /* Clean and readable font */
+  text-align: center; /* Center align text */
+  cursor: pointer; /* Indicate interactivity */
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1); /* Add a light shadow for depth */
+  transition: background-color 0.3s, box-shadow 0.3s; /* Smooth transition for hover effects */
+}
+
+/* Hover state for better interactivity */
+.tab:hover {
+  background-color: #e2e2e2; /* Slightly darker background on hover */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15); /* Enhance shadow on hover */
+}
+
+/* Active state for selected tabs */
+.tab.active {
+  background-color: #d4d4d4; /* Different background for active tab */
+  border-color: #aaa; /* Slightly darker border for active state */
+  font-weight: bold; /* Emphasize active tab */
 }
 
 #xtext-editor-entities {
@@ -96,3 +118,498 @@ a:hover {
 	flex: 3;
 	height: 100%;
 } 
+
+
+/* Reset and Base Styles */
+body {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  font: 16px Helvetica, sans-serif;
+}
+
+a {
+  color: #22a;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+.editor-tab {
+  height: 2rem;
+}
+
+/* Container Layout */
+.container {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  box-sizing: border-box;
+}
+
+.container h1 {
+  display: inline-block;
+}
+
+.header {
+  height: 60px;
+  padding: 10px;
+}
+
+.content {
+  display: flex;
+  flex-direction: row;
+  flex: 1;
+  height: 80vh;
+  overflow: hidden;
+}
+
+.file-name {
+  margin-left: 20vw;
+}
+
+/* Version Control Panel */
+.version-control-panel {
+  width: 300px;
+  background: white;
+  border-right: 1px solid #ddd;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  transition: width 0.3s ease;
+  flex-shrink: 0; /* Prevent shrinking */
+}
+
+.version-control-panel.collapsed {
+  width: 0; 
+}
+
+.version-control-panel.collapsed {
+  width: 40px;
+}
+
+.version-control-panel.collapsed .version-content,
+.version-control-panel.collapsed .version-header h3,
+.version-control-panel.collapsed .version-actions {
+  display: none;
+}
+
+.version-header {
+  padding: 12px 16px;
+  border-bottom: 1px solid #eee;
+  background: #f8f9fa;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.version-header h3 {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.version-content {
+  flex: 1;
+  overflow-y: auto;
+  padding: 16px;
+}
+
+.version-actions {
+    display: flex;
+    flex-direction: column; /* Stack buttons vertically */
+    align-items: flex-end; /* Align buttons to the right */
+}
+
+.action-button {
+    margin-bottom: 8px; /* Space between buttons */
+}
+
+.delete-button {
+    margin-bottom: 0; /* No margin needed for the last button */
+}
+
+.versions-container {
+  overflow-y: auto;
+}
+
+.version-item {
+  padding: 12px;
+  border: 1px solid #eee;
+  border-radius: 6px;
+  margin-bottom: 8px;
+  background: #f8f9fa;
+  transition: all 0.2s ease;
+}
+
+.version-item:hover {
+  border-color: #0066cc;
+  background: #f0f7ff;
+}
+
+.version-item.selected {
+  border-color: #0066cc;
+  background: #e6f0ff;
+}
+
+.version-item-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 8px;
+}
+
+.version-info {
+  flex: 1;
+}
+
+.version-name {
+	word-wrap: break-word; /* Older syntax for breaking words */
+	word-break: break-word; /* Breaks long words */
+	overflow-wrap: break-word; /* Modern syntax for word breaking */
+	max-width: 200px; /* Adjust width as needed to constrain the element */
+	white-space: normal; /* Ensures it wraps onto the next line */
+  font-weight: 500;
+  margin-bottom: 4px;
+}
+
+.version-timestamp {
+  font-size: 12px;
+  color: #666;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+/* Editors Section */
+.editors-container {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.editors-section {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+}
+
+.xtext-wrapper, 
+.blockly {
+  flex: 1;
+  min-width: 150px;
+  height: 100%;
+  box-sizing: border-box;
+}
+
+.xtext-editor {
+  padding: 4px;
+  box-sizing: border-box;
+  border: 1px solid #aaa;
+  height: 100%;
+}
+
+#xtext-editor-entities {
+  display: none;
+}
+
+#xtext-editor-scenarios {
+  display: block;
+}
+
+#blockly-editor,
+#blockly-editor2 {
+  flex: 1;
+  height: 100%;
+  box-sizing: border-box;
+}
+
+
+/* General Section Styling */
+
+.console-message {
+	margin-bottom: 8px; /* Space between messages */
+	line-height: 1.6; /* Comfortable spacing */
+}
+
+/* Info (default) message */
+.console-message.info {
+  color: #333333; /* Dark gray */
+}
+
+/* Error message */
+.console-message.error {
+  color: #C62828; /* Dark red for errors */
+  font-weight: bold; /* Emphasize errors */
+}
+
+/* Warning message */
+.console-message.warning {
+  color: #FF8C00; /* Orange for warnings */
+  font-style: italic; /* Differentiate with italics */
+}
+
+/* Success message */
+.console-message.success {
+  color: #2E7D32; /* Dark green for success */
+}
+
+#console-section {
+  display: flex;
+  flex-direction: row;
+  background-color:  #FAF3E0;
+  color: #1e1e1e;
+  border-top: 2px solid #444;
+  height: 300px;
+  max-height: 50vh;
+  overflow: hidden;
+  font-family: Arial, sans-serif;
+}
+
+/* Output Container Styling */
+.output-container {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  border-right: 1px solid #ccc;
+  background-color: #fff;
+}
+
+.output-container:last-child {
+  border-right: none;
+}
+
+/* Header Styling */
+.console-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 15px;
+  background-color: #333;
+  color: #fff;
+  border-bottom: 1px solid #444;
+  font-weight: bold;
+}
+
+/* Clear Button Styling */
+.clear-button {
+  background-color: #444;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  padding: 5px 10px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.3s ease;
+}
+
+.clear-button:hover {
+  background-color: #555;
+}
+
+/* Output Area Styling */
+#console-output,
+#debug-output {
+  flex: 1;
+  overflow-y: auto;
+  padding: 15px;
+  font-family: 'Roboto Mono', monospace;
+  font-size: 15px;
+  line-height: 1.8;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  background-color: #E8E8E8;
+  color: #333333; /* Default text color */
+  border: 1px solid #D0D0D0; /* Subtle border */
+}
+
+/* Improve Scrollbar Appearance */
+#console-output::-webkit-scrollbar,
+#debug-output::-webkit-scrollbar {
+  width: 8px;
+}
+
+#console-output::-webkit-scrollbar-thumb,
+#debug-output::-webkit-scrollbar-thumb {
+  background-color: #888;
+  border-radius: 4px;
+}
+
+#console-output::-webkit-scrollbar-thumb:hover,
+#debug-output::-webkit-scrollbar-thumb:hover {
+  background-color: #555;
+}
+
+/* Buttons */
+.primary-button {
+  background: #0066cc;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+}
+
+.primary-button:hover {
+  background: #0052a3;
+}
+
+.toggle-button {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.toggle-button:hover {
+  background: #f0f0f0;
+  border-radius: 4px;
+}
+
+/* Chevron Icon */
+.chevron {
+  width: 20px;
+  height: 20px;
+  transition: transform 0.3s ease;
+}
+
+.collapsed .chevron {
+  transform: rotate(180deg);
+}
+
+/* Debug highlighting */
+.debug-highlight {
+    background-color: #e6f3ff;
+    border-left: 3px solid #007acc;
+}
+
+/* Debug variables panel */
+#debug-variables {
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    margin: 15px 0;
+    background-color: #f8f9fa;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+#debug-variables h3 {
+    margin-top: 0;
+    margin-bottom: 10px;
+    color: #333;
+    font-size: 16px;
+}
+
+#debug-variables div {
+    padding: 4px 0;
+    font-family: monospace;
+    color: #444;
+}
+
+/* Debug controls */
+.debug-controls {
+    margin: 15px 0;
+    padding: 10px;
+    background-color: #f8f9fa;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+.debug-controls button {
+    margin-right: 8px;
+    padding: 6px 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: white;
+    cursor: pointer;
+    font-size: 14px;
+    transition: all 0.2s ease;
+}
+
+.debug-controls button:hover:not(:disabled) {
+    background-color: #e9ecef;
+    border-color: #ced4da;
+}
+
+.debug-controls button:disabled {
+    opacity: 0.1;
+    cursor: not-allowed;
+}
+
+.debug-status {
+    display: inline-block;
+    margin-left: 10px;
+    padding: 4px 8px;
+    border-radius: 3px;
+    font-size: 12px;
+}
+
+.debug-status.active {
+    background-color: #d4edda;
+    color: #155724;
+}
+
+.debug-status.inactive {
+    background-color: #f8d7da;
+    color: #721c24;
+}
+
+.version-content::-webkit-scrollbar {
+    width: 6px; /* Slimmer scrollbar width */
+}
+
+.version-content::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0.5); /* Scrollbar thumb color */
+    border-radius: 3px; /* Rounded scrollbar handle */
+}
+
+.version-content::-webkit-scrollbar-thumb:hover {
+    background-color: rgba(0, 0, 0, 0.7); /* Darker on hover */
+}
+
+.version-content::-webkit-scrollbar-track {
+    background-color: rgba(0, 0, 0, 0.1); /* Scrollbar track color */
+}
+
+.delete-button {
+    background-color: #ff4d4f; /* Bright red */
+    color: white; /* White text for contrast */
+    border: none; /* Remove border */
+    padding: 6px 12px;
+    border-radius: 4px; /* Slightly rounded corners */
+    cursor: pointer;
+}
+
+.delete-button:hover {
+    background-color: #d9363e; /* Darker red for hover */
+}
+
+/* Style for the revert button */
+.revert-button {
+    background-color: #1890ff; /* Soft blue */
+    color: white;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.revert-button:hover {
+    background-color: #096dd9; /* Darker blue for hover */
+}
+
+
+
